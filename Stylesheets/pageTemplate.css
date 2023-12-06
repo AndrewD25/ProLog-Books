@@ -1,0 +1,72 @@
+/*
+Andrew Deal
+Secret Shelf All Pages Shared CSS
+DUE DATE
+*/
+
+:root {
+    --primaryColor: #161E2C;
+    --secondaryColor: #074670;
+}
+
+html, body {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: var(--primaryColor);
+    overflow-x: hidden;    
+    color: white;
+}
+
+#pageTop {
+    width: 100%;
+    height: clamp(75px, 15vh, 8vw);
+    background-color: var(--secondaryColor);
+    padding-inline: 5px;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+#mainLogo {
+    color: white;
+    margin-block: 0;
+    width: clamp(20px, 37vw, 600px);
+}
+
+#pageTop > nav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    width: 70vw;
+    text-align: right;
+}
+
+#pageTop > nav > li {
+    display: inline-block;
+}
+
+#pageTop > nav > li > a {
+    padding-inline: 3vw;
+    color: white;
+    text-decoration: none;
+}
+
+#navHamburger {
+    display: none !important;
+}
+
+@media screen and (max-width: 1000px) {
+    #pageTop > nav > li {
+        display: none;
+    }
+
+    #navHamburger {
+        display: inline-block !important;
+    }
+} 
