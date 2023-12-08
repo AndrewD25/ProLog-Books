@@ -7,6 +7,8 @@ DUE DATE
 :root {
     --primaryColor: #161E2C;
     --secondaryColor: #074670;
+    --darkerSecondary: #002d4b;
+    --navHeight: clamp(75px, 15vh, 8vw);
 }
 
 html, body {
@@ -22,7 +24,8 @@ body {
 
 #pageTop {
     width: 100%;
-    height: clamp(75px, 15vh, 8vw);
+    z-index: 999999; /*stay at top of screen*/
+    height: var(--navHeight);
     background-color: var(--secondaryColor);
     padding-inline: 5px;
     display: flex;
@@ -30,6 +33,7 @@ body {
     position: fixed;
     top: 0;
     left: 0;
+    box-shadow: 5px 5px 15px rgb(25, 25, 25);
 }
 
 #mainLogo {

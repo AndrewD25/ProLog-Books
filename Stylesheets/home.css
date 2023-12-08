@@ -15,9 +15,7 @@ body {
     height: 350px;
     /* height: clamp(150px, 40vh, 20vw); */
     margin-inline: auto;
-    margin-block: clamp(clamp(75px, 15vh, 8vw), calc(((100vh - clamp(75px, 15vh, 8vw)) - 350px) / 2), 100px);
-    /* margin-block: 100px; */
-    /* margin-block: clamp(75px, 20vh, 10vw); */
+    margin-block: calc(2 * var(--navHeight));
     padding: 1% 4% 1% 4%;
     border-radius: 50px;
     background-color: var(--primaryColor);

@@ -1,0 +1,16 @@
+#keepEmInline {
+    position: absolute;
+    top: var(--navHeight);
+    min-height: calc(99.5vh - var(--navHeight));
+    display: flex;
+}
+
+#folderContainer {
+    background-color: var(--darkerSecondary);
+    width: 25vw;
+    box-shadow: 0px 0px 25px rgb(25, 25, 25);
+}
+
+#collectionContainer {
+    width: 75vw;
+}
