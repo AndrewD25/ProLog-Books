@@ -7,10 +7,37 @@
 
 #folderContainer {
     background-color: var(--darkerSecondary);
-    width: 25vw;
     box-shadow: 0px 0px 25px rgb(25, 25, 25);
+    width: 20vw;
+    padding-left: 2.5vw;
+    padding-right: 2.5vw;
 }
 
+.folder:hover {
+    color: #DDD;
+}
+
+/*Grid columns should be 6vw apart*/
+
 #collectionContainer {
-    width: 75vw;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding-inline: 6vw;
+    gap: 6vw;
+}
+
+.book {
+    display: inline-block;
+}
+
+.book > .cover {
+    width: 17vw;
+}
+
+.book > .details {
+    display: none;
+}
+
+.expanded > .details {
+    display: inline-block !important;
 }

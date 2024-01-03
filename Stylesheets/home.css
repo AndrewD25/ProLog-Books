@@ -15,11 +15,31 @@ body {
     height: 350px;
     /* height: clamp(150px, 40vh, 20vw); */
     margin-inline: auto;
-    margin-block: calc(2 * var(--navHeight));
+    margin-top: calc(2 * var(--navHeight));
     padding: 1% 4% 1% 4%;
     border-radius: 50px;
     background-color: var(--primaryColor);
 }
+
+.info {
+    background-color:  var(--primaryColor);
+    margin: 200px 0 0 0; /*update later*/
+    width: 300px; /*update later*/
+    height: 300px; /*update later*/
+}
+
+.leftBox {
+    float: left;
+    clear: both;
+    border-radius: 0 30px 30px 0;
+}
+
+.rightBox {
+    float: right;
+    clear: both;
+    border-radius: 30px 0 0 30px;
+}
+
 
 /* This media query targets larger screens using the same measure as the hamburger menu query */
 @media only screen and (min-width: 1000px) {
