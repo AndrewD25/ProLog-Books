@@ -33,68 +33,78 @@ DUE DATE
 
         <!--Rest of Page Code-->
         <div id="keepEmInline"> <!--Used to neatly keep divs next to each other-->
-            <div id="folderContainer">
-                <p class="folder">DC Comics <i class="fas fa-folder"></i> <span class="folderCount">X</span></p>
-                <p class="folder">Marvel Comics <i class="fas fa-folder"></i> <span class="folderCount">X</span></p>
-                <p class="folder">Manga <i class="fas fa-folder"></i> <span class="folderCount">X</span></p>
+            <div id="folderContainer"> 
+                <p class="folderLink">DC Comics <i class="fas fa-folder"></i> <span class="folderCount">X</span></p>
+                <p class="folderLink">Marvel Comics <i class="fas fa-folder"></i> <span class="folderCount">X</span></p>
+                <p class="folderLink">Manga <i class="fas fa-folder"></i> <span class="folderCount">X</span></p>
             </div>
             <div id="collectionContainer">
+                <div class="folder" id="sampleFolder">
+                    <!--
+                    Books should include: Publisher/Continuity, Series, Number Type, Number, Title, a Read checkbox, a Rating dropdown w/ 5 options, and a Notes text box
+                    
+                    Ratings can be: Unhaul (1/5), Meh (2/5), Good (3/5), Great (4/5), Favorite (5/5) - But might alter to avoid creating another points system
+                    -->
 
-                <div class="book"> <!--When expanded: gain padding, background color, and round borders-->
-                    <img class="cover" src="../Images/exampleCover.png"> <!--In theory, stays the same when expanded-->
-                    <div class="details"> <!--When not expanded: display-none -->
-                        <!--These are the current book details. May change over time-->
-                        <!--Maybe make some details optional-->
-                        <h3>Title</h3>
-                        <p>Publisher</p>
-                        <p>Continuity</p>
-                        <p>Series</p>
-                        <p>Number</p>
-                        <p>Title</p>
-                        <p>Read</p>
-                        <p>Rating</p>
-                        <p>Favorite</p><!--Maybe? Or combine with rating?-->
-                        <p>Notes</p>
-                    </div>
-                </div>
-                <div class="book"> <!--When expanded: gain padding, background color, and round borders-->
-                    <img class="cover" src="../Images/exampleCover.png"> <!--In theory, stays the same when expanded-->
-                    <div class="details"> <!--When not expanded: display-none -->
-                        <!--These are the current book details. May change over time-->
-                        <!--Maybe make some details optional-->
-                        <h3>Title</h3>
-                        <p>Publisher</p>
-                        <p>Continuity</p>
-                        <p>Series</p>
-                        <p>Number</p>
-                        <p>Title</p>
-                        <p>Read</p>
-                        <p>Rating</p>
-                        <p>Favorite</p><!--Maybe? Or combine with rating?-->
-                        <p>Notes</p>
-                    </div>
-                </div>
-                <div class="book"> <!--When expanded: gain padding, background color, and round borders-->
-                    <img class="cover" src="../Images/exampleCover.png"> <!--In theory, stays the same when expanded-->
-                    <div class="details"> <!--When not expanded: display-none -->
-                        <!--These are the current book details. May change over time-->
-                        <!--Maybe make some details optional-->
-                        <h3>Title</h3>
-                        <p>Publisher</p>
-                        <p>Continuity</p>
-                        <p>Series</p>
-                        <p>Number</p>
-                        <p>Title</p>
-                        <p>Read</p>
-                        <p>Rating</p>
-                        <p>Favorite</p><!--Maybe? Or combine with rating?-->
-                        <p>Notes</p>
-                    </div>
-                </div>
+                    <div class="book"> <!--Can be flipped-->
+                        <img class="cover" src="../Images/exampleCover.png"> 
+                        <div class="details"> <!--When not flipped: display-none -->
+                            <!--These are the current book details. May change over time-->
+                            <!--Maybe make some details optional-->
+                            <h3>Green Lantern: Rebirth</h3>
+                            <p>DC Comics - Post-Crisis</p>
 
+                            <p>Notes</p>
+                        
+                            <p>Read</p>
+                            <p>Rating</p>
+                        </div>
+                    </div>
+                    <div class="book">
+                        <img class="cover" src="https://i.pinimg.com/736x/ff/0f/da/ff0fda6d8cca005ba1647865575ea442.jpg"> 
+                        <div class="details"> 
+                            <h3>Adventures of Superman #31</h3>
+                            <p>Publisher</p>
+
+                            <p>Notes</p>
+                        
+                            <p>Read</p>
+                            <p>Rating</p>
+                        </div>
+                    </div>
+                    <div class="book"> 
+                        <img class="cover" src="https://www.cbr.com/wp-content/uploads/2017/03/nightwing-rebirth-01-1200.jpg">
+                        <div class="details">
+                            <h3>Nightwing #1 Better than Batman</h3>
+                            <p>Publisher</p>
+
+                            <p>Notes</p>
+                        
+                            <p>Read</p>
+                            <p>Rating</p>
+                        </div>
+
+                    </div>
+                    <div class="book"> 
+                        <img class="cover" src="https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/81Z85oL1xvL._AC_UF1000,1000_QL80_.jpg">
+                        <div class="details">
+                            <h3>Blue Lock vol 1</h3>
+                            <p>Publisher</p>
+
+                            <p>Notes</p>
+                        
+                            <p>Read</p>
+                            <p>Rating</p>
+                        </div>
+
+                    </div>
+                    
+                </div>
+                
+                
             </div>
         </div>
 
-        <script src="../Scripts/templateScript.js"></script>
+        <script src="../Scripts/collection.js"></script>
     </body>
 </html>
