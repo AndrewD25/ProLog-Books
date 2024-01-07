@@ -9,35 +9,82 @@
     background-color: var(--darkerSecondary);
     box-shadow: 0px 0px 25px rgb(25, 25, 25);
     width: 20vw;
+    resize: horizontal;
     padding-left: 2.5vw;
     padding-right: 2.5vw;
 }
 
-.folder:hover {
+.folderLink:hover {
     color: #DDD;
 }
 
 /*Grid columns should be 6vw apart*/
 
 #collectionContainer {
+    padding-inline: 12vw;
+    padding-block: 6vw;
+}
+
+.folder {
     display: grid;
-    grid-template-columns: auto auto auto;
-    padding-inline: 6vw;
+    grid-template-columns: auto;
     gap: 6vw;
 }
 
 .book {
-    display: inline-block;
+    box-shadow: 0px 0px 5px 5px rgb(16, 16, 19);
+    display: flex;
+    width: 50vw;
+    height: 76vw;
 }
 
-.book > .cover {
-    width: 17vw;
+@media screen and (min-width: 600px) {
+    #collectionContainer {
+        padding-inline: 7vw;
+        padding-block: 3vw;
+    }
+
+    .folder {
+        grid-template-columns: auto auto;
+    }
+
+    .book {
+        width: 27vw;
+        height: 41vw;
+    }
 }
 
-.book > .details {
+@media screen and (min-width: 1300px) {
+    #collectionContainer {
+        padding-inline: 6vw;
+        padding-block: 3vw;
+    }
+    
+    .folder {
+        grid-template-columns: auto auto auto;
+    }
+
+    .book {
+        width: 17vw;
+        height: 26vw;
+    }
+}
+
+/*Toggle the cover and details showing when a book is flipped*/
+.book .cover {
+    width: 100%;
+    height: 100%;
+}
+.book .details {
     display: none;
 }
 
-.expanded > .details {
-    display: inline-block !important;
+.flipped .cover {
+    display: none !important;
+}
+.flipped .details {
+    width: 100%;
+    height: 100%;
+    background-color: var(--darkerSecondary);
+    display: block !important;
 }
