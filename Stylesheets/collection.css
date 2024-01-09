@@ -25,6 +25,10 @@
     padding-block: 6vw;
 }
 
+.hidden { 
+    display: none;
+}
+
 .folder {
     display: grid;
     grid-template-columns: auto;
@@ -36,6 +40,7 @@
     display: flex;
     width: 50vw;
     height: 76vw;
+    position: relative;
 }
 
 @media screen and (min-width: 600px) {
@@ -70,21 +75,59 @@
     }
 }
 
+.bookCircle {
+    background-color: var(--primaryColor);
+    color: white;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    font-size: 15px;
+    border: 1px solid white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.positionNum {
+    top: -15px;
+    left: -15px;
+}
+
+.flipButton {
+    bottom: -15px;
+    right: -15px;
+}
+
 /*Toggle the cover and details showing when a book is flipped*/
 .book .cover {
     width: 100%;
     height: 100%;
-}
-.book .details {
+} .book .details {
     display: none;
 }
 
 .flipped .cover {
     display: none !important;
-}
-.flipped .details {
+} .flipped .details {
     width: 100%;
     height: 100%;
     background-color: var(--darkerSecondary);
     display: block !important;
+}
+
+.noteInput {
+    background-color: rgba(0, 0, 0, 0);
+    border: 1px solid white;
+    border-radius: 5px;
+    resize: none;
+    color: white;
+}
+
+.readBox * {
+    display: inline-block;
+}
+
+.ratingBox * {
+    display: inline-block;
 }

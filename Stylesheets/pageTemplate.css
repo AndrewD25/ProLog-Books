@@ -22,6 +22,10 @@ body {
     color: white;
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+
 #pageTop {
     width: 100%;
     z-index: 999999; /*stay at top of screen*/
@@ -39,7 +43,7 @@ body {
 #mainLogo {
     color: white;
     margin-block: 0;
-    width: clamp(20px, 37vw, 600px);
+    width: 18vw;
 }
 
 #pageTop > nav {
@@ -47,7 +51,7 @@ body {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    width: 70vw;
+    width: 80vw;
     text-align: right;
 }
 
