@@ -14,6 +14,11 @@
     padding-right: 2.5vw;
 }
 
+.folderLink {
+    padding-bottom: 5px;
+    border-bottom: 1px solid white;
+}
+
 .folderLink:hover {
     color: #DDD;
 }
@@ -26,7 +31,7 @@
 }
 
 .hidden { 
-    display: none;
+    display: none !important;
 }
 
 .folder {
@@ -85,9 +90,14 @@
     border: 1px solid white;
     border-radius: 50%;
     display: flex;
+    /* display: none; */
     justify-content: center;
     align-items: center;
 }
+
+/* .book:hover .bookCircle {
+    display: flex !important;
+} */
 
 .positionNum {
     top: -15px;
@@ -95,6 +105,7 @@
 }
 
 .flipButton {
+    /* display: flex !important; */
     bottom: -15px;
     right: -15px;
 }
@@ -111,12 +122,30 @@
     display: none !important;
 } .flipped .details {
     width: 100%;
+    padding-inline: 5%;
     height: 100%;
     background-color: var(--darkerSecondary);
     display: block !important;
 }
 
-.noteInput {
+.title {
+    text-align: center;
+    font-size: 22px;
+    margin-bottom: 0;
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 17px;
+    margin-block: 0;
+}
+
+.centerNotes {
+    text-align: center;
+}
+
+.notesInput {
+    width: 90%;
     background-color: rgba(0, 0, 0, 0);
     border: 1px solid white;
     border-radius: 5px;

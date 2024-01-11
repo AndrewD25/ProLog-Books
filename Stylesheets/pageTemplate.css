@@ -33,6 +33,7 @@ body {
     background-color: var(--secondaryColor);
     padding-inline: 5px;
     display: flex;
+    justify-content: space-around;
     align-items: center;
     position: fixed;
     top: 0;
@@ -43,7 +44,7 @@ body {
 #mainLogo {
     color: white;
     margin-block: 0;
-    width: 18vw;
+    height: calc(var(--navHeight));
 }
 
 #pageTop > nav {
@@ -65,16 +66,8 @@ body {
     text-decoration: none;
 }
 
-#navHamburger {
-    display: none !important;
-}
-
-@media screen and (max-width: 1000px) {
-    #pageTop > nav > li {
+@media screen and (max-width: 1100px) {
+    #pageTop nav li a span {
         display: none;
-    }
-
-    #navHamburger {
-        display: inline-block !important;
     }
 } 
