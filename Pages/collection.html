@@ -22,13 +22,12 @@ DUE DATE
 
             <!--Navigation Links-->
             <nav>
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="collection.html">Collection</a></li>
-                <li><a href="social.html">Social</a></li>
-                <li><a href="news.html">News</a></li>
-                <li><a href="puzzle.html">Play Comicle</a></li>
-                <li><a href="settings.html">Settings</a></li>
-                <li id="navHamburger"><a><i class="fa-solid fa-bars"></i></a></li>
+                <li><a href="../index.html"><i class="fas fa-home" title="Home"></i> <span>Home</span></a></li>
+                <li><a href="collection.html"><i class="fa-solid fa-book" title="Collection"></i> <span>Collection</span></a></li>
+                <li><a href="social.html"><i class="fa-solid fa-people-arrows" title="Social"></i> <span>Social</span></a></li>
+                <li><a href="news.html"><i class="fa-solid fa-newspaper" title="News"></i> <span>News</span></a></li>
+                <li><a href="puzzle.html"><i class="fa-solid fa-puzzle-piece" title="Play Comicle"></i> <span>Play Comicle</span></a></li>
+                <li><a href="settings.html"><i class="fa-solid fa-gears" title="Settings"></i> <span>Settings</span></a></li>
             </nav>
         </header>
 
@@ -40,31 +39,25 @@ DUE DATE
             </div>
             <div id="collectionContainer">
                 <div class="folder" id="DC Comics">
-                    <!--
-                    Books should include: Publisher/Continuity, Series, Number Type, Number, Title, a Read checkbox, a Rating dropdown w/ 5 options, and a Notes text box
-                    
-                    Ratings can be: Unhaul (1/5), Meh (2/5), Good (3/5), Great (4/5), Favorite (5/5) - But might alter to avoid creating another points system
-                    -->
-
                     <div class="book"> <!--Can be flipped-->
                         <div class="bookCircle positionNum">1</div>
                         <img class="cover" src="../Images/exampleCover.png"> 
                         <div class="details"> <!--When not flipped: display-none -->
                             <!--These are the current book details. May change over time-->
                             <!--Maybe make some details optional-->
-                            <h3>Green Lantern: Rebirth</h3>
-                            <p>DC Comics - Post-Crisis</p>
+                            <h3 class="title">Green Lantern: Rebirth</h3>
+                            <h4 class="subtitle">DC Comics - Post-Crisis</h4>
 
-                            <p>Notes</p>
-                            <textarea class="noteInput"></textarea>
+                            <p class="notesLabel">Notes:</p>
+                            <div class="centerNotes"><textarea class="notesInput"></textarea></div>
                         
                             <div class="readBox">
-                                <p>Read</p>
+                                <p>Read:</p>
                                 <input type="checkbox">
                             </div>
 
                             <div class="ratingBox">
-                                <p>Rating</p>
+                                <p>Rating:</p>
                                 <select>
                                     <option>Unhaul</option>
                                     <option>Meh</option>
