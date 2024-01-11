@@ -17,6 +17,7 @@ html, body {
 }
 
 body {
+    padding-top: var(--navHeight);
     background-color: var(--primaryColor);
     overflow-x: hidden;    
     color: white;
@@ -63,6 +64,7 @@ body {
 #pageTop > nav > li > a {
     padding-inline: 3vw;
     color: white;
+    font-size: clamp(12px, 1.5vw, 28px);
     text-decoration: none;
 }
 

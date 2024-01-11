@@ -14,8 +14,8 @@ body {
     width: 70%;
     height: 350px;
     /* height: clamp(150px, 40vh, 20vw); */
+    margin-top: calc((100vh - 350px - var(--navHeight)) / 2);
     margin-inline: auto;
-    margin-top: calc(2 * var(--navHeight));
     padding: 1% 4% 1% 4%;
     border-radius: 50px;
     background-color: var(--primaryColor);
@@ -23,8 +23,8 @@ body {
 
 .info {
     background-color:  var(--primaryColor);
-    margin: 200px 0 0 0; /*update later*/
-    width: 300px; /*update later*/
+    margin: 150px 0 0 0; /*update later*/
+    width: 70vw; /*update later*/
     height: 300px; /*update later*/
 }
 

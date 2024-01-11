@@ -1,0 +1,16 @@
+#pageTitle {
+    text-align: center;
+}
+
+#blogColumns {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 7vw;
+    padding-inline: 7vw;
+}
+
+article {
+    width: 23.8vw;
+    height: 25vw;
+    background-color: white;
+}
