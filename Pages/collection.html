@@ -37,9 +37,13 @@ DUE DATE
                 <!--Folders are now added via javascript - example of html folder format below-->
                 <!-- <p class="folderLink">DC Comics <i class="fas fa-folder"></i> <span class="folderCount">X</span></p> -->
             </div>
+            
             <div id="collectionContainer">
                 <div class="folder" id="DC Comics">
+                    
                     <div class="book"> <!--Can be flipped-->
+                        <button class="addBookButton before">+</button>
+
                         <div class="bookCircle positionNum">1</div>
                         <img class="cover" src="../Images/exampleCover.png"> 
                         <div class="details"> <!--When not flipped: display-none -->
@@ -54,7 +58,7 @@ DUE DATE
                             <div class="readBox">
                                 <p>Read:</p>
                                 <input type="checkbox">
-                            </div>
+                            </div>  
 
                             <div class="ratingBox">
                                 <p>Rating:</p>
@@ -69,8 +73,9 @@ DUE DATE
                 
                         </div>
                         <button class="bookCircle flipButton"><i class="fa-solid fa-arrows-spin"></i></button>
-                    </div>
-                
+
+                        <button class="addBookButton after">+</button>
+                    </div>               
                     
                 </div>
 
