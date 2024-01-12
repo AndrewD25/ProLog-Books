@@ -36,8 +36,10 @@
 
 .folder {
     display: grid;
+    align-items: center;
     grid-template-columns: auto;
     gap: 6vw;
+    row-gap: 60px;
 }
 
 .book {
@@ -160,3 +162,35 @@
 .ratingBox * {
     display: inline-block;
 }
+
+.addBookButton {
+    background-color: var(--primaryColor);
+    color: white;
+    width: 40px;
+    height: 40px;
+    font-size: 25px;
+    border: 1px solid white;
+    border-radius: 50%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Used to disable clicks on buttons that are opacity: 0 */
+.addBookButton[style="opacity: 0"] {
+    pointer-events: none;
+}
+
+.before {
+    top: 50%;
+    left: -20px;
+    transform: translateY(-20px);
+}
+
+.after {
+    top: 50%;
+    right: -20px;
+    transform: translateY(-20px);
+}
+
