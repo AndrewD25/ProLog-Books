@@ -6,9 +6,17 @@ Due Date
 
 "use strict";
 
+// "All" Variables
+let everythingArray = []; //To possibly be used later
+let allBooks = document.getElementsByClassName("book");
+let allAddBookButtons = document.getElementsByClassName("addBookButton");
+let folderContainer = document.getElementById("folderContainer");
+let allFolders = document.getElementsByClassName("folder");
+let allFolderLinks = document.getElementsByClassName("folderLink");
+let allFlipButtons = document.getElementsByClassName("flipButton");
+
 
 //Add flip ability to all books
-let allFlipButtons = document.getElementsByClassName("flipButton");
 
 for (let i = 0; i < allFlipButtons.length; i++) {
     allFlipButtons[i].addEventListener("click", function(e) {
@@ -31,9 +39,6 @@ for (let i = 0; i < allFlipButtons.length; i++) {
 }
 
 // Example function for draw folder links
-let folderContainer = document.getElementById("folderContainer");
-let allFolders = document.getElementsByClassName("folder");
-
 function drawFolderLinks() {
     let folderIDs = [];
     for (let i = 0; i < allFolders.length; i++) {
@@ -53,21 +58,40 @@ function drawFolderLinks() {
 drawFolderLinks();
 
 //Add functionality to folder links
-let allFolderLinks = document.getElementsByClassName("folderLink");
-
 for (let i = 0; i < allFolderLinks.length; i++) {
     allFolderLinks[i].addEventListener("click", function() {
         for (let j = 0; j < allFolders.length; j++) {
             let folderInner = allFolderLinks[i].innerHTML;
             let htmlStart = folderInner.indexOf('<i class="fas fa-folder"></i> <span class="folderCount">') - 1 //Get the index where the title ends
             if (allFolders[j].id == folderInner.substring(0, htmlStart)) {
-                console.log(`${allFolders[j]} will show`)
                 allFolders[j].classList.remove("hidden");
             } else {
-                console.log(`${allFolders[j]} will hide`)
                 allFolders[j].classList.add("hidden");
             }
         }
     })
 }
+
+// Make addBookButtons disappear until prompted to appear, then stay open for a few seconds or until other buttons appear
+for (let i = 0; i < allBooks.length; i++) {
+    //Create an event listener for the book to activate
+}
+function activate() {
+    //Make add books show
+    //Start making them fade away and make them disappear after a few seconds
+    //Hide buttons if another book is activated
+}
+
+
+
+
+// Make Add Book Buttons Functional
+// for (let i = 0; i < allAddBookButtons.length; i++) {
+//     allAddBookButtons[i].addEventListener("click", function(e) {
+//         //Get target book
+//         //Get book position
+//         //Save either a .before or .after position
+//     })
+// }
+
 
