@@ -9,7 +9,6 @@ Due Date
 // "All" Variables
 let everythingArray = []; //To possibly be used later
 let allBooks = document.getElementsByClassName("book");
-let allAddBookButtons = document.getElementsByClassName("addBookButton");
 let folderContainer = document.getElementById("folderContainer");
 let allFolders = document.getElementsByClassName("folder");
 let allFolderLinks = document.getElementsByClassName("folderLink");
@@ -27,13 +26,13 @@ for (let i = 0; i < allFlipButtons.length; i++) {
             // Toggle the 'flipped' class on the found book
             currentBook.classList.toggle("flipped");
 
-            // Remove 'flipped' from other books
-            // let otherBooks = document.getElementsByClassName("book");
-            // for (let j = 0; j < otherBooks.length; j++) {
-            //     if (otherBooks[j] !== currentBook) {
-            //         otherBooks[j].classList.remove("flipped");
-            //     }
-            // }
+            //Remove 'flipped' from other books
+            let flippedBooks = document.getElementsByClassName("flipped");
+            for (let j = 0; j < flippedBooks.length; j++) {
+                if (flippedBooks[j] !== currentBook) {
+                    flippedBooks[j].classList.remove("flipped");
+                }
+            }
         }
     });
 }
@@ -72,24 +71,11 @@ for (let i = 0; i < allFolderLinks.length; i++) {
     })
 }
 
-// Make addBookButtons disappear until prompted to appear, then stay open for a few seconds or until other buttons appear
-for (let i = 0; i < allBooks.length; i++) {
-    allBooks[i].addEventListener('click', activate);
-}
-function activate(e) {
-    for (let l = 0; l < allAddBookButtons.length; l++) {
-        allAddBookButtons[l].style.opacity = 0;
-    }
-    let activatedBook = e.target.closest('.book');
-    let buttonsToShow = activatedBook.getElementsByClassName("addBookButton");
-    for (let b = 0; b < buttonsToShow.length; b++) {
-        buttonsToShow[b].style.opacity = 1;
-    }
-    setTimeout(() => {
-        //Start reducing opacity on each button over time (if opacity != 0)
-        
-    }, 2000); 
-}
+
+
+
+
+
 
 
 
