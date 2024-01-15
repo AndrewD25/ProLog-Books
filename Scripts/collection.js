@@ -74,12 +74,21 @@ for (let i = 0; i < allFolderLinks.length; i++) {
 
 // Make addBookButtons disappear until prompted to appear, then stay open for a few seconds or until other buttons appear
 for (let i = 0; i < allBooks.length; i++) {
-    //Create an event listener for the book to activate
+    allBooks[i].addEventListener('click', activate);
 }
-function activate() {
-    //Make add books show
-    //Start making them fade away and make them disappear after a few seconds
-    //Hide buttons if another book is activated
+function activate(e) {
+    for (let l = 0; l < allAddBookButtons.length; l++) {
+        allAddBookButtons[l].style.opacity = 0;
+    }
+    let activatedBook = e.target.closest('.book');
+    let buttonsToShow = activatedBook.getElementsByClassName("addBookButton");
+    for (let b = 0; b < buttonsToShow.length; b++) {
+        buttonsToShow[b].style.opacity = 1;
+    }
+    setTimeout(() => {
+        //Start reducing opacity on each button over time (if opacity != 0)
+        
+    }, 2000); 
 }
 
 
