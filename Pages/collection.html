@@ -42,9 +42,11 @@ DUE DATE
                 <div class="folder" id="DC Comics">
                     
                     <div class="book"> <!--Can be flipped-->
-                        <button class="addBookButton before">+</button>
-
+                        
+                        <button class="bookCircle addBookButton before">+</button>
                         <div class="bookCircle positionNum">1</div>
+                        <div class="bookCircle editButton"><i class="fa-solid fa-pencil"></i></div>
+
                         <img class="cover" src="../Images/exampleCover.png"> 
                         <div class="details"> <!--When not flipped: display-none -->
                             <!--These are the current book details. May change over time-->
@@ -70,12 +72,20 @@ DUE DATE
                                     <option>Favorite</option>
                                 </select>
                             </div>
-                
-                        </div>
-                        <button class="bookCircle flipButton"><i class="fa-solid fa-arrows-spin"></i></button>
 
-                        <button class="addBookButton after">+</button>
-                    </div>               
+                            <div class="bookBottomButtons">
+                                <button>&lt;</button>
+                                <button><i class="fa-solid fa-trash"></i></button>
+                                <button>&gt;</button>
+                            </div>
+                        </div>
+
+                        <button class="bookCircle copyButton"><i class="fa-solid fa-copy"></i></button>
+                        <button class="bookCircle flipButton"><i class="fa-solid fa-arrows-spin"></i></button>
+                        <button class="bookCircle addBookButton after">+</button>
+
+                    </div>                     
+                           
                     
                 </div>
 
