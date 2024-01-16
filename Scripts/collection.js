@@ -13,6 +13,7 @@ let folderContainer = document.getElementById("folderContainer");
 let allFolders = document.getElementsByClassName("folder");
 let allFolderLinks = document.getElementsByClassName("folderLink");
 let allFlipButtons = document.getElementsByClassName("flipButton");
+let allAddBookButtons = document.getElementsByClassName("addBookButton");
 
 
 //Add flip ability to all books
@@ -72,21 +73,22 @@ for (let i = 0; i < allFolderLinks.length; i++) {
 }
 
 
-
-
-
-
-
-
-
-
 // Make Add Book Buttons Functional
-// for (let i = 0; i < allAddBookButtons.length; i++) {
-//     allAddBookButtons[i].addEventListener("click", function(e) {
-//         //Get target book
-//         //Get book position
-//         //Save either a .before or .after position
-//     })
-// }
+for (let i = 0; i < allAddBookButtons.length; i++) {
+    allAddBookButtons[i].addEventListener("click", function(e) {
+        //Get target book
+        //Get book position
+        //Save either a .before or .after position
+        showModal();
+    })
+}
 
+function showModal() {
+    modalWindow.classList.remove('hidden');
+    overlay.classList.remove("hidden");
+};
 
+function closeModal() {
+    modalWindow.classList.add("hidden");
+    overlay.classList.add("hidden");
+}
