@@ -1,0 +1,20 @@
+body {
+    background-image: url("../Images/comicBackgroundBlurred.jpg");
+    background-size: 300% auto; /*Background for mobile version*/
+    background-repeat: repeat-y; /* Repeat vertically */
+}
+
+/* This media query targets larger screens using the same measure as the hamburger menu query */
+@media only screen and (min-width: 1100px) {
+    body {
+        background-size: 100% auto; /*Set background for pc version*/
+    }
+}
+
+#centerScrolling {
+    display: block;
+    width: 75%;
+    margin-inline: auto;
+    background-color: var(--darkerSecondary);
+    box-shadow: 0px 0px 25px rgb(25, 25, 25);
+}

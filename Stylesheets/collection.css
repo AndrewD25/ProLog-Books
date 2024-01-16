@@ -97,13 +97,45 @@
     align-items: center;
 }
 
-/* .book:hover .bookCircle {
-    display: flex !important;
-} */
+/* Used to disable clicks on buttons that are opacity: 0 */
+.addBookButton {
+    display: none;
+    top: 50%;
+    transform: translateY(-20px);
+    font-size: 27px;
+}
+
+.addBookButton[style="opacity: 0"] {
+    pointer-events: none;
+}
+
+.before {
+    left: -35px;
+}
+
+.after {
+    right: -35px;
+}
 
 .positionNum {
     top: -15px;
     left: -15px;
+}
+
+.editButton {
+    display: none;
+    top: -15px;
+    right: -15px;
+}
+
+.copyButton {
+    display: none;
+    bottom: -15px;
+    left: -15px;
+}
+
+.flipped .addBookButton, .flipped .editButton, .flipped .copyButton {
+    display: flex !important;
 }
 
 .flipButton {
@@ -163,34 +195,44 @@
     display: inline-block;
 }
 
-.addBookButton {
-    background-color: var(--primaryColor);
-    color: white;
-    width: 40px;
-    height: 40px;
-    font-size: 25px;
-    border: 1px solid white;
-    border-radius: 50%;
-    position: absolute;
+.bookBottomButtons {
+    width: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-around;
 }
 
-/* Used to disable clicks on buttons that are opacity: 0 */
-.addBookButton[style="opacity: 0"] {
-    pointer-events: none;
-}
 
-.before {
+/* MODAL WINDOW */  
+.modal {
+    position: absolute;
     top: 50%;
-    left: -20px;
-    transform: translateY(-20px);
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30vw;
+    height: 45vw;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+    z-index: 9999999991;
+    text-align: center;
+    color: black;
 }
 
-.after {
-    top: 50%;
-    right: -20px;
-    transform: translateY(-20px);
+.smallText {
+    color: #889;
+    font-size: 13px;
 }
+  
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(3px);
+    z-index: 9999999;
+}
+
 

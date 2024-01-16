@@ -13,4 +13,42 @@ article {
     width: 23.8vw;
     height: 25vw;
     background-color: white;
+    color: black;
 }
+
+.thumbnail {
+    width: 23.8vw;
+    height: 18vw;
+    margin-block: 0;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.data {
+    height: 7vw;
+    padding-inline: 5%;
+    border-top: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+
+.title {
+    margin-block: 0;
+}
+
+.subData {
+    display: flex;
+    justify-content: left;
+    gap: 5%;
+}
+
+.author {
+    margin-block: 0;
+}
+
+.date {
+    margin-block: 0;
+}
+

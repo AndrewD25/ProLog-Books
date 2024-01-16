@@ -1,0 +1,20 @@
+/*
+Andrew Deal
+Share Your Shelf Settings Page CSS
+DUE DATE 
+*/
+
+#sidebar {
+    height: calc(100vh - var(--navHeight));
+    width: 30vw;
+    background-color: var(--darkerSecondary);
+    box-shadow: 0px 0px 25px rgb(25, 25, 25);
+    float: left;
+    position: fixed;
+}
+
+#menu {
+    margin-left: 30vw;
+    width: 70vw;
+    float: left;
+}
