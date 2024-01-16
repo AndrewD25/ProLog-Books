@@ -160,6 +160,43 @@ DUE DATE
             </div>
         </div>
 
+        <!--Modal Window Elements-->
+        <div class="modal hidden" id="modalWindow">
+            <h1>Add Book</h1>
+            <div>
+                <label>Title: </label>
+                <input type="text">
+                <p class="smallText">A title may include a series, number, and/or title</p>
+            </div>
+            <div>
+                <label>Subtitle: </label>
+                <input type="text">
+                <p class="smallText">A subtitle may include publisher or continuity</p>
+            </div>
+            <div>
+                <label>Notes: </label>
+                <textarea></textarea>
+                <p class="smallText">Information about the book - or leave a review!</p>
+            </div>
+            <div>
+                <label>Read: </label>
+                <input type="checkbox">
+            </div>
+            <div>
+                <label>Rating: </label>
+                <select>
+                    <option>Unhaul</option>
+                    <option>Meh</option>
+                    <option>Good</option>
+                    <option>Great</option>
+                    <option>Favorite</option>
+                </select>
+            </div>
+            <button>Add Book</button>
+            <button onclick="closeModal()">Cancel</button>
+        </div>            
+        <div class="overlay hidden" id="overlay"></div>
+
         <script src="../Scripts/collection.js"></script>
     </body>
 </html>
