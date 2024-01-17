@@ -1,13 +1,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script>
-            let Title = "How to Write a Blog Post";
-            let Author = "Andrew Deal";
-            let Date = "01-16-24";
-            let Image = "";
-        </script>
-
         <link rel="stylesheet" href="../../Stylesheets/pageTemplate.css">
         <link rel="stylesheet" href="../../Stylesheets/articles.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -31,15 +24,26 @@
         <!--Rest of Page Code-->
         <div id="blurryBackground">
             <div id="centerScrolling">
-                <h1>How to Write a Blog Post</h1>
-                <h2>By Andrew Deal</h2>
-                <h3>01-16-24</h3>
-
-                <p>
-                    <!--Enter Your Article Text Here-->
-                    EXAMPLE TEXT
-                </p>
+                <h1 id="Title">Loading...</h1>
+                <h2 id="Author">Loading...</h2>
+                <h3 id="Date">Loading...</h3>
+                <img id="Image">
+                <p id="Content">Loading...</p>
             </div>
         </div>
+
+        <script>
+            let InputTitle = "How to Write a Blog Post";
+            let InputAuthor = "Andrew Deal";
+            let InputDate = "01-16-24";
+            let InputImage = "https://img.freepik.com/free-photo/sunset-time-tropical-beach-sea-with-coconut-palm-tree_74190-1075.jpg";
+            let InputContent = "EXAMPLE TEXT";
+
+            document.getElementById("Title").innerText = InputTitle;
+            document.getElementById("Author").innerText = InputAuthor;
+            document.getElementById("Date").innerText = InputDate;
+            document.getElementById("Image").setAttribute("src", InputImage);
+            document.getElementById("Content").innerText = InputContent;
+        </script>
     </body>
 </html>
