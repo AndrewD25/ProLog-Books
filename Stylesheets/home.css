@@ -13,6 +13,7 @@ body {
 #landingBox {
     width: 70%;
     height: 350px;
+    text-align: center;
     /* height: clamp(150px, 40vh, 20vw); */
     margin-top: calc((100vh - 350px - var(--navHeight)) / 2);
     margin-inline: auto;
@@ -23,23 +24,33 @@ body {
 
 .info {
     background-color:  var(--primaryColor);
+    display: flex;
+    align-items: center;
     margin: 150px 0 0 0; /*update later*/
     width: 70vw; /*update later*/
     height: 300px; /*update later*/
+    clear: both;
 }
 
 .leftBox {
     float: left;
-    clear: both;
+    justify-content: left;
     border-radius: 0 30px 30px 0;
+    text-align: left;
 }
 
 .rightBox {
     float: right;
-    clear: both;
+    justify-content: right;
     border-radius: 30px 0 0 30px;
+    text-align: right;
 }
 
+.previewImage {
+    width: 20%;
+    height: 230px; /*update later*/
+    background-color: white; /*Delete later*/
+}
 
 /* This media query targets larger screens using the same measure as the hamburger menu query */
 @media only screen and (min-width: 1100px) {

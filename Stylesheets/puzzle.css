@@ -10,21 +10,80 @@ DUE DATE
 }
 
 div#centering {
-  width: 80%;
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  border: 1px dashed pink;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
 }
 
 div#leftSide {
-  display: inline-block;
-  width: 65%;
-  border: 1px dashed pink;
+    display: inline-block;
+    width: 65%;
 }
 
 div#rightSide {
-  display: inline-block;
-  width: 35%;
-  border: 1px dashed pink;
+    display: inline-block;
+    width: 35%;
+}
+
+#gallery-container {
+    position: relative;
+    width: 80%;
+    max-width: 800px;
+    margin: 20px auto;
+    overflow: hidden;
+}
+
+.gallery-image {
+    width: 100%;
+    display: none;
+}
+
+.gallery-image.active {
+    display: block;
+}
+
+#navigation-buttons {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.navigation-button {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin: 0 5px;
+    background-color: #bbb;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.active {
+    background-color: #333;
+    color: #fff;
+}
+
+#guessInputs {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#seriesInput {
+    width: 71%;
+}
+
+#numberInput { 
+    width: 22%;
+}
+
+#guessButton {
+    color: white;
+    background-color: green;
+    width: 100%;
+    margin-block: 10px;
+}
+
+.guess {
+    border: 1px solid white;
 }
