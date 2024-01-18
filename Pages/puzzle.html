@@ -30,20 +30,37 @@
         <div id="centering">
             <div id="leftSide">
                 <!--Add Image Gallery-->
+                <div id="gallery-container">
+                    <div id="image-list">
+                      <img class="gallery-image" src="../Images/Puzzles/Example/example1.jpg" alt="Image 1">
+                      <img class="gallery-image" src="../Images/Puzzles/Example/example2.jpg" alt="Image 2">
+                      <img class="gallery-image" src="../Images/Puzzles/Example/example3.jpg" alt="Image 3">
+                      <img class="gallery-image" src="../Images/Puzzles/Example/example4.jpg" alt="Image 4">
+                      <img class="gallery-image" src="../Images/Puzzles/Example/example5.jpg" alt="Image 5">
+                      <img class="gallery-image" src="../Images/Puzzles/Example/example6.jpg" alt="Image 6">
+                    </div>
+                  
+                    <div id="navigation-buttons">
+                      <!-- Navigation buttons will be dynamically generated based on the 'round' value -->
+                    </div>
+                </div>
             </div>
             <div id="rightSide">
                 <!--User input boxes-->
-                <input type="text">
-                <input type="number">
+                <div id="guessInputs">
+                    <input type="text" id="seriesInput">
+                    <input type="number" id="numberInput">
+                </div>
+                <button id="guessButton">Guess!</button>
 
                 <!--Keep track of guesses-->
                 <h3>Guesses:</h3>
-                <p class="guess"></p>
-                <p class="guess"></p>
-                <p class="guess"></p>
-                <p class="guess"></p>
-                <p class="guess"></p>
-                <p class="guess"></p>
+                <p class="guess">Guess 1</p>
+                <p class="guess">Guess 2</p>
+                <p class="guess">Guess 3</p>
+                <p class="guess">Guess 4</p>
+                <p class="guess">Guess 5</p>
+                <p class="guess">Guess 6</p>
             </div>
         </div>
 
