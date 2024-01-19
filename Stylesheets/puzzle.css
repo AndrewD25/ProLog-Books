@@ -53,13 +53,13 @@ div#rightSide {
     width: 30px;
     height: 30px;
     margin: 0 5px;
-    background-color: #bbb;
+    background-color: var(--secondaryColor);
     border-radius: 5px;
     cursor: pointer;
 }
 
 .active {
-    background-color: #333;
+    background-color: var(--darkerSecondary);
     color: #fff;
 }
 
