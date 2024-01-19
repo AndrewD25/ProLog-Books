@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Secret Shelf: Organize Your Books Online</title>
+        <title>Share Your Shelf: Organize and Share Your Books Online</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="../Images/favicon.ico">
 
@@ -51,16 +51,13 @@
                     <input type="text" id="seriesInput">
                     <input type="number" id="numberInput">
                 </div>
-                <button id="guessButton">Guess!</button>
+                <button id="guessButton" onclick="guess()">Guess!</button>
 
                 <!--Keep track of guesses-->
                 <h3>Guesses:</h3>
-                <p class="guess">Guess 1</p>
-                <p class="guess">Guess 2</p>
-                <p class="guess">Guess 3</p>
-                <p class="guess">Guess 4</p>
-                <p class="guess">Guess 5</p>
-                <p class="guess">Guess 6</p>
+                <div id="guessContainer">
+                    <!-- <p class="guess">Guess</p> -->
+                </div>
             </div>
         </div>
 

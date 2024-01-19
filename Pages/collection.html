@@ -7,7 +7,7 @@ DUE DATE
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Secret Shelf: Organize Your Books Online</title>
+        <title>Share Your Shelf: Organize and Share Your Books Online</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="../Images/favicon.ico">
 
@@ -41,7 +41,7 @@ DUE DATE
             <div id="collectionContainer">
                 <div class="folder" id="DC Comics">
                     
-                    <div class="book"> <!--Can be flipped-->
+                    <div class="book flipped"> <!--Can be flipped-->
                         
                         <button class="bookCircle addBookButton before">+</button>
                         <div class="bookCircle positionNum">1</div>
@@ -53,18 +53,21 @@ DUE DATE
                             <!--Maybe make some details optional-->
                             <h3 class="title">Green Lantern: Rebirth</h3>
                             <h4 class="subtitle">DC Comics - Post-Crisis</h4>
+                            
+                            <textarea class=notes></textarea>
+                            
+                            <div class="selectBox">
+                                <select class="read">
+                                    <option>---</option>
+                                    <option>Unread</option>
+                                    <option>Reading</option>
+                                    <option>Finished</option>
+                                </select>
 
-                            <p class="notesLabel">Notes:</p>
-                            <div class="centerNotes"><textarea class="notesInput"></textarea></div>
-                        
-                            <div class="readBox">
-                                <p>Read:</p>
-                                <input type="checkbox">
-                            </div>  
+                                <p class="divider">l</p>
 
-                            <div class="ratingBox">
-                                <p>Rating:</p>
-                                <select>
+                                <select class="rating">
+                                    <option>---</option>
                                     <option>Unhaul</option>
                                     <option>Meh</option>
                                     <option>Good</option>
@@ -100,7 +103,7 @@ DUE DATE
                             <h4 class="subtitle">Marvel Comics</h4>
 
                             <p class="notesLabel">Notes:</p>
-                            <div class="centerNotes"><textarea class="notesInput"></textarea></div>
+                            <div class="centerNotes"><textarea class=notes></textarea></div>
                         
                             <div class="readBox">
                                 <p>Read:</p>
@@ -134,7 +137,7 @@ DUE DATE
                             <h4 class="subtitle">Barnes and Noble Edition</h4>
 
                             <p class="notesLabel">Notes:</p>
-                            <div class="centerNotes"><textarea class="notesInput"></textarea></div>
+                            <div class="centerNotes"><textarea class=notes></textarea></div>
                         
                             <div class="readBox">
                                 <p>Read:</p>
@@ -175,16 +178,22 @@ DUE DATE
             </div>
             <div>
                 <label>Notes: </label>
-                <textarea></textarea>
+                <textarea class=""></textarea>
                 <p class="smallText">Information about the book - or leave a review!</p>
             </div>
             <div>
                 <label>Read: </label>
-                <input type="checkbox">
+                <select>
+                    <option>---</option>
+                    <option>Unread</option>
+                    <option>Reading</option>
+                    <option>Finished</option>
+                </select>
             </div>
             <div>
                 <label>Rating: </label>
                 <select>
+                    <option>---</option>
                     <option>Unhaul</option>
                     <option>Meh</option>
                     <option>Good</option>
