@@ -6,15 +6,17 @@ Due Date
 
 "use strict";
 
+//Storage Variables
+let folders = {}; //Store all folders from the db into this objet
+//Then add the books into the folders as arrays
+
 // "All" Variables
-let everythingArray = []; //To possibly be used later
 let allBooks = document.getElementsByClassName("book");
 let folderContainer = document.getElementById("folderContainer");
 let allFolders = document.getElementsByClassName("folder");
 let allFolderLinks = document.getElementsByClassName("folderLink");
 let allFlipButtons = document.getElementsByClassName("flipButton");
 let allAddBookButtons = document.getElementsByClassName("addBookButton");
-
 
 //Add flip ability to all books
 
