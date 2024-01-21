@@ -1,3 +1,9 @@
+/*
+Andrew Deal
+Secret Shelf Puzzle Game JS
+DUE DATE
+*/
+
 "use strict";
 
 let round = 1; // Initialize round to 1
