@@ -110,11 +110,21 @@
 }
 
 .before {
-    left: -35px;
+    animation-name: before;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+} @keyframes before {
+    from {left: 0px;}
+    to {left: -35px;}
 }
 
-.after {
-    right: -35px;
+.after { /*Add book before button*/
+    animation-name: after;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+} @keyframes after {
+    from {right: 0px;}
+    to {right: -35px;}
 }
 
 .positionNum {
