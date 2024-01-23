@@ -18,15 +18,17 @@ div#centering {
 
 div#leftSide {
     display: inline-block;
-    width: 65%;
+    width: 50%;
+    /* width: 65%; */
 }
 
 div#rightSide {
     display: inline-block;
-    width: 35%;
+    width: 50%;
+    /* width: 35%; */
 }
 
-#gallery-container {
+/* #gallery-container {
     position: relative;
     width: 80%;
     max-width: 800px;
@@ -61,6 +63,11 @@ div#rightSide {
 .active {
     background-color: var(--darkerSecondary);
     color: #fff;
+} */
+
+#puzzleImage {
+    max-width: 90%;
+    max-height: 60vh;
 }
 
 #guessInputs {
