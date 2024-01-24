@@ -134,14 +134,22 @@
 
 .editButton {
     display: none;
-    top: -15px;
-    right: -15px;
+    animation-name: edit;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+} @keyframes edit {
+    from {top: 0px; right: 0px;}
+    to {top: -15px; right: -15px;}
 }
 
 .copyButton {
     display: none;
-    bottom: -15px;
-    left: -15px;
+    animation-name: copy;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+} @keyframes copy {
+    from {bottom: 0px; left: 0px;}
+    to {bottom: -15px; left: -15px;}
 }
 
 .flipped .addBookButton, .flipped .editButton, .flipped .copyButton {
@@ -209,9 +217,16 @@
 }
 
 .bookBottomButtons {
-    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
     display: flex;
     justify-content: space-around;
+}
+
+.bookBottomButtons button {
+    background-color: white;
+    width: 25%;
 }
 
 /* MODAL WINDOW */  
