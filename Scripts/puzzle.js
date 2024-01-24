@@ -1,64 +1,65 @@
 /*
 Andrew Deal
-Secret Shelf Puzzle Game JS
-DUE DATE
+Puzzle Page Script
+DUE DATE 
 */
 
 "use strict";
 
-let round = 1; // User will get 6 guesses
-// let currentIndex = 0;
-// const images = document.querySelectorAll('.gallery-image');
-// const navigationButtons = document.getElementById('navigation-buttons');
+let round = 1;
+let scaleFactor = 10; // Set the initial scale factor to 10
+let seconds = 20;
+let timer;
 
-// function updateGallery() {
-//     // Hide all images
-//     images.forEach(image => image.classList.remove('active'));
+// Run 8-bit Function for Image //
+let img = new Image();
+img.onload = function () {
+    eightBit(document.getElementById('mycanvas'), img, scaleFactor);
+};
+img.src = '../Images/exampleCover.png';
 
-//     // Show the current image
-//     images[currentIndex].classList.add('active');
+// Start Timer Function //
+function startTimer() {
+    timer = setInterval(updateTimer, 100); // Update every decisecond
+}
 
-//     // Clear existing navigation buttons
-//     navigationButtons.innerHTML = '';
+// Update Timer Function //
+function updateTimer() {
+    if (seconds > 0) {
+        seconds -= 0.1; // Decrease by decisecond
 
-//     // Create navigation buttons based on the 'round' value
-//     for (let i = 0; i < round; i++) {
-//         if (i < 6) {
-//             const button = document.createElement('div');
-//             button.classList.add('navigation-button');
-//             button.textContent = i + 1;
-//             button.addEventListener('click', () => showImage(i));
-//             navigationButtons.appendChild(button);
-//         }
-//     }
+        // Round to one decimal place
+        seconds = Math.round(seconds * 10) / 10;
 
-//     // Update active state
-//     updateActiveButton();
-// }
+        // Update the 8-bit function with the new scale factor when an integer is reached
+        if (Number.isInteger(seconds)) {
+            // Adjust the scale factor increase over time
+            scaleFactor += Math.pow(scaleFactor / 10, 1.2);
 
-// function showImage(index) {
-//     if (index < 0) {
-//         currentIndex = images.length - 1;
-//     } else if (index >= images.length) {
-//         currentIndex = 0;
-//     } else {
-//         currentIndex = index;
-//     }
+            // Ensure scaleFactor stays within the range 1-100
+            scaleFactor = Math.min(Math.max(scaleFactor, 1), 100);
 
-//     // Update the gallery
-//     updateGallery();
-// }
+            // Update 8-bit function with the new scale factor
+            eightBit(document.getElementById('mycanvas'), img, scaleFactor);
+        }
 
-// function updateActiveButton() {
-//     const buttons = document.querySelectorAll('.navigation-button');
-//     buttons.forEach((button, index) => {
-//         button.classList.remove('active');
-//         if (index === currentIndex) {
-//             button.classList.add('active');
-//         }
-//     });
-// }
+        // Update the slider based on the current seconds
+        updateSlider(seconds);
+    } else {
+        // Stop the timer when it reaches 0
+        clearInterval(timer);
+    }
+}
 
+function updateSlider(seconds) {
+    let slider = document.getElementById('slider');
+    let position = 100 - (seconds * 5); // Adjust the factor as needed
+    slider.style.right = position + '%';
+    slider.textContent = String(Math.ceil(seconds));
+}
+updateSlider(seconds);
+
+// Guess Function //
 function guess() {
     let guessContainer = document.getElementById('guessContainer');
 
@@ -68,22 +69,20 @@ function guess() {
         series: seriesInput.value,
         number: numberInput.value
     };
-    
-    if (round <= 6) {
-        //Guess functionality
 
-        //Add p to guess list
+    if (round <= 6) {
+        // Guess functionality
+
+        // Add p to guess list
         let guess_p = document.createElement("p");
         guess_p.classList.add("guess");
         guess_p.textContent = `${guess.series} ${guess.number}`;
         guessContainer.appendChild(guess_p);
 
-        //Increment Round and Update Gallery
+        // Increment Round
         round++;
-        // updateGallery();
     }
 }
 
-
-//On Startup Functions
-// updateGallery();
+// On Startup Functions to Run //
+autocomplete(document.getElementById("seriesInput"));
