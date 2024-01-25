@@ -84,3 +84,25 @@ VALUES
 ("user4", "Travel Plans", 1, "Into the Wild", "", NULL, NULL, "---", "---"),
 ("user4", "Bucket List", 1, "The Alchemist", "", NULL, NULL, "---", "---"),
 ("user5", "Work Projects", 1, "Getting Things Done", "", NULL, NULL, "---", "---");
+
+
+--Create Puzzles Data - Status : FUNCTIONAL
+CREATE TABLE Puzzles (
+    puzzle_number INT PRIMARY KEY AUTO_INCREMENT,
+    puzzle_date DATE NOT NULL,
+    image_id varchar(2) UNIQUE NOT NULL
+);
+DESCRIBE Puzzles;
+SELECT * FROM Puzzles ORDER BY puzzle_number;
+DELETE FROM Puzzles;
+DROP TABLE Puzzles;
+
+-- Sample Data for Puzzles 
+INSERT INTO Puzzles(puzzle_date, image_id)
+VALUES
+("2024-01-26", "aa"),
+("2024-01-27", "ab"),
+("2024-01-28", "ac"),
+("2024-01-29", "ad"),
+("2024-01-30", "ae"),
+("2024-01-31", "af")
