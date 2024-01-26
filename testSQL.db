@@ -90,7 +90,9 @@ VALUES
 CREATE TABLE Puzzles (
     puzzle_number INT PRIMARY KEY AUTO_INCREMENT,
     puzzle_date DATE NOT NULL,
-    image_id varchar(2) UNIQUE NOT NULL
+    image_id varchar(2) UNIQUE NOT NULL,
+    series varchar(50) NOT NULL,
+    number INT
 );
 DESCRIBE Puzzles;
 SELECT * FROM Puzzles ORDER BY puzzle_number;
@@ -100,9 +102,4 @@ DROP TABLE Puzzles;
 -- Sample Data for Puzzles 
 INSERT INTO Puzzles(puzzle_date, image_id)
 VALUES
-("2024-01-26", "aa"),
-("2024-01-27", "ab"),
-("2024-01-28", "ac"),
-("2024-01-29", "ad"),
-("2024-01-30", "ae"),
-("2024-01-31", "af")
+("2024-01-26", "aa", "Action Comics", 1)
