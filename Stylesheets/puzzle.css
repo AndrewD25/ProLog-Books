@@ -72,6 +72,14 @@ div#rightSide {
     border: 1px solid white;
 }
 
+.green {
+    color: green;
+}
+
+.red {
+    color: red;
+}
+
 /* Autocomplete Styling */
 .autocomplete {
     /*the container must be positioned relative:*/
@@ -105,29 +113,4 @@ div#rightSide {
     /*when navigating through the items using the arrow keys:*/
     background-color: var(--secondaryColor) !important;
     color: white !important;
-}
-
-/* Slider CSS */
-.slider-container {
-    position: relative;
-    width: 80%;
-    height: 20px;
-    background-color: #ddd;
-    margin-top: 20px;
-}
-
-#slider {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1px;
-    border-radius: 50%;
-    background-color: var(--secondaryColor); 
-    position: absolute;
-    top: 0;
-    right: 100%; /* Initially position on the right */
-    width: 30px;
-    height: 30px;
-    transform: translate(7px, -5px);
-    transition: left 1s linear; /* Adjust the duration and timing function as needed */
 }
