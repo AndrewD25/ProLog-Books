@@ -5,7 +5,7 @@ DUE DATE
 -->
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <title>Share Your Shelf: Organize and Share Your Books Online</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,11 +34,62 @@ DUE DATE
 
         <!--Rest of Page Code-->
         <div id="sidebar">
-            <p>test</p>
+            <a class="settingsLink">Profile</a>
+            <hr>
+            <a class="settingsLink selected">General</a>
+            <hr>
+            <a class="settingsLink">Display</a>
+            <hr>
+            <a class="settingsLink">Accessibility</a>
         </div>
         <div id="menu">
-            <p>test</p> 
-            <p>test</p> <p>test</p> <p>test</p> <p>test</p> <p>test</p> <p>test</p> <p>test</p> <p>test</p> <p>test</p> <p>test</p> <p>test</p> <p>test</p> <p>test</p> <p>test</p> <p>test</p> <p>test</p> <p>test</p> <p>test</p> <p>test</p> <p>test</p> <p>test</p> <p>test</p> <p>test</p> <p>test</p>        
+            <h1>General Settings</h1>
+
+            <!--EXAMPLES FROM CHATGPT-->
+            <div class="setting">
+                <label for="slider">Slider:</label>
+                <input type="range" id="slider" name="slider" min="0" max="100">
+            </div>
+        
+            <div class="setting">
+                <label class="switch">
+                    Dark Mode:
+                    <input type="checkbox">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        
+            <div class="setting">
+                <label>
+                    Checkbox:
+                    <input type="checkbox">
+                </label>
+            </div>
+        
+            <div class="setting">
+                <label for="colorPicker">Color Selector:</label>
+                <input type="color" id="colorPicker" name="colorPicker">
+            </div>
+        
+            <div class="setting random-setting">
+                <p>This is a random setting element.</p>
+            </div>
+        
+            <div class="setting random-setting">
+                <p>Another random setting element.</p>
+            </div>
+        
+            <div class="setting random-setting">
+                <p>Yet another random setting element.</p>
+            </div>
+        
+            <div class="setting random-setting">
+                <p>One more random setting element for variety.</p>
+            </div>
+        
+            <div class="setting random-setting">
+                <p>And another one, just for fun!</p>
+            </div>
         </div>
 
         <script src="../Scripts/templateScript.js"></script>
