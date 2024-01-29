@@ -45,7 +45,8 @@ body {
 #mainLogo {
     color: white;
     margin-block: 0;
-    height: calc(var(--navHeight));
+    height: var(--navHeight);
+    max-height: 15vw;
 }
 
 #pageTop > nav {
