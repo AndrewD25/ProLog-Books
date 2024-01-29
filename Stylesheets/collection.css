@@ -201,12 +201,14 @@
     border-radius: 5px;
     resize: none;
     color: white;
+    margin-block: 5px; /*Temp value change later*/
 }
 
 .selectBox { 
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-block: 5px; /*Temp value change later*/
 }
 
 .divider {
@@ -219,6 +221,7 @@
 .bookBottomButtons {
     margin-left: auto;
     margin-right: auto;
+    margin-block: 5px; /*Temp value change later*/
     width: 60%;
     display: flex;
     justify-content: space-around;
@@ -245,6 +248,25 @@
     text-align: center;
     color: black;
 }
+
+@media screen and (max-width: 1100px) {
+    .modal {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 60vw;
+        height: 85vw;
+        max-height: 80vh;
+        background-color: white;
+        padding: 1rem;
+        border-radius: 5px;
+        box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+        z-index: 9999999991;
+        text-align: center;
+        color: black;
+    }
+} 
 
 .smallText {
     color: #889;
