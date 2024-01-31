@@ -10,6 +10,10 @@ body {
     background-repeat: repeat-y; /* Repeat vertically */
 }
 
+div {
+    overflow: hidden;
+}
+
 #landingBox {
     width: 70%;
     height: 350px;
@@ -54,8 +58,11 @@ body {
 
 .previewImage {
     width: 20%;
-    height: 230px; /*update later*/
-    background-color: white; /*Delete later*/
+}
+
+.previewImage > img {
+    width: 100%;
+    border: 1px dashed white;
 }
 
 /* This media query targets larger screens using the same measure as the hamburger menu query */
