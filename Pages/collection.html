@@ -7,7 +7,7 @@ DUE DATE
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Share Your Shelf: Organize and Share Your Books Online</title>
+        <title>Collection - Share Yourshelf</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="../Images/favicon.ico">
 
@@ -57,7 +57,6 @@ DUE DATE
                                     <option>Reading</option>
                                     <option>Read</option>
                                 </select>
-                                <p class="divider">l</p> Vertical divider sans-serif l
                                 <select class="rating">
                                     <option>---</option>
                                     <option>Unhaul</option>
@@ -93,22 +92,22 @@ DUE DATE
             <h1>Add Book</h1>
             <div>
                 <label>Title: </label>
-                <input type="text">
+                <input type="text" id="modalTitle">
                 <p class="smallText">A title may include a series, number, and/or name</p>
             </div>
             <div>
                 <label>Subtitle: </label>
-                <input type="text">
+                <input type="text" id="modalSubtitle">
                 <p class="smallText">A subtitle may include publisher or continuity</p>
             </div>
             <div>
                 <label>Notes: </label>
-                <textarea class=""></textarea>
+                <textarea class="" id="modalNotes"></textarea>
                 <p class="smallText">Information about the book - or leave a review!</p>
             </div>
             <div>
                 <label>Read: </label>
-                <select>
+                <select id="modalRead">
                     <option>---</option>
                     <option>Unread</option>
                     <option>Reading</option>
@@ -117,7 +116,7 @@ DUE DATE
             </div>
             <div>
                 <label>Rating: </label>
-                <select>
+                <select id="modalRating">
                     <option>---</option>
                     <option>Unhaul</option>
                     <option>Meh</option>
@@ -126,7 +125,7 @@ DUE DATE
                     <option>Favorite</option>
                 </select>
             </div>
-            <button>Add Book</button>
+            <button id="addBookToCollectionButton">Add Book</button>
             <button onclick="closeModal()">Cancel</button>
         </div>            
         <div class="overlay hidden" id="overlay"></div>
