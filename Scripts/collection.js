@@ -59,6 +59,8 @@ let folderContainer = document.getElementById("folderContainer"); //This is wher
 let collectionContainer = document.getElementById("collectionContainer"); //This is where actual folders and books are added
 let allFolderLinks = document.getElementsByClassName("folderLink");
 let allAddBookButtons = document.getElementsByClassName("addBookButton");
+let copy = false; //For copying book details into the target modal
+let parentBook; //Used to save a copied book
 
 // Draw Elements of the Page on Load
 function draw() {
@@ -145,6 +147,10 @@ function draw() {
             let copyBtn = document.createElement("button");
             copyBtn.classList.add("bookCircle", "copyButton");
             copyBtn.innerHTML = `<i class="fa-solid fa-copy"></i>`;
+            copyBtn.addEventListener("click", function(e) {
+                copy = true;
+                parentBook = e.target.closest(".book");
+            })
             newBook.appendChild(copyBtn);
             let flipBtn = document.createElement("button");
             flipBtn.classList.add("bookCircle", "flipButton");
@@ -154,6 +160,10 @@ function draw() {
                 if (currentBook) {
                     // Toggle the 'flipped' class on the found book
                     currentBook.classList.toggle("flipped");
+
+                    //Always turn off copy when a book is flipped
+                    copy = false;
+                    parentBook = null;
         
                     //Remove 'flipped' from other books
                     let flippedBooks = document.getElementsByClassName("flipped");
@@ -206,10 +216,13 @@ for (let i = 0; i < allFolderLinks.length; i++) {
 // Make Add Book Buttons Functional
 for (let i = 0; i < allAddBookButtons.length; i++) {
     allAddBookButtons[i].addEventListener("click", function(e) {
-        //Get target book
         //Get book position
         //Save either a .before or .after position
+        //Check if the copy button is on
         showModal();
+        if (copy) {
+            document.getElementById("modalTitle").value = parentBook.querySelector('.details .title').innerText; //Example of how to copy the title
+        }
     })
 }
 
@@ -221,4 +234,13 @@ function showModal() {
 function closeModal() {
     modalWindow.classList.add("hidden");
     overlay.classList.add("hidden");
+    //Clear all text in all children of the modal
+    let inputs = modalWindow.querySelectorAll('input, textarea');
+    inputs.forEach(function(input) {
+        input.value = '';
+    });
+    let selects = modalWindow.querySelectorAll('select');
+    selects.forEach(function(select) {
+        select.value = '---';
+    });
 }
