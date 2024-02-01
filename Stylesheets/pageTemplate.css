@@ -8,6 +8,7 @@ DUE DATE
     --primaryColor: #161E2C;
     --secondaryColor: #074670;
     --darkerSecondary: #002d4b;
+    --linkColor: rgb(0, 196, 192);
     --navHeight: clamp(75px, 15vh, 8vw);
 }
 

@@ -2,38 +2,58 @@
 Andrew Deal
 Share Your Shelf Social Page CSS
 DUE DATE
+
 */
 
-#backgroundShelf {
-    width: 100%;
-    height: calc(100vh - var(--navHeight));
-    background-image: url("../Images/emptyShelf.jpg");
-    background-size: 100% 100%;
+.shelf {
+    display: flex;
+    justify-content: space-around;
+    background-color: #b49784;
+    border: 10px solid #5c2603;
+    border-top: none;
 }
 
-.exampleBook {
-    height: 28vh;
-    width: 6vw;
-    position: absolute;
-    background-color: red;
-    left: 6vw;
-    top: 41%;
+.shelf:first-of-type {
+    border-top: 10px solid #5c2603;
 }
 
-.exampleBook2 {
-    height: 28vh;
-    width: 6vw;
-    position: absolute;
-    background-color: rgb(0, 110, 255);
-    left: 12vw;
-    top: 41%;
+.book {
+    height: 200px;
+    width: 9%;
+    box-shadow: 10px 15px 15px -12px black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.exampleBook3 {
-    height: 28vh;
-    width: 6vw;
-    position: absolute;
-    background-color: rgb(70, 8, 184);
-    left: 18vw;
-    top: 41%;
+.red {
+    background-color: rgb(143, 32, 32);
 }
+
+.blue {
+    background-color: rgb(0, 0, 155);
+}
+
+.green {
+    background-color: rgb(54, 124, 54);
+}
+
+.purple {
+    background-color: purple;
+}
+
+.yellow {
+    background-color: rgb(204, 204, 85);
+}
+
+.teal {
+    background-color: teal;
+}
+
+.vertical {
+    writing-mode: vertical-lr; /* lr stands for left-to-right, you can use rl for right-to-left */
+    text-orientation: upright;
+    white-space: nowrap; /* Ensures that each character is on a separate line */
+}
+

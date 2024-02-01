@@ -10,7 +10,6 @@ Due Date
 let folders = {
     "DC": [
         {
-            position: 1,
             title: "Green Lantern Rebirth #1",
             subtitle: "DC Comics, Post Crisis",
             image: "../Images/exampleCover.png",
@@ -19,7 +18,6 @@ let folders = {
             Rating: "Great"
         },
         {
-            position: 2,
             title: "Green Lantern Rebirth #2",
             subtitle: "DC Comics, Post Crisis",
             image: "https://prodimage.images-bn.com/pimages/2940045386319_p0_v1_s1200x630.jpg",
@@ -30,7 +28,6 @@ let folders = {
     ],
     "Marvel": [
         {
-            position: 1,
             title: "Amazing Fantasy #15",
             subtitle: "First Appearance Spider-Man",
             image: "https://m.media-amazon.com/images/I/51ylofh3QmL.jpg",
@@ -41,7 +38,6 @@ let folders = {
     ],
     "Manga": [
         {
-            position: 1,
             title: "Blue Lock vol 1",
             subtitle: "Barnes and Noble Exclusive",
             image: "https://prodimage.images-bn.com/pimages/9798888772300_p0_v1_s1200x630.jpg",
@@ -54,11 +50,20 @@ let folders = {
 //Then add the books into the folders as arrays
 
 // Create Variables
+let modalTitle = document.getElementById("modalTitle");
+let modalSubtitle = document.getElementById("modalSubtitle");
+let modalNotes = document.getElementById("modalNotes");
+let modalRead = document.getElementById("modalRead");
+let modalRating = document.getElementById("modalRating");
+
 let allBooks = document.getElementsByClassName("book");
 let folderContainer = document.getElementById("folderContainer"); //This is where folder links are added
 let collectionContainer = document.getElementById("collectionContainer"); //This is where actual folders and books are added
 let allFolderLinks = document.getElementsByClassName("folderLink");
-let allAddBookButtons = document.getElementsByClassName("addBookButton");
+let newBookData = { //Used to save data when pulling up modal window
+    folderArray: null, //The array the book will be added to
+    index: null //The index to add the book at
+}
 let copy = false; //For copying book details into the target modal
 let parentBook; //Used to save a copied book
 
@@ -78,10 +83,19 @@ function draw() {
         let p = document.createElement("p");
         p.classList.add("folderLink");
         p.innerHTML = `${folderName} <i class="fas fa-folder"></i> <span class="folderCount">${bookCount}</span>`;
+        p.addEventListener("click", function () {
+            let allFolders = document.getElementsByClassName("folder");
+            newFolder.classList.remove("hidden");
+            for (let j = 0; j < allFolders.length; j++) {
+                if (allFolders[j] !== newFolder) {
+                    allFolders[j].classList.add("hidden");
+                }
+            }
+        }) 
         folderContainer.append(p); //Add the folder link to the list
 
         //Create the books inside each folder
-        folderBooks.forEach((book) => {
+        folderBooks.forEach((book, index) => {
             //Create book div
             let newBook = document.createElement("div");
             newBook.classList.add("book");
@@ -138,7 +152,7 @@ function draw() {
             newBook.appendChild(addBookBeforeBtn);
             let positionNumDiv = document.createElement("div");
             positionNumDiv.classList.add("bookCircle", "positionNum");
-            positionNumDiv.innerHTML = "1";
+            positionNumDiv.innerHTML = String(index + 1);
             newBook.appendChild(positionNumDiv);
             let editBtn = document.createElement("div");
             editBtn.classList.add("bookCircle", "editButton");
@@ -179,6 +193,29 @@ function draw() {
             addBookAfterBtn.classList.add("bookCircle", "addBookButton", "after");
             addBookAfterBtn.innerHTML = "+";
             newBook.appendChild(addBookAfterBtn);
+            //Make on book buttons functional
+            let addBookButtons = [addBookBeforeBtn, addBookAfterBtn];
+            for (let i = 0; i < 2; i++) {
+                addBookButtons[i].addEventListener("click", function(e) {
+                    //Start book index -> index
+                    let newIndex = i < 1 ? index-1 : index+1; //Add before = true = 1 less than index, add after = false = 1 more than index
+                    //The array of books is called folderBooks
+                    //Save the data into the newBookData variable
+                    newBookData.folderArray = folderBooks;
+                    newBookData.index = newIndex;
+
+                    showModal(); //Bring up the modal window
+                    
+                    //Check if the copy button is on
+                    if (copy) {
+                        modalTitle.value = parentBook.querySelector('.details .title').innerText; //copy the title
+                        modalSubtitle.value = parentBook.querySelector('.details .subtitle').innerText; //copy the subtitle
+                        modalNotes.value = parentBook.querySelector('.details .notes').value; //copy the notes
+                        modalRead.value = parentBook.querySelector('.details .read').value; //copy the read value
+                        modalRating.value = parentBook.querySelector('.details .rating').value; //copy the rating
+                    }
+                })
+            }
 
             //Append the book to the folder
             newFolder.appendChild(newBook);
@@ -196,36 +233,6 @@ function draw() {
 */
 draw(); 
 
-let allFolders = document.getElementsByClassName("folder");
-
-//Add functionality to folder links REFACTOR INTO DRAW FUNCTION
-for (let i = 0; i < allFolderLinks.length; i++) {
-    allFolderLinks[i].addEventListener("click", function() {
-        for (let j = 0; j < allFolders.length; j++) {
-            let folderInner = allFolderLinks[i].innerHTML;
-            let htmlStart = folderInner.indexOf('<i class="fas fa-folder"></i> <span class="folderCount">') - 1 //Get the index where the title ends
-            if (allFolders[j].id == folderInner.substring(0, htmlStart)) {
-                allFolders[j].classList.remove("hidden");
-            } else {
-                allFolders[j].classList.add("hidden");
-            }
-        }
-    })
-}
-
-// Make Add Book Buttons Functional
-for (let i = 0; i < allAddBookButtons.length; i++) {
-    allAddBookButtons[i].addEventListener("click", function(e) {
-        //Get book position
-        //Save either a .before or .after position
-        //Check if the copy button is on
-        showModal();
-        if (copy) {
-            document.getElementById("modalTitle").value = parentBook.querySelector('.details .title').innerText; //Example of how to copy the title
-        }
-    })
-}
-
 function showModal() {
     modalWindow.classList.remove('hidden');
     overlay.classList.remove("hidden");
@@ -235,6 +242,8 @@ function closeModal() {
     modalWindow.classList.add("hidden");
     overlay.classList.add("hidden");
     //Clear all text in all children of the modal
+    copy = false;
+    parentBook = null;
     let inputs = modalWindow.querySelectorAll('input, textarea');
     inputs.forEach(function(input) {
         input.value = '';
@@ -244,3 +253,34 @@ function closeModal() {
         select.value = '---';
     });
 }
+//The cancel onclick is added through html
+
+//The function run by the modal window add book button
+function addBook() {
+    let newBookObject = {
+        title: modalTitle.value,
+        subtitle: modalSubtitle.value,
+        image: "../Images/altImg.jpg",
+        notes: modalNotes.value,
+        read: modalRead.value,
+        Rating: modalRating.value
+    }
+    //Add the newBookObject to the array
+    if (Array.isArray(newBookData.folderArray) && Number.isInteger(newBookData.index) && newBookData.index >= 0) {
+        // Ensure that the index is within the bounds of the array
+        if (newBookData.index <= newBookData.folderArray.length) {
+            // Use splice to insert the new book at the specified index
+            newBookData.folderArray.splice(newBookData.index, 0, newBookObject);
+            console.log("Book added successfully!");
+        } else {
+            console.error("Index is out of bounds.");
+        }
+    } else {
+        console.error("Invalid input data.");
+    }
+    closeModal();
+
+    //Temporary call of function:
+    draw();
+}
+//the addBook onclick is added through html

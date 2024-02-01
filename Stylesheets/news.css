@@ -5,19 +5,23 @@
 #blogColumns {
     display: grid;
     grid-template-columns: auto auto auto;
-    gap: 7vw;
-    padding-inline: 7vw;
+    gap: 3.2vw;
+    padding-inline: 3.5vw;
 }
 
 article {
-    width: 23.8vw;
-    height: 25vw;
+    width: 28vw;
     background-color: white;
     color: black;
 }
 
+article a {
+    text-decoration: none;
+    color: black;
+}
+
 .thumbnail {
-    width: 23.8vw;
+    width: 28vw;
     height: 18vw;
     margin-block: 0;
     background-repeat: no-repeat;
@@ -25,7 +29,7 @@ article {
 }
 
 .data {
-    height: 7vw;
+    height: 15vw;
     padding-inline: 5%;
     border-top: 1px solid black;
     display: flex;
@@ -36,12 +40,14 @@ article {
 
 .title {
     margin-block: 0;
+    font-size: 3vw;
 }
 
 .subData {
     display: flex;
     justify-content: left;
     gap: 5%;
+    font-size: 2vw;
 }
 
 .author {
