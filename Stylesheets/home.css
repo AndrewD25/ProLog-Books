@@ -42,7 +42,7 @@ h1 {
     margin: 150px 0 0 0; /*update later*/
     padding-inline: 50px;
     width: 70vw; /*update later*/
-    height: 300px; /*update later*/
+    height: 37vw; /*update later*/
     clear: both;
     gap: 5%;
 }
@@ -63,6 +63,14 @@ h1 {
 
 .infoText {
     width: 70%;
+}
+
+.infoText h2 {
+    font-size: 2.5vw
+}
+
+.infoText p {
+    font-size: 1.65vw
 }
 
 .infoText a {

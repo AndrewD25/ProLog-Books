@@ -10,6 +10,14 @@ Due Date
 let folders = {
     "DC": [
         {
+            title: "Batman #129",
+            subtitle: "DC Comics, Dawn of DC",
+            image: "https://s3.amazonaws.com/comicgeeks/comics/covers/large-4298766.jpg?1688842554",
+            notes: "Start of Failsafe arc",
+            read: "Read",
+            Rating: "Good"
+        },
+        {
             title: "Green Lantern Rebirth #1",
             subtitle: "DC Comics, Post Crisis",
             image: "../Images/exampleCover.png",
@@ -26,6 +34,16 @@ let folders = {
             Rating: "Great"
         }
     ],
+    "Manga": [
+        {
+            title: "Blue Lock vol 1",
+            subtitle: "Barnes and Noble Exclusive",
+            image: "https://prodimage.images-bn.com/pimages/9798888772300_p0_v1_s1200x630.jpg",
+            notes: "This book good 4.",
+            read: "Read",
+            Rating: "Favorite"
+        },
+    ],
     "Marvel": [
         {
             title: "Amazing Fantasy #15",
@@ -36,16 +54,6 @@ let folders = {
             Rating: "---"
         },
     ],
-    "Manga": [
-        {
-            title: "Blue Lock vol 1",
-            subtitle: "Barnes and Noble Exclusive",
-            image: "https://prodimage.images-bn.com/pimages/9798888772300_p0_v1_s1200x630.jpg",
-            notes: "This book good 4.",
-            read: "Read",
-            Rating: "Favorite"
-        },
-    ]
 }; //Store all folders from the db into this objet
 //Then add the books into the folders as arrays
 
@@ -96,142 +104,144 @@ function draw() {
 
         //Create the books inside each folder
         folderBooks.forEach((book, index) => {
-            //Create book div
-            let newBook = document.createElement("div");
-            newBook.classList.add("book");
-
-            //Add the cover image
-            let coverImg = document.createElement("img");
-            coverImg.classList.add("cover");
-            coverImg.src = book.image;
-            newBook.appendChild(coverImg);
-
-            //Add the details div
-            let detailsDiv = document.createElement("div");
-            detailsDiv.classList.add("details");
-            let titleHeading = document.createElement("h3"); //Create the title
-            titleHeading.classList.add("title");
-            titleHeading.innerText = book.title;
-            detailsDiv.appendChild(titleHeading);
-            let subtitleHeading = document.createElement("h4"); //Create the subtitle
-            subtitleHeading.classList.add("subtitle");
-            subtitleHeading.innerText = book.subtitle;
-            detailsDiv.appendChild(subtitleHeading);
-            let notesBox = document.createElement("textarea"); //Create notes area
-            notesBox.classList.add("notes");
-            detailsDiv.appendChild(notesBox);
-            let selectBoxDiv = document.createElement("div"); //Create box for selects (read + rating)
-            selectBoxDiv.classList.add("selectBox");
-            let readSelect = document.createElement("select"); //Create the select element for read
-            readSelect.classList.add("read");
-            readSelect.innerHTML = `<option>---</option><option>Unread</option><option>Reading</option><option>Read</option>`;
-            selectBoxDiv.appendChild(readSelect);
-            let ratingSelect = document.createElement("select"); //Create the select element for rating
-            ratingSelect.classList.add("rating");
-            ratingSelect.innerHTML = `<option>---</option><option>Unhaul</option><option>Meh</option><option>Good</option><option>Great</option><option>Favorite</option>`;
-            selectBoxDiv.appendChild(ratingSelect);
-            detailsDiv.appendChild(selectBoxDiv);
-            let bottomBtnDiv = document.createElement("div"); //Create div for bottom buttons
-            bottomBtnDiv.classList.add("bookBottomButtons");
-            let btmLeftBtn = document.createElement("button"); //Move book left btn
-            btmLeftBtn.innerHTML = "&lt;";
-            bottomBtnDiv.appendChild(btmLeftBtn);
-            let btmTrashBtn = document.createElement("button"); //Delete book btn
-            btmTrashBtn.innerHTML = `<i class="fa-solid fa-trash"></i>`;
-            bottomBtnDiv.appendChild(btmTrashBtn);
-            let btmRightBtn = document.createElement("button"); //Move book right btn
-            btmRightBtn.innerHTML = "&gt;";
-            bottomBtnDiv.appendChild(btmRightBtn);
-            detailsDiv.appendChild(bottomBtnDiv);
-            newBook.appendChild(detailsDiv);
-
-            //Add the "bookButtons" that are absolute positioned over it
-            let addBookBeforeBtn = document.createElement("button");
-            addBookBeforeBtn.classList.add("bookCircle", "addBookButton", "before");
-            addBookBeforeBtn.innerHTML = "+";
-            newBook.appendChild(addBookBeforeBtn);
-            let positionNumDiv = document.createElement("div");
-            positionNumDiv.classList.add("bookCircle", "positionNum");
-            positionNumDiv.innerHTML = String(index + 1);
-            newBook.appendChild(positionNumDiv);
-            let editBtn = document.createElement("div");
-            editBtn.classList.add("bookCircle", "editButton");
-            editBtn.innerHTML = `<i class="fa-solid fa-pencil"></i>`;
-            newBook.appendChild(editBtn);
-            let copyBtn = document.createElement("button");
-            copyBtn.classList.add("bookCircle", "copyButton");
-            copyBtn.innerHTML = `<i class="fa-solid fa-copy"></i>`;
-            copyBtn.addEventListener("click", function(e) {
-                copy = true;
-                parentBook = e.target.closest(".book");
-            })
-            newBook.appendChild(copyBtn);
-            let flipBtn = document.createElement("button");
-            flipBtn.classList.add("bookCircle", "flipButton");
-            flipBtn.innerHTML = `<i class="fa-solid fa-arrows-spin"></i>`;
-            flipBtn.addEventListener("click", function(e) { //Make Books flippable
-                let currentBook = e.target.closest('.book');
-                if (currentBook) {
-                    // Toggle the 'flipped' class on the found book
-                    currentBook.classList.toggle("flipped");
-
-                    //Always turn off copy when a book is flipped
-                    copy = false;
-                    parentBook = null;
-        
-                    //Remove 'flipped' from other books
-                    let flippedBooks = document.getElementsByClassName("flipped");
-                    for (let j = 0; j < flippedBooks.length; j++) {
-                        if (flippedBooks[j] !== currentBook) {
-                            flippedBooks[j].classList.remove("flipped");
-                        }
-                    }
-                }
-            })
-            newBook.appendChild(flipBtn);
-            let addBookAfterBtn = document.createElement("button");
-            addBookAfterBtn.classList.add("bookCircle", "addBookButton", "after");
-            addBookAfterBtn.innerHTML = "+";
-            newBook.appendChild(addBookAfterBtn);
-            //Make on book buttons functional
-            let addBookButtons = [addBookBeforeBtn, addBookAfterBtn];
-            for (let i = 0; i < 2; i++) {
-                addBookButtons[i].addEventListener("click", function(e) {
-                    //Start book index -> index
-                    let newIndex = i < 1 ? index-1 : index+1; //Add before = true = 1 less than index, add after = false = 1 more than index
-                    //The array of books is called folderBooks
-                    //Save the data into the newBookData variable
-                    newBookData.folderArray = folderBooks;
-                    newBookData.index = newIndex;
-
-                    showModal(); //Bring up the modal window
-                    
-                    //Check if the copy button is on
-                    if (copy) {
-                        modalTitle.value = parentBook.querySelector('.details .title').innerText; //copy the title
-                        modalSubtitle.value = parentBook.querySelector('.details .subtitle').innerText; //copy the subtitle
-                        modalNotes.value = parentBook.querySelector('.details .notes').value; //copy the notes
-                        modalRead.value = parentBook.querySelector('.details .read').value; //copy the read value
-                        modalRating.value = parentBook.querySelector('.details .rating').value; //copy the rating
-                    }
-                })
-            }
-
-            //Append the book to the folder
-            newFolder.appendChild(newBook);
+            drawBook(book, folderName, index);
         });
     }
+    //Make the first folder visible
+    document.querySelector(".folder").classList.remove("hidden");
 }
-/*
-    Temporary Documentation for me for later
-    -----------------------------------------
-    --- folderName //The name/property of the folders object
-    -- folderBooks //The array that stores all the books that go in a folder
-    -- bookCount //The amount of books inside a folder
-    -- //Maybe use a foreach loop to simplify drawing the books even further
-    -- newFolder //This is the div that books from the current folder should be appended into
-*/
 draw(); 
+
+function drawBook(book, folder, index) {
+    let folderDiv = document.getElementById(String(folder));
+
+    //Create book div
+    let newBook = document.createElement("div");
+    newBook.classList.add("book");
+
+    //Add the cover image
+    let coverImg = document.createElement("img");
+    coverImg.classList.add("cover");
+    coverImg.src = book.image;
+    newBook.appendChild(coverImg);
+
+    //Add the details div
+    let detailsDiv = document.createElement("div");
+    detailsDiv.classList.add("details");
+    let titleHeading = document.createElement("h3"); //Create the title
+    titleHeading.classList.add("title");
+    titleHeading.innerText = book.title;
+    detailsDiv.appendChild(titleHeading);
+    let subtitleHeading = document.createElement("h4"); //Create the subtitle
+    subtitleHeading.classList.add("subtitle");
+    subtitleHeading.innerText = book.subtitle;
+    detailsDiv.appendChild(subtitleHeading);
+    let notesBox = document.createElement("textarea"); //Create notes area
+    notesBox.classList.add("notes");
+    notesBox.value = book.notes;
+    detailsDiv.appendChild(notesBox);
+    let selectBoxDiv = document.createElement("div"); //Create box for selects (read + rating)
+    selectBoxDiv.classList.add("selectBox");
+    let readSelect = document.createElement("select"); //Create the select element for read
+    readSelect.classList.add("read");
+    readSelect.innerHTML = `<option>---</option><option>Unread</option><option>Reading</option><option>Read</option>`;
+    selectBoxDiv.appendChild(readSelect);
+    let ratingSelect = document.createElement("select"); //Create the select element for rating
+    ratingSelect.classList.add("rating");
+    ratingSelect.innerHTML = `<option>---</option><option>Unhaul</option><option>Meh</option><option>Good</option><option>Great</option><option>Favorite</option>`;
+    selectBoxDiv.appendChild(ratingSelect);
+    detailsDiv.appendChild(selectBoxDiv);
+    let bottomBtnDiv = document.createElement("div"); //Create div for bottom buttons
+    bottomBtnDiv.classList.add("bookBottomButtons");
+    let btmLeftBtn = document.createElement("button"); //Move book left btn
+    btmLeftBtn.innerHTML = "&lt;";
+    bottomBtnDiv.appendChild(btmLeftBtn);
+    let btmTrashBtn = document.createElement("button"); //Delete book btn
+    btmTrashBtn.innerHTML = `<i class="fa-solid fa-trash"></i>`;
+    bottomBtnDiv.appendChild(btmTrashBtn);
+    let btmRightBtn = document.createElement("button"); //Move book right btn
+    btmRightBtn.innerHTML = "&gt;";
+    bottomBtnDiv.appendChild(btmRightBtn);
+    detailsDiv.appendChild(bottomBtnDiv);
+    newBook.appendChild(detailsDiv);
+
+    //Add the "bookButtons" that are absolute positioned over it
+    let addBookBeforeBtn = document.createElement("button");
+    addBookBeforeBtn.classList.add("bookCircle", "addBookButton", "before");
+    addBookBeforeBtn.innerHTML = "+";
+    newBook.appendChild(addBookBeforeBtn);
+    let positionNumDiv = document.createElement("div");
+    positionNumDiv.classList.add("bookCircle", "positionNum");
+    positionNumDiv.innerHTML = String(index + 1);
+    newBook.appendChild(positionNumDiv);
+    let editBtn = document.createElement("div");
+    editBtn.classList.add("bookCircle", "editButton");
+    editBtn.innerHTML = `<i class="fa-solid fa-pencil"></i>`;
+    newBook.appendChild(editBtn);
+    let copyBtn = document.createElement("button");
+    copyBtn.classList.add("bookCircle", "copyButton");
+    copyBtn.innerHTML = `<i class="fa-solid fa-copy"></i>`;
+    copyBtn.addEventListener("click", function(e) {
+        copy = true;
+        parentBook = e.target.closest(".book");
+    })
+    newBook.appendChild(copyBtn);
+    let flipBtn = document.createElement("button");
+    flipBtn.classList.add("bookCircle", "flipButton");
+    flipBtn.innerHTML = `<i class="fa-solid fa-arrows-spin"></i>`;
+    flipBtn.addEventListener("click", function(e) { //Make Books flippable
+        let currentBook = e.target.closest('.book');
+        if (currentBook) {
+            // Toggle the 'flipped' class on the found book
+            currentBook.classList.toggle("flipped");
+
+            //Always turn off copy when a book is flipped
+            copy = false;
+            parentBook = null;
+
+            //Remove 'flipped' from other books
+            let flippedBooks = document.getElementsByClassName("flipped");
+            for (let j = 0; j < flippedBooks.length; j++) {
+                if (flippedBooks[j] !== currentBook) {
+                    flippedBooks[j].classList.remove("flipped");
+                }
+            }
+        }
+    })
+    newBook.appendChild(flipBtn);
+    let addBookAfterBtn = document.createElement("button");
+    addBookAfterBtn.classList.add("bookCircle", "addBookButton", "after");
+    addBookAfterBtn.innerHTML = "+";
+    newBook.appendChild(addBookAfterBtn);
+    //Make on book buttons functional
+    let addBookButtons = [addBookBeforeBtn, addBookAfterBtn];
+    for (let i = 0; i < 2; i++) {
+        addBookButtons[i].addEventListener("click", function() {
+            //⚠️ To-Do: Refactor to calculate index here instead of passing it in to make sure it stays up to date
+
+            //Start book index -> index
+            let newIndex = i < 1 ? index-1 : index+1; //Add before = true = 1 less than index, add after = false = 1 more than index
+            //The array of books is called folderBooks
+            //Save the data into the newBookData variable
+            newBookData.folderArray = folders[folder];
+            newBookData.index = newIndex;
+
+            showModal(); //Bring up the modal window
+            
+            //Check if the copy button is on
+            if (copy) {
+                modalTitle.value = parentBook.querySelector('.details .title').innerText; //copy the title
+                modalSubtitle.value = parentBook.querySelector('.details .subtitle').innerText; //copy the subtitle
+                modalNotes.value = parentBook.querySelector('.details .notes').value; //copy the notes
+                modalRead.value = parentBook.querySelector('.details .read').value; //copy the read value
+                modalRating.value = parentBook.querySelector('.details .rating').value; //copy the rating
+            }
+        })
+    }
+
+    //Append the book to the folder
+    folderDiv.appendChild(newBook);
+}
 
 function showModal() {
     modalWindow.classList.remove('hidden');
