@@ -255,7 +255,7 @@ function drawBook(book, folder, index) {
             //⚠️ To-Do: Refactor to calculate index here instead of passing it in to make sure it stays up to date
 
             //Start book index -> index
-            let newIndex = i < 1 ? index-1 : index+1; //Add before = true = 1 less than index, add after = false = 1 more than index
+            let newIndex = i < 1 ? index : index+1; //Add before = true = 1 less than index, add after = false = 1 more than index
             //The array of books is called folderBooks
             //Save the data into the newBookData variable
             newBookData.folderArray = folders[folder];
