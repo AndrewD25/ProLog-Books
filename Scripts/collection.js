@@ -32,6 +32,14 @@ let folders = {
             notes: "This book good 2.",
             read: "Read",
             Rating: "Great"
+        },
+        {
+            title: "Superman Secret Identity",
+            subtitle: "Andrew's Favorite Book",
+            image: "https://upload.wikimedia.org/wikipedia/en/4/4d/Superman-secretidentity1.jpg",
+            notes: "Peak fiction",
+            read: "Read",
+            Rating: "Favorite"
         }
     ],
     "Manga": [
@@ -43,6 +51,22 @@ let folders = {
             read: "Read",
             Rating: "Favorite"
         },
+        {
+            title: "Kaiju No. 8 vol 8",
+            subtitle: "Funny volume",
+            image: "https://prodimage.images-bn.com/pimages/9781974740628_p0_v1_s1200x630.jpg",
+            notes: "",
+            read: "Read",
+            Rating: "Great"
+        },
+        {
+            title: "Kaguya Sama vol 1",
+            subtitle: "Love is War",
+            image: "https://m.media-amazon.com/images/I/61EP4kOgxyL._AC_UF1000,1000_QL80_.jpg",
+            notes: "",
+            read: "Read",
+            Rating: "Great"
+        },
     ],
     "Marvel": [
         {
@@ -51,6 +75,14 @@ let folders = {
             image: "https://m.media-amazon.com/images/I/51ylofh3QmL.jpg",
             notes: "This book good 3.",
             read: "Unread",
+            Rating: "---"
+        },
+        {
+            title: "Amazing Spider-Man by Nick Spencer Omnibus",
+            subtitle: "Testing a long name",
+            image: "https://m.media-amazon.com/images/I/51Msd0CX31L.jpg",
+            notes: "Good spidey writing.",
+            read: "Read",
             Rating: "---"
         },
     ],
@@ -77,6 +109,9 @@ let parentBook; //Used to save a copied book
 
 // Draw Elements of the Page on Load
 function draw() {
+    //Reset page before drawing new books
+    collectionContainer.innerHTML = "";
+
     //Create folders for each key of the folders object
     for (let folderName in folders) {
         //Create the folder divs
