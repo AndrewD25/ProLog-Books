@@ -85,8 +85,10 @@ DUE DATE
             </div>
         </div>
 
+
+
         <!--Modal Window Elements-->
-        <div class="modal hidden" id="modalWindow">
+        <div class="modal hidden" id="addBookModal">
             <h1>Add Book</h1>
             <div>
                 <label>Title: </label>
@@ -126,8 +128,23 @@ DUE DATE
             <button id="addBookToCollectionButton" onclick="addBook()">Add Book</button>
             <button onclick="closeModal()">Cancel</button>
         </div>            
+
+        <div class="modal hidden" id="loginModal">
+            <label for="usernameInput">Username:</label>
+            <input type="text" name="usernameInput" id="usernameInput">
+            <label for="passwordInput">Password:</label>
+            <input type="password" name="passwordInput" id="passwordInput">
+            <div>
+                <button id="loginButton">Log In</button>
+                <button id="cancelLogin">Cancel</button>
+            </div>
+        </div>
+
         <div class="overlay hidden" id="overlay"></div>
+        
 
         <script src="../Scripts/collection.js"></script>
+        <script src="../Scripts/c2.js"></script>
+        <script src="../Scripts/templateScript.js"></script>
     </body>
 </html>
