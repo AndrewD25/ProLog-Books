@@ -247,33 +247,33 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 50vw;
-    height: 65vw;
-    max-height: 85vh;
     background-color: white;
     padding: 1rem;
     border-radius: 5px;
     box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
     z-index: 9999999991;
-    text-align: center;
     color: black;
 }
 
+#addBookModal {
+    text-align: center;
+    width: 50vw;
+    height: 65vw;
+    max-height: 85vh;
+}
+
+#loginModal {
+    text-align: left;
+}
+
+#loginModal > * {
+    display: block;
+}
+
 @media screen and (max-width: 1100px) {
-    .modal {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+    #addBookModal {
         width: 60vw;
         height: 85vw;
-        background-color: white;
-        padding: 1rem;
-        border-radius: 5px;
-        box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
-        z-index: 9999999991;
-        text-align: center;
-        color: black;
     }
 } 
 
@@ -285,7 +285,7 @@
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-.modal label, #modalTitle, #modalSubtitle, #modalNotes, #modalRead, #modalRating {
+.modal label, .modal input, .modal select {
     font-size: clamp(5px, 2.5vw, 4vh);
 }
 
@@ -316,7 +316,7 @@
 
 .modal button {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: clamp(5px, 2vw, 30px);
+    font-size: clamp(5px, 2vw, 3.5vh);
     color: white;
     border: 1px solid black;
     border-radius: 5px;
