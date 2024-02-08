@@ -4,6 +4,14 @@ Capstone Project Collection Page Script
 Due Date
 */
 
+/*
+High priority to do:
+ - Add images to the add book modal
+ - make the copy button highlight when it is clicked
+ - make the delete button functional
+ - get database and web hosting set up
+*/
+
 "use strict";
 
 //Storage Variables PRE POPULATED EXAMPLE
@@ -104,6 +112,7 @@ let newBookData = { //Used to save data when pulling up modal window
     folderArray: null, //The array the book will be added to
     index: null //The index to add the book at
 }
+let modalWindow = document.getElementById("addBookModal");
 let copy = false; //For copying book details into the target modal
 let parentBook; //Used to save a copied book
 
@@ -148,6 +157,7 @@ function draw() {
 draw(); 
 
 function drawBook(book, folder, index) {
+    let arrayIn = folders[folder];
     let folderDiv = document.getElementById(String(folder));
 
     //Create book div
@@ -252,13 +262,12 @@ function drawBook(book, folder, index) {
     let addBookButtons = [addBookBeforeBtn, addBookAfterBtn];
     for (let i = 0; i < 2; i++) {
         addBookButtons[i].addEventListener("click", function() {
-            //⚠️ To-Do: Refactor to calculate index here instead of passing it in to make sure it stays up to date
-
+            let currentIndex = arrayIn.indexOf(book);
             //Start book index -> index
-            let newIndex = i < 1 ? index : index+1; //Add before = true = 1 less than index, add after = false = 1 more than index
+            let newIndex = i < 1 ? currentIndex : currentIndex + 1; //Add before = true = 1 less than index, add after = false = 1 more than index
             //The array of books is called folderBooks
             //Save the data into the newBookData variable
-            newBookData.folderArray = folders[folder];
+            newBookData.folderArray = arrayIn;
             newBookData.index = newIndex;
 
             showModal(); //Bring up the modal window
