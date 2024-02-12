@@ -6,8 +6,8 @@ Due Date
 
 /*
 High priority to do:
- - Button for adding books when none are in there
- - Add images to the add book modal
+ - Move the delete book modal window and image from read rover
+ - Keep folder open on redraw
  - make the copy button highlight when it is clicked
  - make the delete button functional
  - get database and web hosting set up
@@ -26,91 +26,8 @@ if (localStorage.getItem("username") !== null) {
 let password; //Might delete later
 
 //User collection is an object that has folders as its properties which each hold an array of books
-let collection;
+let collection = {};
 // collection  = { "Example": [{title: "", subti...}, {}, {}], "Ex2": [] }
-
-//Test collection data
-let testData = {
-    "DC": [
-        {
-            title: "Batman #129",
-            subtitle: "DC Comics, Dawn of DC",
-            image: "https://s3.amazonaws.com/comicgeeks/comics/covers/large-4298766.jpg?1688842554",
-            notes: "Start of Failsafe arc",
-            read: "Read",
-            Rating: "Good"
-        },
-        {
-            title: "Green Lantern Rebirth #1",
-            subtitle: "DC Comics, Post Crisis",
-            image: "../Images/exampleCover.png",
-            notes: "This book good.",
-            read: "Read",
-            Rating: "Great"
-        },
-        {
-            title: "Green Lantern Rebirth #2",
-            subtitle: "DC Comics, Post Crisis",
-            image: "https://prodimage.images-bn.com/pimages/2940045386319_p0_v1_s1200x630.jpg",
-            notes: "This book good 2.",
-            read: "Read",
-            Rating: "Great"
-        },
-        {
-            title: "Superman Secret Identity",
-            subtitle: "Andrew's Favorite Book",
-            image: "https://upload.wikimedia.org/wikipedia/en/4/4d/Superman-secretidentity1.jpg",
-            notes: "Peak fiction",
-            read: "Read",
-            Rating: "Favorite"
-        }
-    ],
-    "Manga": [
-        {
-            title: "Blue Lock vol 1",
-            subtitle: "Barnes and Noble Exclusive",
-            image: "https://prodimage.images-bn.com/pimages/9798888772300_p0_v1_s1200x630.jpg",
-            notes: "This book good 4.",
-            read: "Read",
-            Rating: "Favorite"
-        },
-        {
-            title: "Kaiju No. 8 vol 8",
-            subtitle: "Funny volume",
-            image: "https://prodimage.images-bn.com/pimages/9781974740628_p0_v1_s1200x630.jpg",
-            notes: "",
-            read: "Read",
-            Rating: "Great"
-        },
-        {
-            title: "Kaguya Sama vol 1",
-            subtitle: "Love is War",
-            image: "https://m.media-amazon.com/images/I/61EP4kOgxyL._AC_UF1000,1000_QL80_.jpg",
-            notes: "",
-            read: "Read",
-            Rating: "Great"
-        },
-    ],
-    "Marvel": [
-        {
-            title: "Amazing Fantasy #15",
-            subtitle: "First Appearance Spider-Man",
-            image: "https://m.media-amazon.com/images/I/51ylofh3QmL.jpg",
-            notes: "This book good 3.",
-            read: "Unread",
-            Rating: "---"
-        },
-        {
-            title: "Amazing Spider-Man by Nick Spencer Omnibus",
-            subtitle: "Testing a long name",
-            image: "https://m.media-amazon.com/images/I/51Msd0CX31L.jpg",
-            notes: "Good spidey writing.",
-            read: "Read",
-            Rating: "---"
-        },
-    ],
-}; //Store all folders from the db into this objet
-//Then add the books into the folders as arrays
 
 let newBookData = { //Used to save data when pulling up modal window
     folderArray: null, //The array the book will be added to
@@ -143,6 +60,13 @@ let cancelSignInBtn = document.getElementById("cancelSignIn");
 let addBookModal = document.getElementById("addBookModal");
 let addBookToCollectionBtn = document.getElementById("addBookToCollectionButton");
 let cancelAddBookBtn = document.getElementById("cancelAddBookButton");
+let modalTitle  = document.getElementById("modalTitle");
+let modalSubtitle = document.getElementById("modalSubtitle");
+let modalNotes = document.getElementById("modalNotes");
+let modalRead = document.getElementById("modalRead");
+let modalRating = document.getElementById("modalRating");
+let modalImgFile = document.getElementById("modalImageFile");
+let modalImgText = document.getElementById("modalImageText");
 
 //Modal Window Overlay
 let overlay = document.getElementById("overlay");
@@ -160,6 +84,7 @@ function signInCheck() {
         if (localStorage.getItem(username) !== null) {
             loadData();
         }
+        createAddFolderBtn()
         draw();
     }
 }
@@ -227,7 +152,7 @@ function hideAddBookModal() {
 //Add user data to the page
 function draw() {
     //Reset page before drawing new content
-    folderContainer.innerHTML = "";
+    createAddFolderBtn()
     collectionContainer.innerHTML = "";
 
     for (let folderName in collection) {
@@ -235,14 +160,20 @@ function draw() {
         //folderName: the property of the collection object that leads to a key with data inside
         let folderBooks = collection[folderName]; //Get the array of books in the folder
         let bookCount = folderBooks.length; //Get count of elements inside array value in folder
-
+        
         //Create the folders
         drawFolder(folderName, bookCount);
 
-        //Create the books inside the folders
-        folderBooks.forEach((book, index) => {
-            drawBook(book, folderName, index);
-        });
+        if (bookCount > 0) {
+            //Create the books inside the folders
+            folderBooks.forEach((book, index) => {
+                drawBook(book, folderName, index);
+            });
+        } else {
+            //Create an add book button
+            emptyFolder(folderName);
+        }
+       
     }
 }
 
@@ -305,10 +236,12 @@ function drawBook(book, folder, index) {
     let readSelect = document.createElement("select"); //Create the select element for read
     readSelect.classList.add("read");
     readSelect.innerHTML = `<option>---</option><option>Unread</option><option>Reading</option><option>Read</option>`;
+    readSelect.value = book.read;
     selectBoxDiv.appendChild(readSelect);
     let ratingSelect = document.createElement("select"); //Create the select element for rating
     ratingSelect.classList.add("rating");
     ratingSelect.innerHTML = `<option>---</option><option>Unhaul</option><option>Meh</option><option>Good</option><option>Great</option><option>Favorite</option>`;
+    ratingSelect.value = book.rating;
     selectBoxDiv.appendChild(ratingSelect);
     detailsDiv.appendChild(selectBoxDiv);
     let bottomBtnDiv = document.createElement("div"); //Create div for bottom buttons
@@ -402,14 +335,31 @@ function drawBook(book, folder, index) {
     folderDiv.appendChild(newBook);
 }
 
+function emptyFolder(folder) {
+    let folderDiv = document.getElementById(String(folder));
+    let addFirstBookBtn = document.createElement("button");
+    addFirstBookBtn.innerText = "+";
+    addFirstBookBtn.classList.add("addFirstBook");
+    addFirstBookBtn.addEventListener("click", function () {
+        newBookData.folderArray = collection[folder];
+        newBookData.index = 0;
+        showAddBookModal();
+    });
+    folderDiv.appendChild(addFirstBookBtn);
+}
+
 function addBook() {
     let newBookObject = {
         title: modalTitle.value,
         subtitle: modalSubtitle.value,
-        image: "../Images/altImg.jpg", //Replace later
+        image: "../Images/altImg.jpg", //Sets a default image
         notes: modalNotes.value,
         read: modalRead.value,
-        Rating: modalRating.value
+        rating: modalRating.value
+    }
+    //Set the image if user sent a usable file (SET LOGIC LATER)
+    if (modalImgText.value != null) {
+        newBookObject.image = modalImgText.value;
     }
     //Add the newBookObject to the array
     if (Array.isArray(newBookData.folderArray) && Number.isInteger(newBookData.index) && newBookData.index >= 0) {
@@ -430,6 +380,26 @@ function addBook() {
     draw();
 }
 
+function createAddFolderBtn() {
+    folderContainer.innerHTML = `<p id="addFolderLink">Add a new folder <i class="fa fa-plus" aria-hidden="true"></i></p>`;
+    let newFolderBtn = document.getElementById("addFolderLink");
+    newFolderBtn.onclick = addFolder;
+}
+
+function addFolder() {
+    //CHANGE THIS LATER TO AVOID USING ALERTS AND PROMPTS
+    let folderName = prompt("Enter the folder name:"); 
+    if (folderName === null || folderName === "") {
+        //Cannot have a folder that has no name value
+        return;
+    } else if (collection.hasOwnProperty(folderName)) {
+        alert("This folder already exists!");
+    } else {
+        collection[folderName] = [];
+        draw();
+    }
+}
+
   ///////////////////////////////////////
  // Onclicks and On Startup Functions //
 ///////////////////////////////////////
@@ -441,5 +411,3 @@ addBookToCollectionBtn.onclick = addBook;
 cancelAddBookBtn.onclick = hideAddBookModal;
 
 signInCheck();
-
-
