@@ -32,8 +32,9 @@ DUE DATE
         </header>
 
         <!--Rest of Page Code-->
-        <div id="keepEmInline"> <!--Used to neatly keep divs next to each other-->
+        
             <div id="folderContainer"> 
+                <!-- <p id="addFolderLink">Add a new folder +</p> -->
                 <!--Folders are now added via javascript - example of html folder format below-->
                 <!-- <p class="folderLink">DC Comics <i class="fas fa-folder"></i> <span class="folderCount">X</span></p> -->
             </div>
@@ -85,7 +86,6 @@ DUE DATE
                 </div>-->
                 
             </div>
-        </div>
 
 
 
@@ -126,6 +126,13 @@ DUE DATE
                     <option>Great</option>
                     <option>Favorite</option>
                 </select>
+            </div>
+            <div>
+                <label>Image URL: </label>
+                <input type="text" id="modalImageText">
+                <!--Currently hidden-->
+                <input class="hidden" type="file" id="modalImageFile" accept="image/png, image/jpeg">
+                <p class="smallText hidden">File selected:</p>
             </div>
             <button id="addBookToCollectionButton" onclick="addBook()">Add Book</button>
             <button id="cancelAddBookButton">Cancel</button>
