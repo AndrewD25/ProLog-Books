@@ -39,9 +39,11 @@ DUE DATE
             </div>
             
             <div id="collectionContainer">
+                <button id="startSignInButton">Sign In</button>
+                
                 <!--<div class="folder" id="DC Comics">
                     
-                    ==EXAMPLE OF A BOOK 
+                    EXAMPLE OF A BOOK 
                         <div class="book"> Can be flipped 
                         <img class="cover" src="../Images/exampleCover.png"> 
                         <div class="details"> When not flipped: display-none
@@ -85,8 +87,10 @@ DUE DATE
             </div>
         </div>
 
+
+
         <!--Modal Window Elements-->
-        <div class="modal hidden" id="modalWindow">
+        <div class="modal hidden" id="addBookModal">
             <h1>Add Book</h1>
             <div>
                 <label>Title: </label>
@@ -124,10 +128,24 @@ DUE DATE
                 </select>
             </div>
             <button id="addBookToCollectionButton" onclick="addBook()">Add Book</button>
-            <button onclick="closeModal()">Cancel</button>
+            <button id="cancelAddBookButton">Cancel</button>
         </div>            
+
+        <div class="modal hidden" id="signInModal">
+            <label for="usernameInput">Username:</label>
+            <input type="text" name="usernameInput" id="usernameInput">
+            <label for="passwordInput">Password:</label>
+            <input type="password" name="passwordInput" id="passwordInput">
+            <div>
+                <button id="signInButton">Sign In</button>
+                <button id="cancelSignIn">Cancel</button>
+            </div>
+        </div>
+
         <div class="overlay hidden" id="overlay"></div>
+        
 
         <script src="../Scripts/collection.js"></script>
+        <script src="../Scripts/templateScript.js"></script>
     </body>
 </html>

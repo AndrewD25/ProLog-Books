@@ -4,10 +4,33 @@ Capstone Project Collection Page Script
 Due Date
 */
 
+/*
+High priority to do:
+ - Button for adding books when none are in there
+ - Add images to the add book modal
+ - make the copy button highlight when it is clicked
+ - make the delete button functional
+ - get database and web hosting set up
+*/
+
 "use strict";
 
-//Storage Variables PRE POPULATED EXAMPLE
-let folders = {
+  ////////////////////
+ // Data variables //
+////////////////////
+
+let username;
+if (localStorage.getItem("username") !== null) {
+    username = localStorage.getItem("username");
+}
+let password; //Might delete later
+
+//User collection is an object that has folders as its properties which each hold an array of books
+let collection;
+// collection  = { "Example": [{title: "", subti...}, {}, {}], "Ex2": [] }
+
+//Test collection data
+let testData = {
     "DC": [
         {
             title: "Batman #129",
@@ -32,6 +55,14 @@ let folders = {
             notes: "This book good 2.",
             read: "Read",
             Rating: "Great"
+        },
+        {
+            title: "Superman Secret Identity",
+            subtitle: "Andrew's Favorite Book",
+            image: "https://upload.wikimedia.org/wikipedia/en/4/4d/Superman-secretidentity1.jpg",
+            notes: "Peak fiction",
+            read: "Read",
+            Rating: "Favorite"
         }
     ],
     "Manga": [
@@ -43,6 +74,22 @@ let folders = {
             read: "Read",
             Rating: "Favorite"
         },
+        {
+            title: "Kaiju No. 8 vol 8",
+            subtitle: "Funny volume",
+            image: "https://prodimage.images-bn.com/pimages/9781974740628_p0_v1_s1200x630.jpg",
+            notes: "",
+            read: "Read",
+            Rating: "Great"
+        },
+        {
+            title: "Kaguya Sama vol 1",
+            subtitle: "Love is War",
+            image: "https://m.media-amazon.com/images/I/61EP4kOgxyL._AC_UF1000,1000_QL80_.jpg",
+            notes: "",
+            read: "Read",
+            Rating: "Great"
+        },
     ],
     "Marvel": [
         {
@@ -53,21 +100,18 @@ let folders = {
             read: "Unread",
             Rating: "---"
         },
+        {
+            title: "Amazing Spider-Man by Nick Spencer Omnibus",
+            subtitle: "Testing a long name",
+            image: "https://m.media-amazon.com/images/I/51Msd0CX31L.jpg",
+            notes: "Good spidey writing.",
+            read: "Read",
+            Rating: "---"
+        },
     ],
 }; //Store all folders from the db into this objet
 //Then add the books into the folders as arrays
 
-// Create Variables
-let modalTitle = document.getElementById("modalTitle");
-let modalSubtitle = document.getElementById("modalSubtitle");
-let modalNotes = document.getElementById("modalNotes");
-let modalRead = document.getElementById("modalRead");
-let modalRating = document.getElementById("modalRating");
-
-let allBooks = document.getElementsByClassName("book");
-let folderContainer = document.getElementById("folderContainer"); //This is where folder links are added
-let collectionContainer = document.getElementById("collectionContainer"); //This is where actual folders and books are added
-let allFolderLinks = document.getElementsByClassName("folderLink");
 let newBookData = { //Used to save data when pulling up modal window
     folderArray: null, //The array the book will be added to
     index: null //The index to add the book at
@@ -75,44 +119,160 @@ let newBookData = { //Used to save data when pulling up modal window
 let copy = false; //For copying book details into the target modal
 let parentBook; //Used to save a copied book
 
-// Draw Elements of the Page on Load
+  ////////////////////////////
+ // HTML Element Variables //
+////////////////////////////
+
+//Left half div
+let folderContainer = document.getElementById("folderContainer");
+
+//Right half div
+let collectionContainer = document.getElementById("collectionContainer");
+
+//Button to pull up sign in modal
+let startSignInBtn = document.getElementById("startSignInButton");
+
+//SignIn Modal
+let signInModal = document.getElementById("signInModal");
+let usernameInput = document.getElementById("usernameInput");
+let passwordInput = document.getElementById("passwordInput");
+let signInBtn = document.getElementById("signInButton")
+let cancelSignInBtn = document.getElementById("cancelSignIn");
+
+//Add Books Modal
+let addBookModal = document.getElementById("addBookModal");
+let addBookToCollectionBtn = document.getElementById("addBookToCollectionButton");
+let cancelAddBookBtn = document.getElementById("cancelAddBookButton");
+
+//Modal Window Overlay
+let overlay = document.getElementById("overlay");
+
+
+  ///////////////
+ // Functions //
+///////////////
+
+function signInCheck() {
+    if (username == undefined) {
+        console.log("User is signed out");
+    } else {
+        //Not looking for "username" key, but the key that corresponds to their username
+        if (localStorage.getItem(username) !== null) {
+            loadData();
+        }
+        draw();
+    }
+}
+
+function signIn() {
+    //Check if fields are filled in
+    if (usernameInput.value == "" || passwordInput.value == "") {
+        alert("Username and Password cannot be empty");
+        return;
+    }
+
+    //SignIn Functionality
+    username = usernameInput.value;
+    localStorage.setItem("username", username);
+
+    //Refresh the page
+    location.reload();
+}
+
+function saveData() {
+    localStorage.setItem(username, JSON.stringify(collection));
+}
+
+function loadData() {
+    collection = JSON.parse(localStorage.getItem(username));
+    
+}
+
+function showSignInModal() {
+    signInModal.classList.remove('hidden');
+    overlay.classList.remove("hidden");
+}
+
+function hideSignInModal() {
+    signInModal.classList.add('hidden');
+    overlay.classList.add("hidden");
+    //Clear text in all input fields
+    let inputs = signInModal.querySelectorAll('input, textarea');
+    inputs.forEach(function(input) {
+        input.value = '';
+    });
+}
+
+function showAddBookModal() {
+    addBookModal.classList.remove('hidden');
+    overlay.classList.remove("hidden");
+}
+
+function hideAddBookModal() {
+    addBookModal.classList.add("hidden");
+    overlay.classList.add("hidden");
+    //Clear all text in all children of the modal
+    copy = false;
+    parentBook = null;
+    let inputs = addBookModal.querySelectorAll('input, textarea');
+    inputs.forEach(function(input) {
+        input.value = '';
+    });
+    let selects = addBookModal.querySelectorAll('select');
+    selects.forEach(function(select) {
+        select.value = '---';
+    });
+}
+
+//Add user data to the page
 function draw() {
-    //Create folders for each key of the folders object
-    for (let folderName in folders) {
-        //Create the folder divs
-        let newFolder = document.createElement("div");
-        newFolder.classList.add("folder", "hidden");
-        newFolder.id = folderName;
-        collectionContainer.appendChild(newFolder)
+    //Reset page before drawing new content
+    folderContainer.innerHTML = "";
+    collectionContainer.innerHTML = "";
 
-        //Add the folder to the folder links
-        let folderBooks = folders[folderName]; //Get the array of books in the folder
+    for (let folderName in collection) {
+        //Instantiate variables
+        //folderName: the property of the collection object that leads to a key with data inside
+        let folderBooks = collection[folderName]; //Get the array of books in the folder
         let bookCount = folderBooks.length; //Get count of elements inside array value in folder
-        let p = document.createElement("p");
-        p.classList.add("folderLink");
-        p.innerHTML = `${folderName} <i class="fas fa-folder"></i> <span class="folderCount">${bookCount}</span>`;
-        p.addEventListener("click", function () {
-            let allFolders = document.getElementsByClassName("folder");
-            newFolder.classList.remove("hidden");
-            for (let j = 0; j < allFolders.length; j++) {
-                if (allFolders[j] !== newFolder) {
-                    allFolders[j].classList.add("hidden");
-                }
-            }
-        }) 
-        folderContainer.append(p); //Add the folder link to the list
 
-        //Create the books inside each folder
+        //Create the folders
+        drawFolder(folderName, bookCount);
+
+        //Create the books inside the folders
         folderBooks.forEach((book, index) => {
             drawBook(book, folderName, index);
         });
     }
-    //Make the first folder visible
-    document.querySelector(".folder").classList.remove("hidden");
 }
-draw(); 
 
+//Create a folder div and link
+function drawFolder(name, count) {
+    //Create the folder divs
+    let newFolder = document.createElement("div");
+    newFolder.classList.add("folder", "hidden");
+    newFolder.id = name;
+    collectionContainer.appendChild(newFolder)
+
+    //Create the folder links
+    let p = document.createElement("p");
+    p.classList.add("folderLink");
+    p.innerHTML = `${name} <i class="fas fa-folder"></i> <span class="folderCount">${count}</span>`;
+    p.addEventListener("click", function () {
+        let allFolders = document.getElementsByClassName("folder");
+        newFolder.classList.remove("hidden");
+        for (let j = 0; j < allFolders.length; j++) {
+            if (allFolders[j] !== newFolder) {
+                allFolders[j].classList.add("hidden");
+            }
+        }
+    }) 
+    folderContainer.append(p); //Add the folder link to the list
+}
+
+//Create a book element
 function drawBook(book, folder, index) {
+    let arrayIn = collection[folder];
     let folderDiv = document.getElementById(String(folder));
 
     //Create book div
@@ -217,16 +377,15 @@ function drawBook(book, folder, index) {
     let addBookButtons = [addBookBeforeBtn, addBookAfterBtn];
     for (let i = 0; i < 2; i++) {
         addBookButtons[i].addEventListener("click", function() {
-            //⚠️ To-Do: Refactor to calculate index here instead of passing it in to make sure it stays up to date
-
+            let currentIndex = arrayIn.indexOf(book);
             //Start book index -> index
-            let newIndex = i < 1 ? index-1 : index+1; //Add before = true = 1 less than index, add after = false = 1 more than index
+            let newIndex = i < 1 ? currentIndex : currentIndex + 1; //Add before = true = 1 less than index, add after = false = 1 more than index
             //The array of books is called folderBooks
             //Save the data into the newBookData variable
-            newBookData.folderArray = folders[folder];
+            newBookData.folderArray = arrayIn;
             newBookData.index = newIndex;
 
-            showModal(); //Bring up the modal window
+            showAddBookModal(); //Bring up the modal window
             
             //Check if the copy button is on
             if (copy) {
@@ -243,34 +402,11 @@ function drawBook(book, folder, index) {
     folderDiv.appendChild(newBook);
 }
 
-function showModal() {
-    modalWindow.classList.remove('hidden');
-    overlay.classList.remove("hidden");
-};
-
-function closeModal() {
-    modalWindow.classList.add("hidden");
-    overlay.classList.add("hidden");
-    //Clear all text in all children of the modal
-    copy = false;
-    parentBook = null;
-    let inputs = modalWindow.querySelectorAll('input, textarea');
-    inputs.forEach(function(input) {
-        input.value = '';
-    });
-    let selects = modalWindow.querySelectorAll('select');
-    selects.forEach(function(select) {
-        select.value = '---';
-    });
-}
-//The cancel onclick is added through html
-
-//The function run by the modal window add book button
 function addBook() {
     let newBookObject = {
         title: modalTitle.value,
         subtitle: modalSubtitle.value,
-        image: "../Images/altImg.jpg",
+        image: "../Images/altImg.jpg", //Replace later
         notes: modalNotes.value,
         read: modalRead.value,
         Rating: modalRating.value
@@ -288,9 +424,22 @@ function addBook() {
     } else {
         console.error("Invalid input data.");
     }
-    closeModal();
+    hideAddBookModal();
 
-    //Temporary call of function:
+    //Call draw function to redraw page
     draw();
 }
-//the addBook onclick is added through html
+
+  ///////////////////////////////////////
+ // Onclicks and On Startup Functions //
+///////////////////////////////////////
+
+startSignInBtn.onclick = showSignInModal;
+signInBtn.onclick = signIn;
+cancelSignInBtn.onclick = hideSignInModal;
+addBookToCollectionBtn.onclick = addBook;
+cancelAddBookBtn.onclick = hideAddBookModal;
+
+signInCheck();
+
+

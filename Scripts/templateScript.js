@@ -6,3 +6,8 @@ DUE DATE
 
 "use strict";
 
+//Sign Out : Primarily used on Collection and Account pages
+function signOut() {
+    localStorage.removeItem("username");
+    location.reload();
+}
