@@ -1,6 +1,6 @@
 /*
 Andrew Deal
-Puzzle Page Script
+Puzzle Page Script 
 DUE DATE 
 */
 
