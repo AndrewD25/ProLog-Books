@@ -12,7 +12,7 @@
     <body>
         <!--Page Banner with Navlinks at the top of each page-->
         <header id="pageTop">
-            <a href="../index.html"><img id="mainLogo" src="../Images/sysLogo.png"></a>
+            <a href="../index.html"><img id="mainLogo" src="../Images/sysLogo.png" alt="Share Yourshelf Logo"></a>
   
             <!--Navigation Links-->
             <nav>
@@ -55,5 +55,37 @@
         </script><script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
         <script src="../Scripts/autocomplete.js"></script>
         <script src="../Scripts/puzzle.js"></script>
+
+        <!--Php query to connect to server-->
+        <?php
+
+        //See flash drive for connection information
+        $servername = "";
+        $username = "";
+        $password = "";
+        $database = "";
+
+        // Create connection
+        $conn = new mysqli($servername, $username, $password, $database);
+
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+        echo "<script>console.log('Successfully Connected')</script>" . "<br>";
+
+        $currentDate = date("Y-m-d");
+
+        $query = "SELECT * FROM Puzzles WHERE puzzle_date = '$currentDate'";
+        $result = $conn->query($query);
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                echo "<script>setAnswer('" . $row["image_id"] . "', '" . $row["answer_series"] . "', '" . $row["answer_number"] . "')</script>";
+                // echo "Date: " . $row["puzzle_date"] . "<br>";
+                // echo "ID: " . $row["image_id"] . " - Series: " . $row["answer_series"] . " - Number: " . $row["answer_number"] . "<br>";
+            }
+        }
+
+        ?>
     </body>
 </html>
