@@ -26,6 +26,12 @@ div#rightSide {
     /* width: 35%; */
 }
 
+#mycanvas {
+    min-width: 1px;
+    min-height: 1px;
+    width: clamp(20vh, 20vw, 40vh);
+}
+
 @media screen and (max-width: 600px) {
     div#centering {
         width: 80%;
@@ -41,10 +47,10 @@ div#rightSide {
     div#rightSide {
         width: 100%; /* Full width when the screen is small */
     }
-}
 
-#mycanvas {
-    width: 80%;
+    #mycanvas {
+        width: 60vw;
+    }
 }
 
 #guessInputs {

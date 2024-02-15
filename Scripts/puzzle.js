@@ -4,6 +4,13 @@ Puzzle Page Script
 DUE DATE 
 */
 
+/*
+To Do:
+
+Make Puzzles Loop After a Year (actually in php code)
+Hide correct answer data better
+*/
+
 "use strict";
 
 // Set initial variables
@@ -21,27 +28,64 @@ const jsConfetti = new JSConfetti()
 //Generate a cover based on the current date (used until database is set up)
 let imgName;
 let img = new Image();
-// img.onload = function () {
-//     eightBit(document.getElementById('mycanvas'), img, scaleFactor[sfi]);
-// };
+ img.onload = function () {
+     eightBit(document.getElementById('mycanvas'), img, scaleFactor[sfi]);
+};
 img.src = `../Images/altImg.jpg`; // Set a default alt image
 
-// Create object with answer from database
 let correctAnswer = {
-    series: "Action Comics",
-    number: 1
+    series: "Error",
+    number: 0
 }
 
-//echo "<script>setAnswer(" . $result["image_id"] . ", " . $result["answer_series"] . ", " . $result["answer_number"] . ")</script>";
+// Function to encode a string using rot13
+function rot13Encode(str) {
+    let result = '';
+    for (let i = 0; i < str.length; i++) {
+      let c = str.charCodeAt(i);
+      if (c >= 65 && c <= 90) {  // Upper case letters
+        result += String.fromCharCode((c - 65 + 13) % 26 + 65);
+      } else if (c >= 97 && c <= 122) {  // Lower case letters
+        result += String.fromCharCode((c - 97 + 13) % 26 + 97);
+      } else {  // Symbols and spaces
+        result += str.charAt(i);
+      };
+    };
+    result = "#" + result //If old import data is used, it will not have #, so does not need to be decoded
+    return result;
+};
+  
+// Function to decode a string using rot13
+function rot13Decode(str) {
+      if (str.slice(0, 1) === "#") {
+          str = str.slice(1);
+          let result = '';
+          for (let i = 0; i < str.length; i++) {
+              let c = str.charCodeAt(i);
+              if (c >= 65 && c <= 90) {  // Upper case letters
+                  result += String.fromCharCode((c - 65 + 13) % 26 + 65);
+              } else if (c >= 97 && c <= 122) {  // Lower case letters
+                  result += String.fromCharCode((c - 97 + 13) % 26 + 97);
+              } else {  // Symbols and spaces
+          result += str.charAt(i);
+          };
+      };
+      return result;
+    };
+    return str; //If there is not # at beginning, it does not have to be decoded
+};
 
 //Function to actually set data correctly
 function setAnswer(cover, series, number) {
     imgName = cover;
-    correctAnswer.series = series;
+    correctAnswer.series = rot13Encode(series);
     correctAnswer.number = number;
 
     img.src = `../Images/Puzzles/${imgName}.jpg`; // Set based on database information from the day
     eightBit(document.getElementById('mycanvas'), img, scaleFactor[sfi]);
+
+    //Delete the delete me script
+    document.getElementById("deleteMe").remove();
 }
 
 // Run 8-bit Function for Image //
@@ -66,7 +110,7 @@ function guess() {
 
     if (round <= 6 && !correct) {
         // Guess functionality
-        if (guess.series == correctAnswer.series && guess.number == correctAnswer.number) {
+        if (guess.series == rot13Decode(correctAnswer.series) && guess.number == correctAnswer.number) {
             correct = true;
         }
 
@@ -99,7 +143,7 @@ function guess() {
         roundText.innerHTML = "You got it!"
     } else if (round > 6) { //Lose
         eightBit(document.getElementById('mycanvas'), img, 100); //Make image fully visible
-        roundText.innerHTML = `The correct answer was... ${correctAnswer.series} #${correctAnswer.number}`
+        roundText.innerHTML = `The correct answer was... ${rot13Decode(correctAnswer.series)} #${correctAnswer.number}`
     }
 }
 
