@@ -1,6 +1,6 @@
 /*
 Andrew Deal
-Puzzle Page Script 
+Puzzle Page Script
 DUE DATE 
 */
 
@@ -18,18 +18,39 @@ let correct = false;
 //Set up confetti
 const jsConfetti = new JSConfetti()
 
+//Generate a cover based on the current date (used until database is set up)
+let imgName;
+let img = new Image();
+// img.onload = function () {
+//     eightBit(document.getElementById('mycanvas'), img, scaleFactor[sfi]);
+// };
+img.src = `../Images/altImg.jpg`; // Set a default alt image
+
 // Create object with answer from database
 let correctAnswer = {
     series: "Action Comics",
     number: 1
 }
 
-// Run 8-bit Function for Image //
-let img = new Image();
-img.onload = function () {
+//echo "<script>setAnswer(" . $result["image_id"] . ", " . $result["answer_series"] . ", " . $result["answer_number"] . ")</script>";
+
+//Function to actually set data correctly
+function setAnswer(cover, series, number) {
+    imgName = cover;
+    correctAnswer.series = series;
+    correctAnswer.number = number;
+
+    img.src = `../Images/Puzzles/${imgName}.jpg`; // Set based on database information from the day
     eightBit(document.getElementById('mycanvas'), img, scaleFactor[sfi]);
-};
-img.src = '../Images/Puzzles/aa.jpg'; // Set based on database information from the day
+}
+
+// Run 8-bit Function for Image //
+// let img = new Image();
+// img.onload = function () {
+//     eightBit(document.getElementById('mycanvas'), img, scaleFactor[sfi]);
+// };
+// console.log(imgName);
+// img.src = `../Images/Puzzles/${imgName}.jpg`; // Set based on database information from the day
 
 
 // Guess Function //
