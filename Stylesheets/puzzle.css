@@ -5,12 +5,12 @@ DUE DATE
 */
 
 div#centering {
-    margin-top: calc(var(--navHeight) * 0.75);
+    margin-top: 30px;
     width: 80%;
+    max-width: 470px;
     margin-left: auto;
     margin-right: auto;
-    display: flex;
-    gap: 5%;
+    display: block;
 }
 
 div#leftSide {
@@ -29,28 +29,17 @@ div#rightSide {
 #mycanvas {
     min-width: 1px;
     min-height: 1px;
-    width: clamp(20vh, 20vw, 40vh);
+    width: 80%;
+    /* width: clamp(20vh, 20vw, 40vh); */
 }
 
 @media screen and (max-width: 600px) {
-    div#centering {
-        width: 80%;
-        margin-left: auto;
-        margin-right: auto;
-        display: block;
-    }
+    /*Phone specific styling */
 
-    div#leftSide {
-        width: 100%; /* Full width when the screen is small */
-    }
-    
-    div#rightSide {
-        width: 100%; /* Full width when the screen is small */
-    }
+}
 
-    #mycanvas {
-        width: 60vw;
-    }
+#roundText {
+    margin-block: 5px;
 }
 
 #guessInputs {
@@ -76,6 +65,7 @@ div#rightSide {
 
 .guess {
     border: 1px solid white;
+    margin-block: 8px;
 }
 
 .green {
