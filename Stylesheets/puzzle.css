@@ -4,6 +4,11 @@ Secret Shelf Home Page CSS
 DUE DATE
 */
 
+h1, .puzzleNumber {
+    text-align: center;
+    margin-block: 1%;
+}
+
 div#centering {
     margin-top: 30px;
     width: 80%;
@@ -48,38 +53,10 @@ div#rightSide {
     justify-content: space-between;
 }
 
-#seriesInput {
-    width: 100%;
-}
-
-#numberInput { 
-    width: 22%;
-}
-
-#guessButton {
-    color: white;
-    background-color: green;
-    width: 100%;
-    margin-block: 10px;
-}
-
-.guess {
-    border: 1px solid white;
-    margin-block: 8px;
-}
-
-.green {
-    color: green;
-}
-
-.red {
-    color: red;
-}
-
 /* Autocomplete Styling */
 .autocomplete {
     /*the container must be positioned relative:*/
-    width: 71%;
+    width: 74%;
     position: relative;
     display: inline-block;
 }
@@ -109,4 +86,61 @@ div#rightSide {
     /*when navigating through the items using the arrow keys:*/
     background-color: var(--secondaryColor) !important;
     color: white !important;
+}
+
+#seriesInput {
+    width: 100%;
+}
+
+#numberInput { 
+    width: 22%;
+}
+
+#guessButton {
+    color: white;
+    background-color: green;
+    width: 100%;
+    margin-block: 10px;
+}
+
+h3 {
+    margin-block: 1%;
+}
+
+.flex {
+    display: flex;
+    margin-block: 0px;
+    justify-content: space-between;
+}
+
+.flex > * {
+    border: 1px solid white;
+    border-radius: 5px;
+    padding-inline: 2%;
+    margin-block: 3px;
+}
+
+.series { /*For the guess display*/
+    width: 72%;
+}
+
+.number { /*For the guess display*/
+    width: 18%;
+}
+
+.guess {
+    border: 1px solid white;
+    margin-block: 8px;
+}
+
+.green {
+    color: green;
+}
+
+.red {
+    color: red;
+}
+
+.yellow {
+    color: yellow;
 }

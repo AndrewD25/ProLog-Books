@@ -9,7 +9,7 @@ DUE DATE
     --secondaryColor: #074670;
     --darkerSecondary: #002d4b;
     --linkColor: rgb(0, 196, 192);
-    --navHeight: clamp(75px, 15vh, 8vw);
+    --navHeight: clamp(60px, 10vh, 6vw);
 }
 
 html, body {
@@ -46,7 +46,7 @@ body {
 #mainLogo {
     color: white;
     margin-block: 0;
-    height: var(--navHeight);
+    height: calc(var(--navHeight) * 0.75);
     max-height: 15vw;
 }
 
