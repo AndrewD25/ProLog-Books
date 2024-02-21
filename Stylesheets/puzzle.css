@@ -144,3 +144,13 @@ h3 {
 .yellow {
     color: yellow;
 }
+
+#kofi {
+    display: flex;
+    justify-content: center;
+}
+
+.btn-container {
+    margin-left: auto;
+    margin-right: auto;
+}

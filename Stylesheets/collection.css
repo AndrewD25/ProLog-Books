@@ -39,10 +39,6 @@
     position: relative;
 }
 
-.hidden { 
-    display: none !important;
-}
-
 #startSignInButton {
     position: absolute;
     top: 50%;

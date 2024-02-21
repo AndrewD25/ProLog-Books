@@ -8,6 +8,8 @@ DUE DATE
     --primaryColor: #161E2C;
     --secondaryColor: #074670;
     --darkerSecondary: #002d4b;
+    --accentColor: #A63BFF;
+    --textColor: white;
     --linkColor: rgb(0, 196, 192);
     --navHeight: clamp(60px, 10vh, 6vw);
 }
@@ -54,13 +56,13 @@ body {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    overflow: hidden;
     width: 80vw;
     text-align: right;
 }
 
 #pageTop > nav > li {
     display: inline-block;
+    position: relative;
 }
 
 #pageTop > nav > li > a {
@@ -70,8 +72,38 @@ body {
     text-decoration: none;
 }
 
+#accountMenu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 1999999;
+    width: 10vw;
+    font-size: clamp(12px, 1.5vw, 28px);
+}
+
+#accountMenu * {
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+#accountMenu li {
+    border: 1px solid var(--textColor);
+}
+
+#accountMenu ul {
+    background-color: var(--secondaryColor);
+}
+
+#accountLi:hover #accountMenu {
+    display: block !important; /* Show the menu when the parent li is hovered */
+}
 @media screen and (max-width: 1100px) {
     #pageTop nav li a span {
         display: none;
     }
 } 
+
+.hidden { 
+    display: none !important;
+}
