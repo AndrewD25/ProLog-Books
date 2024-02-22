@@ -1,1 +1,5 @@
 Change all relative paths to absolute paths, at least for the heading, and try to export it into its own "heading.php" file to save time editing it over and over
+
+Start making every page other than home a requirement of being signed in before visiting
+
+Also look into how signing in with google works
