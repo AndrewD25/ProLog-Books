@@ -1,0 +1,1 @@
+Change all relative paths to absolute paths, at least for the heading, and try to export it into its own "heading.php" file to save time editing it over and over
