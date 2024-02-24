@@ -11,6 +11,7 @@ DUE DATE
     --accentColor: #A63BFF;
     --textColor: white;
     --linkColor: rgb(0, 196, 192);
+    --linkClickedColor: var(--accentColor);
     --navHeight: clamp(60px, 10vh, 6vw);
 }
 
@@ -63,10 +64,11 @@ body {
 #pageTop > nav > li {
     display: inline-block;
     position: relative;
+    margin-inline: 3vw;
+    padding-block: calc(var(--navHeight) / 3);
 }
 
 #pageTop > nav > li > a {
-    padding-inline: 3vw;
     color: white;
     font-size: clamp(12px, 1.5vw, 28px);
     text-decoration: none;
@@ -75,9 +77,8 @@ body {
 #accountMenu {
     position: absolute;
     top: 100%;
-    right: 0;
+    right: -20%;
     z-index: 1999999;
-    width: 10vw;
     font-size: clamp(12px, 1.5vw, 28px);
 }
 
@@ -87,17 +88,23 @@ body {
     padding: 0;
 }
 
-#accountMenu li {
-    border: 1px solid var(--textColor);
-}
-
 #accountMenu ul {
+    list-style: none;
     background-color: var(--secondaryColor);
 }
 
-#accountLi:hover #accountMenu {
-    display: block !important; /* Show the menu when the parent li is hovered */
+#accountMenu li {
+    padding-inline: clamp(0.1vw, 1vw, 2vh);
+    padding-block: 0.5em;
+    white-space: nowrap;
+    border: 1px solid var(--textColor);
 }
+
+#accountMenu a {
+    color: var(--textColor);
+    text-decoration: none;
+}
+
 @media screen and (max-width: 1100px) {
     #pageTop nav li a span {
         display: none;
