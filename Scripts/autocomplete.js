@@ -9,8 +9,11 @@ let dcComics = [
     "Booster Gold",
     "Catwoman",
     "Crisis on Infinite Earths",
+    "Dark Nights Metal",
+    "Dark Nights Death Metal",
     "Detective Comics",
     "Doom Patrol",
+    "The Flash",
     "Green Arrow",
     "Green Lantern",
     "Green Lantern Corps",
@@ -25,6 +28,7 @@ let dcComics = [
     "Suicide Squad",
     "Superman",
     "Supergirl",
+    "Supergirl: Woman of Tomorrow",
     "Teen Titans",
     "Titans",
     "The Flash",
@@ -33,6 +37,7 @@ let dcComics = [
 ];
 let marvelComics = [
     "The Amazing Spider-Man",
+    "All-New Spider-Man",
     "Ant-Man",
     "The Avengers",
     "Black Panther",
@@ -40,15 +45,17 @@ let marvelComics = [
     "Daredevil",
     "Deadpool",
     "Doctor Strange",
-    "The Fantastic Four",
+    "Fantastic Four",
     "Guardians of the Galaxy",
     "The Incredible Hulk",
     "Iron Man",
     "Luke Cage",
     "Ms. Marvel",
     "The Punisher",
+    "Secret Wars",
     "The Silver Surfer",
     "The Spectacular Spider-Man",
+    "Ultimate Spider-Man",
     "Spider-Man",
     "Spider-Woman",
     "Thor",
@@ -62,7 +69,8 @@ let otherComics = [
     "Invincible",
     "Spawn",
     "WildC.A.T.s",
-    "Watchmen"
+    "Watchmen",
+    "Radiant Black"
 ];
 let otherBooks = [
     //No other books right now, this is comicle for now

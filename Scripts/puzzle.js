@@ -57,20 +57,20 @@ function rot13Encode(str) {
   
 // Function to decode a string using rot13
 function rot13Decode(str) {
-      if (str.slice(0, 1) === "#") {
+    if (str.slice(0, 1) === "#") {
           str = str.slice(1);
           let result = '';
-          for (let i = 0; i < str.length; i++) {
+        for (let i = 0; i < str.length; i++) {
               let c = str.charCodeAt(i);
               if (c >= 65 && c <= 90) {  // Upper case letters
-                  result += String.fromCharCode((c - 65 + 13) % 26 + 65);
-              } else if (c >= 97 && c <= 122) {  // Lower case letters
-                  result += String.fromCharCode((c - 97 + 13) % 26 + 97);
-              } else {  // Symbols and spaces
-          result += str.charAt(i);
-          };
-      };
-      return result;
+                    result += String.fromCharCode((c - 65 + 13) % 26 + 65);
+                } else if (c >= 97 && c <= 122) {  // Lower case letters
+                    result += String.fromCharCode((c - 97 + 13) % 26 + 97);
+                } else {  // Symbols and spaces
+                    result += str.charAt(i);
+                };
+        };
+        return result;
     };
     return str; //If there is not # at beginning, it does not have to be decoded
 };
@@ -79,7 +79,7 @@ function rot13Decode(str) {
 function setAnswer(cover, series, number) {
     imgName = cover;
     correctAnswer.series = rot13Encode(series);
-    correctAnswer.number = number;
+    correctAnswer.number = parseInt(number);
 
     img.src = `../Images/Puzzles/${imgName}.jpg`; // Set based on database information from the day
     eightBit(document.getElementById('mycanvas'), img, scaleFactor[sfi]);
@@ -105,21 +105,46 @@ function guess() {
     let numberInput = document.getElementById('numberInput');
     let guess = {
         series: seriesInput.value,
-        number: numberInput.value
+        number: parseInt(numberInput.value)
     };
 
     if (round <= 6 && !correct) {
         // Guess functionality
-        if (guess.series == rot13Decode(correctAnswer.series) && guess.number == correctAnswer.number) {
+        if (guess.series === rot13Decode(correctAnswer.series) && guess.number === correctAnswer.number) {
             correct = true;
         }
 
-        // Add p to guess list
-        let guess_p = document.createElement("p");
-        guess_p.classList.add("guess");
-        guess_p.innerHTML = correct ? `<i class="fa-solid fa-check green"></i> ` : `<i class="fa-solid fa-x red"></i> `;
-        guess_p.innerHTML = guess_p.innerHTML + `${guess.series} #${guess.number}`;
-        guessContainer.appendChild(guess_p);
+        // Add the guess to guess list
+        let flex = document.createElement("div");
+        flex.classList.add("flex");
+        let guessSeries = document.createElement("p");
+        guessSeries.classList.add("series");
+        if (guess.series === rot13Decode(correctAnswer.series)) {
+            guessSeries.innerHTML = `<i class="fa-solid fa-check green"></i> ` + guess.series;
+        } else {
+            guessSeries.innerHTML = `<i class="fa-solid fa-x red"></i> ` + guess.series;
+        }
+        flex.appendChild(guessSeries);
+
+        console.log(guess.number);
+        console.log(guess.number < correctAnswer.number);
+        console.log(guess.number > correctAnswer.number);
+
+        let guessNumber = document.createElement("p");
+        guessNumber.classList.add("number");
+        if (guess.number === correctAnswer.number) {
+            guessNumber.innerHTML = `<i class="fa-solid fa-check green"></i> ` + guess.number;
+        } else if (guess.number === "") {
+            guessNumber.innerHTML = `<i class="fa-solid fa-x red"></i>`;
+        } else if (guess.number < correctAnswer.number) {
+            guessNumber.innerHTML = `<i class="fa-solid fa-arrow-up yellow"></i> ` + guess.number;
+        } else if (guess.number > correctAnswer.number) {
+            guessNumber.innerHTML = `<i class="fa-solid fa-arrow-down yellow"></i> ` + guess.number;
+        }
+        flex.appendChild(guessNumber);
+        //Finish guess number code
+        
+        guessContainer.appendChild(flex);
 
         // Clear the values of the guess inputs
         seriesInput.value = "";
