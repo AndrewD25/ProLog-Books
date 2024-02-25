@@ -1,0 +1,22 @@
+/*
+Andrew Deal
+Share Your Shelf Settings Page CSS
+DUE DATE 
+*/
+
+body {
+    text-align: center;
+}
+
+#profileDisplay, #settings {
+    background-color: var(--darkerSecondary);
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    /* fix later */ height: 300px; 
+    border-radius: 20px;
+}
+
+#signOutButton {
+    margin-block: 30px;
+}

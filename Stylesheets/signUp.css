@@ -1,0 +1,104 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#logoBox {
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+#logoBox img {
+    width: 40vw;
+    min-width: 200px;
+}
+
+#mainContent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+@media screen and (min-width: 650px) {
+    #logoBox {
+        position: relative;
+        width: 50vw;
+        float: left;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-image: url(../Images/comicBackgroundBlurred2Much.jpg);
+        background-size: cover;
+    }
+
+    #mainContent {
+        float: left;
+        width: 50vw;
+    }
+
+    form input[type="text"],
+    form input[type="email"],
+    form input[type="password"],
+    form input[type="submit"] {
+        width: 25vw !important;; 
+    }
+}
+
+#accountBox {
+    text-align: center;
+}
+
+.icon {
+    font-size: clamp(60px, 7vw, 15vh);
+    margin-block: 0;
+}
+
+h2 {
+    margin-top: 0;
+    font-size: clamp(4.5vh, 4.5vw, 7.5vh);
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form input[type="submit"] {
+    width: 50vw;
+    min-width: 250px;
+    box-sizing: border-box;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+form input[type="submit"] {
+    background-color: var(--accentColor);
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.inlineContents * {
+    display: inline;
+}
+
+.inlineContents a {
+    color: var(--linkColor);
+    text-decoration: none;
+}
+
+
+/*OLD*/
+.tooltip {
+    padding: 5px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translate(140%, calc(50% - 10px));    
+    border-radius: 20px;
+    background-color: var(--accentColor);
+}

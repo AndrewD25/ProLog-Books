@@ -9,7 +9,7 @@ DUE DATE
 }
 
 body {
-    background-image: url("../Images/comicBackground1.jpg");
+    background-image: url("../Images/comicBackgroundBlurred.jpg");
     background-size: 300% auto; /*Background for mobile version*/
     background-repeat: repeat-y; /* Repeat vertically */
 }
@@ -20,13 +20,14 @@ div {
 
 #landingBox {
     width: 70vw;
-    height: var(--landingBoxHeight);
+    height: auto;
+    min-height: var(--landingBoxHeight);
     text-align: center;
     /* height: clamp(150px, 40vh, 20vw); */
     margin-top: calc(var(--navHeight) + 3vh);
     margin-inline: auto;
     padding: 1% 4% 1% 4%;
-    border-radius: 50px;
+    border-radius: 30px;
     background-color: var(--primaryColor);
     font-size: clamp(1.5vh, 2vw, 4vh);
 }
@@ -35,14 +36,17 @@ h1 {
     font-size: clamp(3vh, 3vw, 5vh);
 }
 
+#landingBox, .info {
+    box-shadow: 5px 5px 15px rgb(25, 25, 25);
+}
+
 .info {
     background-color:  var(--primaryColor);
     display: flex;
     align-items: center;
     margin: 150px 0 0 0; /*update later*/
-    padding-inline: 50px;
+    padding: 5vw;
     width: 70vw; /*update later*/
-    height: 37vw; /*update later*/
     clear: both;
     gap: 5%;
 }
@@ -66,11 +70,11 @@ h1 {
 }
 
 .infoText h2 {
-    font-size: 2.5vw
+    font-size: clamp(18px, 3vw, 50px);
 }
 
 .infoText p {
-    font-size: 1.65vw
+    font-size: clamp(12px, 2vw, 40px);
 }
 
 .infoText a {
@@ -78,8 +82,8 @@ h1 {
 }
 
 .previewImage {
-    width: 30%;
-    height: 80%;
+    width: 60%;
+    height: 160%;
     border: 1px dashed white;
 }
 
@@ -93,3 +97,18 @@ h1 {
         background-size: 100% auto; /*Set background for pc version*/
     }
 }
+
+/* For phone version - refactor to make this the default later*/
+@media screen and (max-width: 600px) {
+    #landingBox {
+        width: 60vw;
+        padding: 8vw;
+    }
+} 
+
+/* For screens under 400px, drop text and images to different lines*/
+@media screen and (max-width: 350px) {
+    .info {
+        flex-direction: column;
+    }
+} 

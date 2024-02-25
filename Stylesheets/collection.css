@@ -1,11 +1,14 @@
-#keepEmInline {
+/* #keepEmInline {
     position: absolute;
     top: var(--navHeight);
     min-height: calc(99.5vh - var(--navHeight));
     display: flex;
-}
+} */
 
 #folderContainer {
+    float: left;
+    position: fixed;
+    height: calc(100vh - var(--navHeight));
     background-color: var(--darkerSecondary);
     box-shadow: 0px 0px 25px rgb(25, 25, 25);
     width: 20vw;
@@ -14,12 +17,12 @@
     padding-right: 2.5vw;
 }
 
-.folderLink {
+.folderLink, #addFolderLink {
     padding-bottom: 5px;
     border-bottom: 1px solid white;
 }
 
-.folderLink:hover {
+.folderLink:hover, #addFolderLink:hover {
     color: #DDD;
     cursor: pointer;
 }
@@ -27,12 +30,20 @@
 /*Grid columns should be 6vw apart*/
 
 #collectionContainer {
+    float: left;
+    margin-left: 25vw;
     padding-inline: 12vw;
-    padding-block: 6vw;
+    padding-block: 12vw;
+    width: 62vw;
+    min-height: 30px;
+    position: relative;
 }
 
-.hidden { 
-    display: none !important;
+#startSignInButton {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .folder {
@@ -55,7 +66,7 @@
 @media screen and (min-width: 600px) {
     #collectionContainer {
         padding-inline: 7vw;
-        padding-block: 3vw;
+        padding-block: 6vw;
     }
 
     .folder {
@@ -71,7 +82,7 @@
 @media screen and (min-width: 1300px) {
     #collectionContainer {
         padding-inline: 6vw;
-        padding-block: 3vw;
+        padding-block: 4vw;
     }
     
     .folder {
@@ -90,6 +101,22 @@
     position: absolute;
     width: 40px;
     height: 40px;
+    font-size: 15px;
+    border: 1px solid white;
+    border-radius: 50%;
+    display: flex;
+    /* display: none; */
+    justify-content: center;
+    align-items: center;
+}
+
+.addFirstBook {
+    background-color: var(--primaryColor);
+    color: white;
+    width: 40px;
+    margin-inline: clamp(5px, 10vw, 45px);
+    height: 40px;
+    margin-block: clamp(20px, 20vw, 15vh);
     font-size: 15px;
     border: 1px solid white;
     border-radius: 50%;
@@ -262,11 +289,11 @@
     max-height: 85vh;
 }
 
-#loginModal {
+#signInModal {
     text-align: left;
 }
 
-#loginModal > * {
+#signInModal > * {
     display: block;
 }
 

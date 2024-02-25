@@ -8,8 +8,12 @@ let dcComics = [
     "Blue Beetle",
     "Booster Gold",
     "Catwoman",
+    "Crisis on Infinite Earths",
+    "Dark Nights Metal",
+    "Dark Nights Death Metal",
     "Detective Comics",
     "Doom Patrol",
+    "The Flash",
     "Green Arrow",
     "Green Lantern",
     "Green Lantern Corps",
@@ -24,6 +28,7 @@ let dcComics = [
     "Suicide Squad",
     "Superman",
     "Supergirl",
+    "Supergirl: Woman of Tomorrow",
     "Teen Titans",
     "Titans",
     "The Flash",
@@ -32,6 +37,7 @@ let dcComics = [
 ];
 let marvelComics = [
     "The Amazing Spider-Man",
+    "All-New Spider-Man",
     "Ant-Man",
     "The Avengers",
     "Black Panther",
@@ -46,8 +52,11 @@ let marvelComics = [
     "Luke Cage",
     "Ms. Marvel",
     "The Punisher",
+    "Secret Wars",
     "The Silver Surfer",
     "The Spectacular Spider-Man",
+    "Ultimate Spider-Man",
+    "Spider-Man",
     "Spider-Woman",
     "Thor",
     "Venom",
@@ -59,19 +68,23 @@ let otherComics = [
     "Hellboy",
     "Invincible",
     "Spawn",
-    "WildC.A.T.s"
+    "WildC.A.T.s",
+    "Watchmen",
+    "Radiant Black"
 ];
 let otherBooks = [
-    "Harry Potter",
-    "The Lord of the Rings",
-    "Game of Thrones",
-    "The Chronicles of Narnia",
-    "The Hunger Games",
-    "Divergent",
-    "Percy Jackson & the Olympians",
-    "The Maze Runner",
-    "Twilight",
-    "The Dark Tower"
+    //No other books right now, this is comicle for now
+
+    // "Harry Potter",
+    // "The Lord of the Rings",
+    // "Game of Thrones",
+    // "The Chronicles of Narnia",
+    // "The Hunger Games",
+    // "Divergent",
+    // "Percy Jackson & the Olympians",
+    // "The Maze Runner",
+    // "Twilight",
+    // "The Dark Tower"
 ];
 let autoSuggest = [...dcComics, ...marvelComics, ...otherComics, ...otherBooks];
 

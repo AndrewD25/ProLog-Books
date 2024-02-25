@@ -4,13 +4,18 @@ Secret Shelf Home Page CSS
 DUE DATE
 */
 
+h1, .puzzleNumber {
+    text-align: center;
+    margin-block: 1%;
+}
+
 div#centering {
-    margin-top: calc(var(--navHeight) * 0.75);
+    margin-top: 30px;
     width: 80%;
+    max-width: 470px;
     margin-left: auto;
     margin-right: auto;
-    display: flex;
-    gap: 5%;
+    display: block;
 }
 
 div#leftSide {
@@ -26,25 +31,20 @@ div#rightSide {
     /* width: 35%; */
 }
 
-@media screen and (max-width: 600px) {
-    div#centering {
-        width: 80%;
-        margin-left: auto;
-        margin-right: auto;
-        display: block;
-    }
-
-    div#leftSide {
-        width: 100%; /* Full width when the screen is small */
-    }
-    
-    div#rightSide {
-        width: 100%; /* Full width when the screen is small */
-    }
+#mycanvas {
+    min-width: 1px;
+    min-height: 1px;
+    width: 80%;
+    /* width: clamp(20vh, 20vw, 40vh); */
 }
 
-#mycanvas {
-    width: 80%;
+@media screen and (max-width: 600px) {
+    /*Phone specific styling */
+
+}
+
+#roundText {
+    margin-block: 5px;
 }
 
 #guessInputs {
@@ -53,37 +53,10 @@ div#rightSide {
     justify-content: space-between;
 }
 
-#seriesInput {
-    width: 100%;
-}
-
-#numberInput { 
-    width: 22%;
-}
-
-#guessButton {
-    color: white;
-    background-color: green;
-    width: 100%;
-    margin-block: 10px;
-}
-
-.guess {
-    border: 1px solid white;
-}
-
-.green {
-    color: green;
-}
-
-.red {
-    color: red;
-}
-
 /* Autocomplete Styling */
 .autocomplete {
     /*the container must be positioned relative:*/
-    width: 71%;
+    width: 74%;
     position: relative;
     display: inline-block;
 }
@@ -113,4 +86,71 @@ div#rightSide {
     /*when navigating through the items using the arrow keys:*/
     background-color: var(--secondaryColor) !important;
     color: white !important;
+}
+
+#seriesInput {
+    width: 100%;
+}
+
+#numberInput { 
+    width: 22%;
+}
+
+#guessButton {
+    color: white;
+    background-color: green;
+    width: 100%;
+    margin-block: 10px;
+}
+
+h3 {
+    margin-block: 1%;
+}
+
+.flex {
+    display: flex;
+    margin-block: 0px;
+    justify-content: space-between;
+}
+
+.flex > * {
+    border: 1px solid white;
+    border-radius: 5px;
+    padding-inline: 2%;
+    margin-block: 3px;
+}
+
+.series { /*For the guess display*/
+    width: 72%;
+}
+
+.number { /*For the guess display*/
+    width: 18%;
+}
+
+.guess {
+    border: 1px solid white;
+    margin-block: 8px;
+}
+
+.green {
+    color: green;
+}
+
+.red {
+    color: red;
+}
+
+.yellow {
+    color: yellow;
+}
+
+#kofi {
+    display: flex;
+    justify-content: center;
+}
+
+.btn-container {
+    margin-left: auto;
+    margin-right: auto;
 }
