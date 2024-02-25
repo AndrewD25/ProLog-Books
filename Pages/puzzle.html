@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Play Comicle Online - ProLog Books</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="../Images/PLBLogo.png">
+
+        <link rel="stylesheet" href="../Stylesheets/pageTemplate.css">
+        <link rel="stylesheet" href="../Stylesheets/puzzle.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    </head>
+    <body>
+        <!--Page Banner with Navlinks at the top of each page-->
+        <header id="pageTop">
+            <a href="../index.html"><img id="mainLogo" src="../Images/ProLogBooksLogo.png"></a>
+            <nav>
+                <li><a href="../index.html"><i class="fas fa-home" title="Home"></i> <span>Home</span></a></li>
+                <li><a href="collection.html"><i class="fa-solid fa-book" title="Collection"></i> <span>Collection</span></a></li>
+                <li><a href="social.html"><i class="fa-solid fa-people-arrows" title="Social"></i> <span>Social</span></a></li>
+                <li><a href="news.html"><i class="fa-solid fa-newspaper" title="News"></i> <span>News</span></a></li>
+                <li><a href="puzzle.html"><i class="fa-solid fa-puzzle-piece" title="Play Comicle"></i> <span>Play Comicle</span></a></li>
+                <li><a href="account.html"><i class="fa-solid fa-user"></i> <span>Account</span></a></li>
+            </nav>
+        </header>   
+        
+        <h1>Daily Comicle</h1>
+
+        <div id="centering">
+            <div id="leftSide">
+                <!--Image to be Pixelated-->
+                <canvas id="mycanvas"></canvas>
+
+                <p id="roundText">Round <span id="roundNum">1</span>/6</p>
+            </div>
+            <div id="rightSide">
+                <!--User input boxes-->
+                <div id="guessInputs">
+                    <div class="autocomplete">
+                        <input type="text" id="seriesInput" placeholder="Series">
+                    </div>
+                    <input type="number" id="numberInput" placeholder="Number">
+                </div>
+                <button id="guessButton">Guess!</button>
+
+                <!--Keep track of guesses-->
+                <h3>Guesses:</h3>
+                <div id="guessContainer">
+                    <div class="flex">
+                        <!-- <p class="series">Series:</p><p class="number">Number:</p> -->
+                    </div>
+                    <!-- <p class="guess">Guess</p> -->
+                </div>
+            </div>
+        </div>
+        
+        <script src="../Scripts/templateScript.js"></script>
+        <script type="text/javascript" src="https://cdn.rawgit.com/rogeriopvl/8bit/master/8bit.js">
+        </script><script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
+        <script src="../Scripts/autocomplete.js"></script>
+        <script src="../Scripts/puzzle.js"></script>
+    </body>
+</html>
