@@ -1,15 +1,15 @@
 <!--
 Andrew Deal
-Secret Shelf Collection Page HTML
+ProLog Books Collection Page HTML
 DUE DATE
 -->
 
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Collection - Share Yourshelf</title>
+        <title>Collection - ProLog Books</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" href="../Images/favicon.ico">
+        <link rel="icon" href="../Images/PLBLogo.png">
 
         <link rel="stylesheet" href="../Stylesheets/pageTemplate.css">
         <link rel="stylesheet" href="../Stylesheets/collection.css">
@@ -18,9 +18,7 @@ DUE DATE
     <body>
         <!--Page Banner with Navlinks at the top of each page-->
         <header id="pageTop">
-            <a href="../index.html"><img id="mainLogo" src="../Images/sysLogo.png"></a>
-
-            <!--Navigation Links-->
+            <a href="../index.html"><img id="mainLogo" src="../Images/PLBLogo.png"></a>
             <nav>
                 <li><a href="../index.html"><i class="fas fa-home" title="Home"></i> <span>Home</span></a></li>
                 <li><a href="collection.html"><i class="fa-solid fa-book" title="Collection"></i> <span>Collection</span></a></li>
@@ -32,8 +30,9 @@ DUE DATE
         </header>
 
         <!--Rest of Page Code-->
-        <div id="keepEmInline"> <!--Used to neatly keep divs next to each other-->
+        
             <div id="folderContainer"> 
+                <!-- <p id="addFolderLink">Add a new folder +</p> -->
                 <!--Folders are now added via javascript - example of html folder format below-->
                 <!-- <p class="folderLink">DC Comics <i class="fas fa-folder"></i> <span class="folderCount">X</span></p> -->
             </div>
@@ -85,7 +84,6 @@ DUE DATE
                 </div>-->
                 
             </div>
-        </div>
 
 
 
@@ -126,6 +124,13 @@ DUE DATE
                     <option>Great</option>
                     <option>Favorite</option>
                 </select>
+            </div>
+            <div>
+                <label>Image URL: </label>
+                <input type="text" id="modalImageText">
+                <!--Currently hidden-->
+                <input class="hidden" type="file" id="modalImageFile" accept="image/png, image/jpeg">
+                <p class="smallText hidden">File selected:</p>
             </div>
             <button id="addBookToCollectionButton" onclick="addBook()">Add Book</button>
             <button id="cancelAddBookButton">Cancel</button>

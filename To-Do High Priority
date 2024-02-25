@@ -1,0 +1,7 @@
+Change all relative paths to absolute paths, at least for the heading, and try to export it into its own "heading.php" file to save time editing it over and over
+  -Done for home page, need to figure out how to make the header.php use abs paths and then I can move it to the other pages
+
+Start making every page other than home a requirement of being signed in before visiting
+  - Done for profile page, add to others as I add them
+
+Also look into how signing in with google works

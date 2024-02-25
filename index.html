@@ -1,6 +1,6 @@
 <!--
 Andrew Deal
-Secret Shelf Home Page HTML
+ProLog Books Home Page HTML
 DUE DATE
 -->
 
@@ -9,9 +9,9 @@ DUE DATE
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Share Yourshelf: Organize and Share Your Books Online</title>
+        <title>ProLog Books: Organize and Share Your Books Online</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" href="Images/favicon.ico">
+        <link rel="icon" href="Images/PLBLogo.png">
 
         <link rel="stylesheet" href="Stylesheets/pageTemplate.css">
         <link rel="stylesheet" href="Stylesheets/home.css">
@@ -20,7 +20,7 @@ DUE DATE
     <body>
         <!--Page Banner with Navlinks at the top of each page-->
         <header id="pageTop">
-            <a href="index.html"><img id="mainLogo" src="Images/sysLogo.png"></a>
+            <a href="index.html"><img id="mainLogo" src="Images/ProLogBooksLogo.png"></a>
 
             <!--Navigation Links-->
             <nav> <!--Home uses different links than other pages-->
@@ -29,13 +29,22 @@ DUE DATE
                 <li><a href="Pages/social.html"><i class="fa-solid fa-people-arrows" title="Social"></i> <span>Social</span></a></li>
                 <li><a href="Pages/news.html"><i class="fa-solid fa-newspaper" title="News"></i> <span>News</span></a></li>
                 <li><a href="Pages/puzzle.html"><i class="fa-solid fa-puzzle-piece" title="Play Comicle"></i> <span>Play Comicle</span></a></li>
-                <li><a href="Pages/account.html"><i class="fa-solid fa-user"></i> <span>Account</span></a></li>
+                <li id="accountLi"><a"><i class="fa-solid fa-user"></i> <span>Account</span></a>
+                    <div id="accountMenu" class="hidden">
+                        <ul>
+                            <li><a>Create Account</a></li>
+                            <li><a>Login</a></li>
+                            <li><a href="Pages/account.html">Profile</a></li>
+                            <li><a>Sign Out</a></li>
+                        </ul>
+                    </div>
+                </li>
             </nav>
         </header>
 
         <!--Rest of Page Code-->
         <div id="landingBox">
-            <h1 id="homeTitle">Welcome to Share Your Shelf!</h1>
+            <h1 id="homeTitle">Welcome to ProLog Books!</h1>
             <p>This program is designed to help you inventory your books and share your collection with others with
                 similar interests. Use our collection manager feature to organize your books and keep track of your collection, 
                 reading order, and personal thoughts. Our social features help you create a personalized profile to share

@@ -1,0 +1,72 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#mainContent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: var(--navHeight);
+    height: calc(100vh - var(--navHeight));
+}
+
+#accountBox{ 
+    background-color: var(--secondaryColor);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+#accountBox h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#accountBox form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.input-container {
+    position: relative;
+}
+
+#accountBox form input[type="text"],
+#accountBox form input[type="email"],
+#accountBox form input[type="password"] {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+#accountBox form input[type="submit"] {
+    padding: 10px 20px;
+    background-color: var(--accentColor);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#accountBox a {
+    display: block;
+    text-align: center;
+    width: 100%;
+    color: var(--linkColor);
+}
+
+.tooltip {
+    padding: 5px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translate(140%, calc(50% - 10px));    
+    border-radius: 20px;
+    background-color: var(--accentColor);
+}
