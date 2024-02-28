@@ -1,10 +1,14 @@
 // Autocomplete Script
 let dcComics = [
     "Action Comics",
+    "All-Star Comics",
     "Aquaman",
     "Batgirl",
     "Batman",
+    "Batman #428 Robin Lives!",
+    "Batman: The Killing Joke",
     "Birds of Prey",
+    "Blackest Night",
     "Blue Beetle",
     "Booster Gold",
     "Catwoman",
@@ -24,6 +28,7 @@ let dcComics = [
     "Legion of Super-Heroes",
     "Nightwing",
     "Red Hood and the Outlaws",
+    "OMAC",
     "Sinestro",
     "Suicide Squad",
     "Superman",
@@ -40,6 +45,7 @@ let marvelComics = [
     "All-New Spider-Man",
     "Ant-Man",
     "The Avengers",
+    "Darth Vader",
     "Black Panther",
     "Captain America",
     "Daredevil",
@@ -47,9 +53,12 @@ let marvelComics = [
     "Doctor Strange",
     "Fantastic Four",
     "Guardians of the Galaxy",
+    "House of M",
     "The Incredible Hulk",
     "Iron Man",
     "Luke Cage",
+    "Marvel Comics",
+    "Moon Knight",
     "Ms. Marvel",
     "The Punisher",
     "Secret Wars",
@@ -63,6 +72,7 @@ let marvelComics = [
     "Wolverine",
     "X-Force",
     "X-Men",
+    "The Uncanny X-Men",
 ];
 let otherComics = [
     "Hellboy",
@@ -70,7 +80,20 @@ let otherComics = [
     "Spawn",
     "WildC.A.T.s",
     "Watchmen",
-    "Radiant Black"
+    "Radiant Black",
+    "G.I. Joe",
+    "Ghost Machine"
+];
+let manga = [
+    "Assassination Classroom",
+    "Attack on Titan",
+    "Blue Lock",
+    "Jojo's Bizarre Adventure",
+    "Kaguya-Sama: Love is War",
+    "Kaiju No. 8",
+    "Romantic Killer",
+    "Solo Leveling",
+    "Spy x Family"
 ];
 let otherBooks = [
     //No other books right now, this is comicle for now
@@ -86,7 +109,7 @@ let otherBooks = [
     // "Twilight",
     // "The Dark Tower"
 ];
-let autoSuggest = [...dcComics, ...marvelComics, ...otherComics, ...otherBooks];
+let autoSuggest = [...dcComics, ...marvelComics, ...otherComics, ...otherBooks, ...manga];
 
 function autocomplete(inp, arr = autoSuggest) { //arr is optional param
     var currentFocus;
