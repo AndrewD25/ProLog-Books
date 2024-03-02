@@ -46,16 +46,6 @@ let folderContainer = document.getElementById("folderContainer");
 //Right half div
 let collectionContainer = document.getElementById("collectionContainer");
 
-//Button to pull up sign in modal
-let startSignInBtn = document.getElementById("startSignInButton");
-
-//SignIn Modal
-let signInModal = document.getElementById("signInModal");
-let usernameInput = document.getElementById("usernameInput");
-let passwordInput = document.getElementById("passwordInput");
-let signInBtn = document.getElementById("signInButton")
-let cancelSignInBtn = document.getElementById("cancelSignIn");
-
 //Add Books Modal
 let addBookModal = document.getElementById("addBookModal");
 let addBookToCollectionBtn = document.getElementById("addBookToCollectionButton");

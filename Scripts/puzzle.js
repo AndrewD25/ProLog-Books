@@ -28,7 +28,7 @@ const jsConfetti = new JSConfetti()
 //Generate a cover based on the current date (used until database is set up)
 let imgName;
 let img = new Image();
- img.onload = function () {
+img.onload = function () {
      eightBit(document.getElementById('mycanvas'), img, scaleFactor[sfi]);
 };
 img.src = `../Images/altImg.jpg`; // Set a default alt image
