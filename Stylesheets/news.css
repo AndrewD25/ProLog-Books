@@ -4,15 +4,38 @@
 
 #blogColumns {
     display: grid;
-    grid-template-columns: auto auto auto;
-    gap: 3.2vw;
-    padding-inline: 3.5vw;
+    grid-template-columns: auto;
+    grid-gap: 20px;
+    justify-content: center;
 }
 
 article {
-    width: 28vw;
+    width: 85vw;
     background-color: white;
     color: black;
+    padding: 20px; 
+    border-radius: 5px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+@media only screen and (min-width: 600px) {
+    #blogColumns {
+        grid-template-columns: repeat(2, auto); /* Two columns */
+    }
+
+    article {
+        width: 40vw;
+    }
+}
+
+@media only screen and (min-width: 900px) {
+    #blogColumns {
+        grid-template-columns: repeat(3, auto); /* Three columns */
+    }
+
+    article {
+        width: 25vw;
+    }
 }
 
 article a {

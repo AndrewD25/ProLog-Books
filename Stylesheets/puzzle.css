@@ -7,6 +7,7 @@ DUE DATE
 h1, .puzzleNumber {
     text-align: center;
     margin-block: 1%;
+    color: var(--textColor);
 }
 
 div#centering {
@@ -104,6 +105,8 @@ div#rightSide {
 }
 
 h3 {
+    border: 1px solid var(--textColor);
+    color: var(--textColor);
     margin-block: 1%;
 }
 
@@ -114,7 +117,7 @@ h3 {
 }
 
 .flex > * {
-    border: 1px solid white;
+    border: 1px solid var(--textColor);
     border-radius: 5px;
     padding-inline: 2%;
     margin-block: 3px;
@@ -122,14 +125,15 @@ h3 {
 
 .series { /*For the guess display*/
     width: 72%;
+    color: var(--textColor);
 }
 
 .number { /*For the guess display*/
     width: 18%;
+    color: var(--textColor);
 }
 
 .guess {
-    border: 1px solid white;
     margin-block: 8px;
 }
 

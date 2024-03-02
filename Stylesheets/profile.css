@@ -11,12 +11,34 @@ body {
 #profileDisplay, #settings {
     background-color: var(--darkerSecondary);
     width: 80%;
+    max-width: 1000px;
     margin-left: auto;
     margin-right: auto;
     /* fix later */ height: 300px; 
     border-radius: 20px;
 }
 
+#profileDisplay {
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+#pfp {
+    width: 200px;
+    height: 200px;
+    text-align: center;
+}
+
+#pfp img {
+    width: 80%;
+}
+
 #signOutButton {
-    margin-block: 30px;
+    text-decoration: none;
+    color: var(--textColor);
+    border: 1px solid var(--textColor);
+    border-radius: 5px;
+    padding: 1px;
 }

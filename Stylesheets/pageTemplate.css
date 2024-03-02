@@ -82,6 +82,14 @@ body {
     font-size: clamp(12px, 1.5vw, 28px);
 }
 
+#accountLi {
+    cursor: context-menu;
+}
+
+#accountLi:hover #accountMenu {
+    display: auto !important;
+}
+
 #accountMenu * {
     display: block;
     margin: 0;
