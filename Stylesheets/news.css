@@ -26,6 +26,14 @@ article {
     article {
         width: 40vw;
     }
+
+    .title {
+        font-size: 3.5vw !important;
+    }
+
+    .subData, .preview {
+        font-size: 2vw !important;
+    }
 }
 
 @media only screen and (min-width: 900px) {
@@ -36,6 +44,14 @@ article {
     article {
         width: 25vw;
     }
+
+    .title {
+        font-size: 2vw !important;
+    }
+
+    .subData, .preview {
+        font-size: 1vw !important;
+    }
 }
 
 article a {
@@ -44,16 +60,20 @@ article a {
 }
 
 .thumbnail {
-    width: 28vw;
-    height: 18vw;
+    width: 90%;
+    min-height: 200px;
     margin-block: 0;
+    margin-left: 5%;
+    margin-right: 5%;
     background-repeat: no-repeat;
     background-size: 100% 100%;
+    display: block;
 }
 
 .data {
-    height: 15vw;
     padding-inline: 5%;
+    padding-top: 5%;
+    margin-top: 5%;
     border-top: 1px solid black;
     display: flex;
     flex-direction: column;
@@ -63,14 +83,14 @@ article a {
 
 .title {
     margin-block: 0;
-    font-size: 3vw;
+    font-size: 5vw;
 }
 
 .subData {
     display: flex;
     justify-content: left;
     gap: 5%;
-    font-size: 2vw;
+    font-size: 3vw;
 }
 
 .author {
@@ -81,3 +101,7 @@ article a {
     margin-block: 0;
 }
 
+.preview {
+    margin-block: 0;
+    font-size: 2vw;
+}

@@ -103,7 +103,7 @@
     align-items: center;
 }
 
-.addFirstBook {
+.appendBook {
     background-color: var(--primaryColor);
     color: white;
     width: 40px;
@@ -275,13 +275,6 @@
     color: black;
 }
 
-#addBookModal {
-    text-align: center;
-    width: 50vw;
-    height: 65vw;
-    max-height: 85vh;
-}
-
 #signInModal {
     text-align: left;
 }
@@ -289,13 +282,6 @@
 #signInModal > * {
     display: block;
 }
-
-@media screen and (max-width: 1100px) {
-    #addBookModal {
-        width: 60vw;
-        height: 85vw;
-    }
-} 
 
 .modal h1 {
     font-size: clamp(10px, 3.5vw, 60px);
