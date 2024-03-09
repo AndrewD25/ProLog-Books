@@ -113,7 +113,7 @@ h1 {
         justify-content: center !important;
     }
 
-    .info .previewImage {
+    .info .previewImage  {
         width: 40% !important;
     }
 
@@ -130,6 +130,10 @@ h1 {
 @media screen and (max-width: 350px) {
     .info {
         flex-direction: column;
+    }
+
+    .rightBox {
+        flex-direction: column-reverse;
     }
 
     .infoText {
