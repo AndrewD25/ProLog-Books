@@ -74,6 +74,17 @@ function getFolderId(linkElement) {
     return linkElement.closest('.folderLink').querySelector(".folderName").innerText;
 }
 
+function deleteFolderButtons() {
+    let allFolderDeleters = document.getElementsByClassName("deleteFolder");
+    for (let i = 0; i < allFolderDeleters.length; i++) {
+        allFolderDeleters[i].addEventListener("click", function (e) {
+            let id = getFolderId(e.target);
+            document.getElementById("folder_to_delete").value = id;
+            showModal("deleteFolderModal");
+        })
+    }
+}
+
 function flipButtons() {
     let allFlipButtons = document.getElementsByClassName("flipButton");
     for (let i = 0; i < allFlipButtons.length; i++) {
@@ -91,6 +102,8 @@ function flipButtons() {
 
 //Add event listeners by running element functions
 folderLinks();
+deleteFolderButtons();
 flipButtons();
+
 
 overlay.onclick = hideModal;
