@@ -1,5 +1,6 @@
 // Autocomplete Script
 let dcComics = [
+    "52",
     "Action Comics",
     "All-Star Comics",
     "Aquaman",
@@ -7,6 +8,7 @@ let dcComics = [
     "Batman",
     "Batman #428 Robin Lives!",
     "Batman: The Killing Joke",
+    "Batman: The Dark Knight Returns",
     "Birds of Prey",
     "Blackest Night",
     "Blue Beetle",
@@ -81,8 +83,10 @@ let marvelComics = [
     "X-Men",
     "The Uncanny X-Men",
     "The Ultimates",
+    "What If?",
 ];
 let otherComics = [
+    "Archie",
     "Hellboy",
     "Invincible",
     "Spawn",
@@ -90,7 +94,9 @@ let otherComics = [
     "Watchmen",
     "Radiant Black",
     "G.I. Joe",
-    "Ghost Machine"
+    "Ghost Machine",
+    "Void Rivals",
+    "Transformers"
 ];
 let manga = [
     "Assassination Classroom",
