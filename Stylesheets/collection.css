@@ -27,6 +27,10 @@
     cursor: pointer;
 }
 
+.deleteFolder {
+    float: right;
+}
+
 /*Grid columns should be 6vw apart*/
 
 #collectionContainer {
@@ -261,9 +265,10 @@
     width: 25%;
 }
 
+
 /* MODAL WINDOW */  
 .modal {
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -279,7 +284,22 @@
     text-align: left;
 }
 
-#signInModal > * {
+#addBookModal {
+    text-align: center;
+}
+
+#addBookModal h1 {
+    margin-block: 5px;
+    border-bottom: 1px solid black;
+}
+
+#addBookModal form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#signInModal > *, #addBookModal form > * {
     display: block;
 }
 
@@ -299,24 +319,24 @@
     margin-bottom: 1vh;
 }
 
-#modalTitle {
+#title_input {
     width: 60%;
 }
 
-#modalSubtitle {
+#subtitle_input {
     width: 55%;
 }
 
-#modalNotes {
+#notes_input {
     resize: none;
     width: 60%;
 }
 
-#modalRead {
+#read_input {
     width: 30%;
 }
 
-#modalRating {
+#rating_input {
     width: 27%;
 }
 
@@ -343,7 +363,7 @@
 }
   
 .overlay {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -352,5 +372,3 @@
     backdrop-filter: blur(3px);
     z-index: 9999999;
 }
-
-

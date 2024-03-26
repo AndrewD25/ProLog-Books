@@ -153,6 +153,15 @@ h3 {
     color: yellow;
 }
 
+#instagram {
+    text-align: center;
+}
+
+#instagram a {
+    color: var(--linkColor);
+    text-decoration: none;
+}
+
 #kofi {
     display: flex;
     justify-content: center;
