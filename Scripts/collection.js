@@ -105,5 +105,4 @@ folderLinks();
 deleteFolderButtons();
 flipButtons();
 
-
 overlay.onclick = hideModal;

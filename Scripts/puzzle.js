@@ -28,7 +28,7 @@ const jsConfetti = new JSConfetti()
 //Generate a cover based on the current date (used until database is set up)
 let imgName;
 let img = new Image();
-img.onload = function () {
+ img.onload = function () {
      eightBit(document.getElementById('mycanvas'), img, scaleFactor[sfi]);
 };
 img.src = `../Images/altImg.jpg`; // Set a default alt image
@@ -77,15 +77,15 @@ function rot13Decode(str) {
 
 //Function to actually set data correctly
 function setAnswer(cover, series, number) {
+        //Delete the delete me script
+    document.getElementById("deleteMe").remove();
+
     imgName = cover;
     correctAnswer.series = rot13Encode(series);
     correctAnswer.number = parseInt(number);
 
     img.src = `../Images/Puzzles/${imgName}.jpg`; // Set based on database information from the day
     eightBit(document.getElementById('mycanvas'), img, scaleFactor[sfi]);
-
-    //Delete the delete me script
-    document.getElementById("deleteMe").remove();
 }
 
 // Run 8-bit Function for Image //
