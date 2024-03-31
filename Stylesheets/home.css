@@ -81,9 +81,9 @@ h1 {
 }
 
 .previewImage {
-    width: 60%;
+    width: 30%;
     min-width: 150px;
-    height: 160%;
+    height: 80%;
     border: 1px dashed white;
 }
 

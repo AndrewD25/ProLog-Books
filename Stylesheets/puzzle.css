@@ -173,18 +173,17 @@ h3 {
     margin-right: auto;
 }
 
-h4 {
+summary {
+    width: 60%;
+    margin-inline: 20%;
     font-size: 25px;
     text-align: center;
-    text-decoration: underline;
     cursor: pointer;
+    margin-bottom: 15px;
 }
 
 #oldLinks {
-    max-height: 0;
-    overflow: hidden;
     width: 100%;
-    transition: max-height 0.3s ease;
 }
 
 .oldLink {

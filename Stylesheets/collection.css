@@ -235,15 +235,14 @@
     margin-block: 5px; /*Temp value change later*/
 }
 
-.selectBox { 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-block: 0.5vw; /*Temp value change later*/
+.selectLabel {
+    display: inline-block;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
-.selectBox select {
-    width: 40%;
+select {
+    width: 45%;
     font-size: 80%;
 }
 
@@ -386,3 +385,5 @@
     backdrop-filter: blur(3px);
     z-index: 9999999;
 }
+
+
