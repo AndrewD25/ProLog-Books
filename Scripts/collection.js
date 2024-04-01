@@ -74,6 +74,10 @@ function getFolderId(linkElement) {
     return linkElement.closest('.folderLink').querySelector(".folderName").innerText;
 }
 
+function getBookId(button) {
+    return button.closest(".book").id;
+}
+
 function deleteFolderButtons() {
     let allFolderDeleters = document.getElementsByClassName("deleteFolder");
     for (let i = 0; i < allFolderDeleters.length; i++) {
@@ -96,6 +100,16 @@ function flipButtons() {
     }
 }
 
+function deleteBookButtons() {
+    let allBookDeleters = document.getElementsByClassName("deleteBook");
+    for (let i = 0; i < allBookDeleters.length; i++) {
+        allBookDeleters[i].addEventListener("click", function (e) {
+            document.getElementById("book_to_delete").value = getBookId(e.target);
+            showModal("deleteBookModal");        
+        })
+    }
+}
+
   ///////////////////
  // Running Logic //
 ///////////////////
@@ -103,6 +117,7 @@ function flipButtons() {
 //Add event listeners by running element functions
 folderLinks();
 deleteFolderButtons();
+deleteBookButtons()
 flipButtons();
 
 overlay.onclick = hideModal;
