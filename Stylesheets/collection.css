@@ -181,6 +181,10 @@
     to {bottom: -15px; left: -15px;}
 }
 
+.active {
+    background-color: var(--accentColor) !important;
+}
+
 .flipped .addBookButton, .flipped .editButton, .flipped .copyButton {
     display: flex !important;
 }
@@ -230,9 +234,11 @@
     background-color: rgba(0, 0, 0, 0);
     border: 1px solid white;
     border-radius: 5px;
-    resize: none;
+    overflow-y: scroll;
+    overflow-x: hidden;
     color: white;
     margin-block: 5px; /*Temp value change later*/
+    margin-inline: 5%;
 }
 
 .selectLabel {
@@ -241,9 +247,9 @@
     margin-bottom: 5px;
 }
 
-select {
-    width: 45%;
-    font-size: 80%;
+.details > div > p {
+    display: inline-block;
+    margin-block: 2.5px;
 }
 
 .divider {
