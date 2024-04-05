@@ -16,13 +16,26 @@ DUE DATE
         <link rel="stylesheet" href="Stylesheets/pageTemplate.css?v=<?php echo time(); ?>">
         <link rel="stylesheet" href="Stylesheets/home.css?v=<?php echo time(); ?>">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+        <style>
+            /*Using in-file css to keep only the background cached*/
+            body {
+                background-image: url("../Images/comicBackgroundBlurred.jpg");
+                background-size: 300% auto; /*Background for mobile version*/
+                background-repeat: repeat-y; /* Repeat vertically */
+            }
+
+            @media only screen and (min-width: 1100px) {
+                body {
+                    background-size: 100% auto; /*Set background for pc version*/
+                }
+            }
+        </style>
     </head>
     <body>
         <!--Page Banner with Navlinks at the top of each page-->
         <?php 
-            //$prefix = '/home/vol1_7/infinityfree.com/if0_35976622/prologbooks.com/htdocs/';
-            //include_once $prefix.'Pages/Includes/header.php'; 
-            include_once 'Pages/Includes/header.php'
+            include_once 'Pages/Includes/header.php'; 
         ?>
 
         <!--Rest of Page Code-->
@@ -44,7 +57,8 @@ DUE DATE
                     If this is your first time on ProLog books, start here! We require you to create an account and sign in to use some of our features in order to avoid bot spam
                     and keep bandwidth down to create the best experience for you. Don't worry, it's completely free to sign up! Head to our <a href="Pages/signUp.php">Sign Up</a>
                     page to get started. Then check out everything we have to offer at ProLog Books! Not ready to do that yet or already done? Then you should check out our article at
-                    <a href="index.php">[Unfinished]</a> on how to get started with our site! We hope you enjoy seeing all we have to offer!
+                    <a href="Pages/article.php?id=1">ProLog Books News</a> on how to get started with our site! Or check out our <a target="_blank" href="userman.pdf">User Manual</a>! 
+                    We hope you enjoy seeing all we have to offer!
                 </p>
             </div>
         </div>
@@ -55,7 +69,7 @@ DUE DATE
                 <p>On the <a href="Pages/construction.php">Collection</a> page, keep an inventory of all your books. The books stay in the order you add them so you 
                 can use it to keep track of reading order. Store titles, publishers, notes, ratings, and any other information you want!    </p>
             </div>
-            <div class="previewImage"><img src="Images/unfinishedPreview.jpg?v=<?php echo time(); ?>"></div>
+            <div class="previewImage"><img src="Images/collectionPagePreview.jpg?v=<?php echo time(); ?>"></div>
         </div>
 
         <div class="info leftBox">
@@ -71,11 +85,11 @@ DUE DATE
         <div class="info rightBox">
             <div class="infoText">
                 <h2>Stay Connected!</h2>
-                <p>Want to spend some time reading instead of managing your books? Check out the <a href="Pages/construction.php">News</a> page! Here, you'll 
+                <p>Want to spend some time reading instead of managing your books? Check out the <a href="Pages/news.php">News</a> page! Here, you'll 
                 find curated articles about all sorts of different things! Articles might include site tutorials, new releases, blog posts, surveys, 
                 or even a monthly book suggestion! There's an article for any occasion at ProLog Books News!</p>
             </div>
-            <div class="previewImage"><img src="Images/unfinishedPreview.jpg?v=<?php echo time(); ?>"></div>
+            <div class="previewImage"><img src="Images/newsPreview.jpg?v=<?php echo time(); ?>"></div>
         </div>
 
         <div class="info leftBox">
