@@ -10,7 +10,23 @@ Due Date
  // Data variables //
 ////////////////////
 
-
+let book_to_copy;
+function resetBTC() {
+    book_to_copy = {
+        title: "",
+        subtitle: "",
+        notes: "",
+        image: "",
+        format: "---",
+        read: "---",
+        rating: "---",
+    }
+    let allCopyButtons = document.getElementsByClassName("copyButton");
+    for (let j = 0; j < allCopyButtons.length; j++) {
+        allCopyButtons[j].classList.remove("active");
+    }
+}
+resetBTC();
 
   ////////////////////////////
  // HTML Element Variables //
@@ -35,6 +51,9 @@ const hiddenInput = document.getElementById("storeUsername");
 
 function showModal(id) {
     hideModal();
+    clearModalWindows();
+    populateModalWindow(id);
+    resetBTC();
     const modal = document.getElementById(id);
     modal.classList.remove('hidden');
     overlay.classList.remove("hidden");
@@ -89,12 +108,87 @@ function deleteFolderButtons() {
     }
 }
 
+function copyButtons() {
+    let allCopyButtons = document.getElementsByClassName("copyButton");
+    for (let i = 0; i < allCopyButtons.length; i++) {
+        allCopyButtons[i].addEventListener("click", function (e) {
+            e.target.closest(".copyButton").classList.toggle("active");
+
+            //Save the book data into the book to copy variable
+            let parentBook = e.target.closest(".book");
+            book_to_copy = {
+                title: parentBook.querySelector(".title").textContent,
+                subtitle: parentBook.querySelector(".subtitle").textContent,
+                notes: parentBook.querySelector(".notes").textContent,
+                image: parentBook.querySelector(".cover").getAttribute("src"),
+                format: parentBook.querySelector(".format").textContent,
+                read: parentBook.querySelector(".read").textContent,
+                rating: parentBook.querySelector(".rating").textContent,
+            }
+
+            for (let j = 0; j < allCopyButtons.length; j++) {
+                if (allCopyButtons[j] !== e.target.closest(".copyButton")) {
+                    allCopyButtons[j].classList.remove("active");
+                }
+            }
+        });
+    }
+}
+
+//Need to refactor
+function populateModalWindow(id) {
+    if (id === "addBookModal") {
+        document.getElementById("title_input").value = book_to_copy.title;
+        document.getElementById("subtitle_input").value = book_to_copy.subtitle;
+        document.getElementById("notes_input").value = book_to_copy.notes;
+        document.getElementById("image_input").value = book_to_copy.image;
+        document.getElementById("format_input").value = book_to_copy.format;
+        document.getElementById("read_input").value = book_to_copy.read;
+        document.getElementById("rating_input").value = book_to_copy.rating;
+    } else if (id === "editBookModal") {
+        document.getElementById("new_title_input").value = book_to_copy.title;
+        document.getElementById("new_subtitle_input").value = book_to_copy.subtitle;
+        document.getElementById("new_notes_input").value = book_to_copy.notes;
+        document.getElementById("new_image_input").value = book_to_copy.image;
+        document.getElementById("new_format_input").value = book_to_copy.format;
+        document.getElementById("new_read_input").value = book_to_copy.read;
+        document.getElementById("new_rating_input").value = book_to_copy.rating;
+    }
+}
+
+function clearModalWindows() {
+    //Add books
+    document.getElementById("title_input").value = "";
+    document.getElementById("subtitle_input").value = "";
+    document.getElementById("notes_input").value = "";
+    document.getElementById("image_input").value = "";
+    document.getElementById("format_input").value = "---";
+    document.getElementById("read_input").value = "---";
+    document.getElementById("rating_input").value = "---";
+    //Edit books
+    document.getElementById("new_title_input").value = "";
+    document.getElementById("new_subtitle_input").value = "";
+    document.getElementById("new_notes_input").value = "";
+    document.getElementById("new_image_input").value = "";
+    document.getElementById("new_format_input").value = "";
+    document.getElementById("new_read_input").value = "";
+    document.getElementById("new_rating_input").value = "";
+    //Also make copy buttons turn off when activating the modal window
+}
+
 function flipButtons() {
     let allFlipButtons = document.getElementsByClassName("flipButton");
     for (let i = 0; i < allFlipButtons.length; i++) {
         allFlipButtons[i].addEventListener("click", function (e) {
             const closestFlip = e.target.closest(".flipButton");
             const closestBook = closestFlip.closest(".book");
+
+            //Turn off copy when flipping a book
+            if (closestBook.querySelector(".copyButton").classList.contains("active")) {
+                resetBTC();
+            }
+
+            closestBook.querySelector(".copyButton").classList.remove("active");
             closestBook.classList.toggle("flipped");
         });
     }
@@ -104,6 +198,8 @@ function deleteBookButtons() {
     let allBookDeleters = document.getElementsByClassName("deleteBook");
     for (let i = 0; i < allBookDeleters.length; i++) {
         allBookDeleters[i].addEventListener("click", function (e) {
+            document.getElementById("folder_location2").value = e.target.closest('.folder').id;
+            document.getElementById("position2").value = e.target.closest(".book").querySelector(".positionNum").textContent;
             document.getElementById("book_to_delete").value = getBookId(e.target);
             showModal("deleteBookModal");        
         })
@@ -117,7 +213,8 @@ function deleteBookButtons() {
 //Add event listeners by running element functions
 folderLinks();
 deleteFolderButtons();
-deleteBookButtons()
+deleteBookButtons();
+copyButtons();
 flipButtons();
 
 overlay.onclick = hideModal;
