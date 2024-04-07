@@ -8,6 +8,7 @@
     resize: horizontal;
     padding-left: 2.5vw;
     padding-right: 2.5vw;
+    overflow-y: scroll;
 }
 
 .folderLink, #addFolderLink {
@@ -22,6 +23,10 @@
 
 .deleteFolder {
     float: right;
+}
+
+.readRoverLink, .readRoverLink img {
+    width: 100%;
 }
 
 /*Grid columns should be 6vw apart*/
@@ -292,22 +297,22 @@
     text-align: left;
 }
 
-#addBookModal {
+#addBookModal, #editBookModal {
     text-align: center;
 }
 
-#addBookModal h1 {
+#addBookModal h1, #editBookModal h1 {
     margin-block: clamp(1vh, 1vw, 3vh);
     border-bottom: 1px solid var(--accentColor);
 }
 
-#addBookModal form {
+#addBookModal form, #editBookModal form {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-#signInModal > *, #addBookModal form > * {
+#signInModal > *, #addBookModal form > *, #editBookModal form > * {
     display: block;
 }
 
@@ -337,24 +342,24 @@
     background-color: var(--primaryColor);
 }
 
-#title_input {
+#title_input, #new_title_input {
     width: 60%;
 }
 
-#subtitle_input {
+#subtitle_input, #new_subtitle_input {
     width: 55%;
 }
 
-#notes_input {
+#notes_input, #new_notes_input {
     resize: none;
     width: 60%;
 }
 
-#read_input {
+#read_input, #new_read_input {
     width: 30%;
 }
 
-#rating_input {
+#rating_input, #new_rating_input {
     width: 27%;
 }
 
