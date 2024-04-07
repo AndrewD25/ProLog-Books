@@ -25,7 +25,16 @@
     float: right;
 }
 
-.readRoverLink, .readRoverLink img {
+.readRoverLink {
+    display: none;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 20vw;
+    margin-inline: 2.5vw;
+}
+
+.readRoverLink img {
     width: 100%;
 }
 
@@ -74,7 +83,7 @@
     align-items: center;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 800px) {
     #collectionContainer {
         padding-inline: 7vw;
         padding-block: 6vw;
