@@ -42,49 +42,77 @@ DUE DATE
         <div id="pageTitle">
             <h1>ProLog Books Articles</h1>
         </div>
-        <div id="blogColumns">
-            <?php
-                //Add articles from database
-                $query = "SELECT * FROM Articles ORDER BY published DESC";
-                $result = $conn->query($query);
+        
+        <div id="mainContent">
+            <div id="articleGrid">
+                <?php
+                    //Add articles from database
+                    $query = "SELECT * FROM Articles ORDER BY published DESC";
+                    $result = $conn->query($query);
 
-                // Loop through results
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        echo '<article>';
-                        echo '<a href="article.php?id=' . $row['article_id'] . '">';
-                        echo '<img class="thumbnail" style="background-image: url(\'../Images/Articles/' . $row['thumbnail'] . '\');">';
-                        echo '<div class="data">';
-                        echo '<h2 class="title">' . $row['header'] . '</h2>';
-                        echo '<div class="subData">';
-                        echo '<p class="author"><i class="fa-solid fa-pencil"></i> ' . $row['author'] . '</p>';
-                        echo '<p class="date"><i class="fa-regular fa-calendar"></i> ' . date('m/d/y', strtotime($row['published'])) . '</p>';
-                        echo '</div>';
-                        echo '<p class="preview">' . substr($row['content'], 0, 50) . '...</p>';
-                        echo '</div>';
-                        echo '</a>';
-                        echo '</article>';
+                    //Create data collection to store dates in
+                    $dates = array();
+
+                    // Loop through results
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            echo '<article>';
+                            echo '<a href="article.php?id=' . $row['article_id'] . '">';
+                            echo '<img class="thumbnail" style="background-image: url(\'../Images/Articles/' . $row['thumbnail'] . '\');">';
+                            echo '<div class="data">';
+                            echo '<h2 class="title">' . $row['header'] . '</h2>';
+                            echo '<div class="subData">';
+                            echo '<p class="author"><i class="fa-solid fa-pencil"></i> ' . $row['author'] . '</p>';
+                            echo '<p class="date"><i class="fa-regular fa-calendar"></i> ' . date('m/d/y', strtotime($row['published'])) . '</p>';
+
+                            $dates[] = $row['published'];
+
+                            echo '</div>';
+                            echo '<p class="preview">' . substr($row['content'], 0, 72) . '...</p>';
+                            echo '</div>';
+                            echo '</a>';
+                            echo '</article>';
+                        }
+                    } else {
+                        echo "No articles found.";
                     }
-                } else {
-                    echo "No articles found.";
-                }
-            ?>
-            <!-- Example article html structure:
-            <article>
-                <a href="article.php"> APPEND THE ARTICLE ID TO THE END OF THE URL
-                    <img class="thumbnail" style="background-image: url("../Images/Articles/IMAGE_ID_HERE");">
-                    <div class="data">
-                        <h2 class="title">Welcome to<br>ProLog Books</h2>
-                        <div class="subData">
-                            <p class="author"><i class="fa-solid fa-pencil"></i> Andrew Deal</p>
-                            <p class="date"><i class="fa-regular fa-calendar"></i> 02/01/24 </p>
-                        </div>
-                        <p class="preview"></p>
+                ?>
+            </div>
+            <div id="sidebar">
+                <div id="searchBox">
+                    <p>Search:</p>
+                    <input type="search">
+                </div>
+                <div id="filterBox">
+                    <p>Filter By Month:</p>
+                    <div id="monthFilters">
+                        <?php
+                            foreach ($dates as $date) {
+                                $dateTime = new DateTime($date);
+                                $formattedDate = $dateTime->format("F Y");
+                                echo '<div><input checked type="checkbox"><p>' . $formattedDate . '</p></div>';
+                            }
+                        ?>
                     </div>
-                </a>
-            </article>
-            -->
+                </div>
+            </div>
         </div>
+
+
+        <!-- Example article html structure:
+        <article>
+            <a href="article.php"> APPEND THE ARTICLE ID TO THE END OF THE URL
+                <img class="thumbnail" style="background-image: url("../Images/Articles/IMAGE_ID_HERE");">
+                <div class="data">
+                    <h2 class="title">Welcome to<br>ProLog Books</h2>
+                    <div class="subData">
+                        <p class="author"><i class="fa-solid fa-pencil"></i> Andrew Deal</p>
+                        <p class="date"><i class="fa-regular fa-calendar"></i> 02/01/24 </p>
+                    </div>
+                </div>
+            </a>
+        </article>
+        -->
 
 
         <script src="../Scripts/news.js?v=<?php echo time(); ?>"></script>

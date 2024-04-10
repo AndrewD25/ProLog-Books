@@ -34,7 +34,7 @@ DUE DATE
         ?>
 
         <div id="usersContainer">
-            <input type="search" placeholder="Search for your username">
+            <input type="search" id="search" placeholder="Username Search">
             <?php
                 //Get all users and their book count and echo it out in a cool format
                 $usernames_query = "SELECT DISTINCT username FROM Users";
