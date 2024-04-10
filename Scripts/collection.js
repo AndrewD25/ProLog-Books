@@ -108,6 +108,19 @@ function deleteFolderButtons() {
     }
 }
 
+function copyParent(element) {
+    let parentBook = element.closest(".book");
+    book_to_copy = {
+        title: parentBook.querySelector(".title").textContent,
+        subtitle: parentBook.querySelector(".subtitle").textContent,
+        notes: parentBook.querySelector(".notes").textContent,
+        image: parentBook.querySelector(".cover").getAttribute("src"),
+        format: parentBook.querySelector(".format").textContent,
+        read: parentBook.querySelector(".read").textContent,
+        rating: parentBook.querySelector(".rating").textContent,
+    }
+}
+
 function copyButtons() {
     let allCopyButtons = document.getElementsByClassName("copyButton");
     for (let i = 0; i < allCopyButtons.length; i++) {
@@ -115,22 +128,24 @@ function copyButtons() {
             e.target.closest(".copyButton").classList.toggle("active");
 
             //Save the book data into the book to copy variable
-            let parentBook = e.target.closest(".book");
-            book_to_copy = {
-                title: parentBook.querySelector(".title").textContent,
-                subtitle: parentBook.querySelector(".subtitle").textContent,
-                notes: parentBook.querySelector(".notes").textContent,
-                image: parentBook.querySelector(".cover").getAttribute("src"),
-                format: parentBook.querySelector(".format").textContent,
-                read: parentBook.querySelector(".read").textContent,
-                rating: parentBook.querySelector(".rating").textContent,
-            }
+            copyParent(e.target);
 
             for (let j = 0; j < allCopyButtons.length; j++) {
                 if (allCopyButtons[j] !== e.target.closest(".copyButton")) {
                     allCopyButtons[j].classList.remove("active");
                 }
             }
+        });
+    }
+}
+
+function editButtons() {
+    let allEditButtons = document.getElementsByClassName("editButton");
+    for (let i = 0; i < allEditButtons.length; i++) {
+        allEditButtons[i].addEventListener("click", function (e) {
+            copyParent(e.target);
+            document.getElementById("book_to_edit").value = e.target.closest(".book").id;
+            showModal("editBookModal");
         });
     }
 }
@@ -214,6 +229,7 @@ function deleteBookButtons() {
 folderLinks();
 deleteFolderButtons();
 deleteBookButtons();
+editButtons();
 copyButtons();
 flipButtons();
 
