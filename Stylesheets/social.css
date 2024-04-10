@@ -5,109 +5,39 @@ DUE DATE
 
 */
 
-h1 {
-    text-align: center;
+/*All social CSS is temporary until the page gets finalized*/
+#usersContainer {
+    width: 50%;
+    min-width: 250px;
+    margin-inline: auto;
+    margin-top: 40px;
 }
 
-#backgroundShelf {
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 750px;
+input[type=search] {
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 30px;
+    padding-block: 10px;
+    padding-inline: 10px;
 }
 
-.shelf {
-    display: flex;
-    justify-content: space-around;
-    background-color: #b49784;
-    border: 10px solid #5c2603;
-    border-top: none;
+.userBox {
+    box-sizing: border-box;
+    width: 100%;
+    background-color: var(--darkerSecondary);
+    font-size: 30px;
+    border: 1px solid black;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    margin: 0;
+    padding-block: 10px;
+    padding-inline: 10px;
 }
 
-.shelf:first-of-type {
-    border-top: 10px solid #5c2603;
-}
-
-.book {
-    height: 200px;
-    width: 9%;
-    box-shadow: 10px 15px 15px -12px black;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    transition: transform 0.3s ease-in-out; /* Add smooth transition effect */
-    cursor: pointer;
-}
-
-/* Define the keyframes for the animation */
-@keyframes moveUp {
-    from {
-        transform: translateY(0);
-    }
-    to {
-        transform: translateY(-10px);
-    }
-}
-
-/* Define the keyframes for the fall animation */
-@keyframes fallDown {
-    from {
-        transform: translateY(-10px);
-    }
-    to {
-        transform: translateY(0);
-    }
-}
-
-/* Add the animation on hover */
-.book:hover {
-    animation: moveUp 0.3s forwards; /* Play the animation on hover */
-}
-
-/* Apply the animation for falling down */
-.book:not(:hover) {
-    transition: transform 0.3s ease-in-out; /* Add smooth transition effect */
-}
-
-/* Add the fall animation when mouse stops hovering */
-.book:not(:hover) {
-    animation: fallDown 0.3s forwards; /* Play the animation when not hovered */
-}
-
-.red {
-    background-color: rgb(143, 32, 32);
-}
-
-.blue {
-    background-color: rgb(0, 0, 155);
-}
-
-.green {
-    background-color: rgb(54, 124, 54);
-}
-
-.purple {
-    background-color: purple;
-}
-
-.yellow {
-    background-color: rgb(204, 204, 85);
-}
-
-.teal {
-    background-color: teal;
-}
-
-.vertical {
-    writing-mode: vertical-lr; /* lr stands for left-to-right, you can use rl for right-to-left */
-    text-orientation: upright;
-    white-space: nowrap; /* Ensures that each character is on a separate line */
-    /*Do not allow text selection:*/
-    -webkit-user-select: none; /* Safari */
-    -ms-user-select: none; /* IE 10 and IE 11 */
-    user-select: none; /* Standard syntax */
-}
-
-
-
-
+/* clears the ‘X’ from Internet Explorer */
+input[type=search]::-ms-clear { display: none; width : 0; height: 0; }
+input[type=search]::-ms-reveal { display: none; width : 0; height: 0; }
+/* clears the ‘X’ from Chrome */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration { display: none; }
