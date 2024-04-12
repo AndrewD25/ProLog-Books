@@ -33,6 +33,22 @@ body {
 
 #pfp img {
     width: 80%;
+    border-radius: 5px;
+}
+
+#pictureList {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    width: 90%;
+    margin-inline: 5%;
+    max-height: 60vh;
+    overflow: scroll;
+    gap: 10px;
+}
+
+#pictureList .pfpOption {
+    width: 100%;
+    border-radius: 5px;
 }
 
 #signOutButton {
@@ -41,4 +57,38 @@ body {
     border: 1px solid var(--textColor);
     border-radius: 5px;
     padding: 1px;
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--primaryColor);
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+    z-index: 9999999991;
+    color: var(--textColor);
+}
+
+.modal input[type=submit] {
+    background-color: var(--secondaryColor);
+    color: var(--textColor);
+}
+
+.cancel {
+    background-color: var(--accentColor);
+    color: var(--textColor);
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(3px);
+    z-index: 9999999;
 }
