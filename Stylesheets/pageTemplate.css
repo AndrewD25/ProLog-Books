@@ -19,13 +19,15 @@ DUE DATE
 html, body {
     padding: 0;
     margin: 0;
+    overflow-x: hidden;
 }
 
 body {
+    position: relative;
     padding-top: var(--navHeight);
     background-color: var(--primaryColor);
-    overflow-x: hidden;    
     color: white;
+    width: 100vw;
 }
 
 ::-webkit-scrollbar {
@@ -33,7 +35,7 @@ body {
 }
 
 #pageTop {
-    width: 100%;
+    width: 100vw;
     z-index: 999999; /*stay at top of screen*/
     height: var(--navHeight);
     background-color: var(--secondaryColor);
@@ -73,6 +75,10 @@ body {
     color: white;
     font-size: clamp(12px, 1.5vw, 28px);
     text-decoration: none;
+}
+
+#accountLi {
+    cursor: default;
 }
 
 #accountMenu {

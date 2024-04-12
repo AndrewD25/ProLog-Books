@@ -1,5 +1,11 @@
 #pageTitle {
     text-align: center;
+    font-size: clamp(30px, 1.5vw, 3vh);
+}
+
+/*I had to create a special second hidden class because the search and filters were overriding each other*/
+.hidden2 {
+    display: none;
 }
 
 #mainContent {
@@ -7,25 +13,39 @@
     width: 90vw;
     margin-inline: 5vw;
     display: flex;
+    justify-content: center;
     gap: 4vw;
 }
 
 #articleGrid {
     width: 80%;
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: auto;
     grid-gap: 2vw;
     justify-content: center;
 }
 
+@media only screen and (min-width: 1200px) {
+    #articleGrid {
+        grid-template-columns: repeat(2, auto); /* Two columns */
+    }
+}
+
+@media only screen and (min-width: 1850px) {
+    #articleGrid {
+        grid-template-columns: repeat(3, auto); /* Three columns */
+    }
+}
+
 article {
-    width: 20vw;
+    width: 400px;
+    height: 370px;
+    min-width: 60%;
     background-color: var(--darkerSecondary);
     color: var(--textColor);
-    padding: 20px; 
+    box-sizing: border-box;
     border: 1px solid var(--textColor);
     border-radius: 8px; 
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 article a {
@@ -34,18 +54,59 @@ article a {
 }
 
 .thumbnail { /*FIX IT 😜*/
-    width: 90%;
+    width: 100%;
     min-height: 200px;
     margin-block: 0;
-    margin-left: 5%;
-    margin-right: 5%;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
+    border-radius: 8px;
     display: block;
+}
+
+.data {
+    padding: 5%;
+    margin-block: 0%;
+    border-top: 1px solid var(--textColor);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+
+.title {
+    margin-block: 0;
+}
+
+.subData {
+    display: flex;
+    justify-content: left;
+    gap: 5%;
+}
+
+.author {
+    margin-block: 0;
+}
+
+.date {
+    margin-block: 0;
+}
+
+.preview {
+    margin-block: 0;
+    word-wrap: normal;
 }
 
 #sidebar {
     width: 20%;
+}
+
+/*Hide sidebar under 700px until programmatically shown*/
+@media only screen and (max-width: 700px) {
+    #sidebar {
+        display: none;
+    }
+
+    #mainContent {
+        gap: 0;
+    }
 }
 
 #sidebar > div {
