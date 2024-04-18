@@ -25,6 +25,28 @@ let correct = false;
 //Set up confetti
 const jsConfetti = new JSConfetti()
 
+
+//Modal Window Functions
+const overlay = document.getElementById("overlay");
+
+function showModal(id) {
+    hideModal();
+    const modal = document.getElementById(id);
+    modal.classList.remove('hidden');
+    overlay.classList.remove("hidden");
+}
+
+function hideModal() {
+    let modals = document.getElementsByClassName("modal");
+    for (let i = 0; i < modals.length; i++) {
+        modals[i].classList.add("hidden");
+    }
+    overlay.classList.add("hidden");
+}
+
+overlay.onclick = hideModal;
+
+
 //Generate a cover based on the current date (used until database is set up)
 let imgName;
 let img = new Image();
@@ -120,26 +142,63 @@ function guess() {
         let guessSeries = document.createElement("p");
         guessSeries.classList.add("series");
         if (guess.series === rot13Decode(correctAnswer.series)) {
-            guessSeries.innerHTML = `<i class="fa-solid fa-check green"></i> ` + guess.series;
+            guessSeries.innerHTML = `<i class="fa-solid fa-check" style='color: green'></i> ` + guess.series;
         } else {
-            guessSeries.innerHTML = `<i class="fa-solid fa-x red"></i> ` + guess.series;
+            guessSeries.innerHTML = `<i class="fa-solid fa-x" style='color: red'></i> ` + guess.series;
         }
         flex.appendChild(guessSeries);
 
-        console.log(guess.number);
-        console.log(guess.number < correctAnswer.number);
-        console.log(guess.number > correctAnswer.number);
 
         let guessNumber = document.createElement("p");
         guessNumber.classList.add("number");
+        
+        //Variable to set arrow color
+        let color;
+
+        //Set guess arrow icon
         if (guess.number === correctAnswer.number) {
-            guessNumber.innerHTML = `<i class="fa-solid fa-check green"></i> ` + guess.number;
-        } else if (guess.number === "") {
-            guessNumber.innerHTML = `<i class="fa-solid fa-x red"></i>`;
-        } else if (guess.number < correctAnswer.number) {
-            guessNumber.innerHTML = `<i class="fa-solid fa-arrow-up yellow"></i> ` + guess.number;
-        } else if (guess.number > correctAnswer.number) {
-            guessNumber.innerHTML = `<i class="fa-solid fa-arrow-down yellow"></i> ` + guess.number;
+            color = "green";
+            guessNumber.innerHTML = `<i class="fa-solid fa-check" style="color: ${color}"></i> ` + guess.number;
+        } else if (guess.number === "" || isNaN(guess.number)) {
+            color = "red";
+            guessNumber.innerHTML = `<i class="fa-solid fa-x" style="color: ${color}"></i>`;
+        } else {
+            //Set distance "heat"
+            color = "white";
+            let diff = Math.abs(correctAnswer.number - guess.number);
+            switch (true) {
+                case (diff === 1):
+                    color = "#6EEBA8";
+                    break;
+                case (diff > 1 && diff <= 10):
+                    color = "#26F6C9";
+                    break;
+                case (diff > 10 && diff <= 50):
+                    color = "#69DFEF";
+                    break;
+                case (diff > 50 && diff <= 100):
+                    color = "#FFFFFF";
+                    break;
+                case (diff > 100 && diff <= 500):
+                    color = "#ECF683";
+                    break;
+                case (diff > 500 && diff <= 1000):
+                    color = "#F9BC4B";
+                    break;
+                case (diff > 1000):
+                    color = "#E66A17";
+                    break;
+                default:
+                    color = "white";
+                    break;
+            }
+
+            //Set arrow icon
+            if (guess.number < correctAnswer.number) {
+                guessNumber.innerHTML = `<i class="fa-solid fa-arrow-up" style="color: ${color}"></i> ` + guess.number;
+            } else if (guess.number > correctAnswer.number) {
+                guessNumber.innerHTML = `<i class="fa-solid fa-arrow-down" style="color: ${color}"></i> ` + guess.number;
+            }
         }
         flex.appendChild(guessNumber);
         //Finish guess number code

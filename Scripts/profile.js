@@ -8,14 +8,25 @@ DUE DATE
 
 const overlay = document.getElementById("overlay");
 
-function showModal(id) {
-    hideModal();
-    const modal = document.getElementById(id);
-    modal.classList.remove('hidden');
+function showUserModal() {
+    const userModal = document.getElementById("editProfileModal");
+    hideAllModal()
+    userModal.classList.remove('hidden');
     overlay.classList.remove("hidden");
 }
 
-function hideModal() {
+function showPfpModal() {
+    const pfpModal = document.getElementById("pfpModal");
+    pfpModal.classList.remove('hidden');
+    overlay.classList.remove("hidden");
+}
+
+function hidePfpModal() {
+    const pfpModal = document.getElementById("pfpModal");
+    pfpModal.classList.add('hidden');
+}
+
+function hideAllModal() {
     let modals = document.getElementsByClassName("modal");
     for (let i = 0; i < modals.length; i++) {
         modals[i].classList.add("hidden");
@@ -23,7 +34,7 @@ function hideModal() {
     overlay.classList.add("hidden");
 }
 
-overlay.onclick = hideModal;
+overlay.onclick = hideAllModal;
 
 
 //Profile Picture Menu Functionality 
@@ -32,37 +43,50 @@ let allPfpOptions = document.getElementsByClassName("pfpOption");
 for (let i = 0; i < allPfpOptions.length; i++) {
     allPfpOptions[i].addEventListener("click", function (e) {
         let pfpsrc = e.target.closest(".pfpOption").getAttribute("src").replace("../Images/Pfps/", "");
-        let pfpname = getPfpName(pfpsrc);
+        let pfpname = convert(pfpsrc);
         document.getElementById("selected").textContent = pfpname;
     })
 }
 
-function getPfpName(src) {
-    switch (src) {
-        case "pfp1.jpg":
-            return "Books";
-        case "pfp2.jpg":
-            return "Superman";
-        case "pfp3.jpg":
-            return "Batman";
-        case "pfp4.jpg":
-            return "Wonder Woman";
-        case "pfp5.jpg":
-            return "Spider-Man";
-        case "pfp6.jpg":
-            return "Hulk";
-        case "pfp7.jpg":
-            return "X-Men";
-        case "pfp8.jpg":
-            return "Invincible";
-        case "pfp9.jpg":
-            return "TMNT";
-        case "pfp10.jpg":
-            return "Optimus Prime";
-        case "pfp11.jpg":
-            return "Green Lantern";
-        default:
-            return "Default";
+const selectBtn = document.querySelector(".selector");
+selectBtn.addEventListener("click", function(e) {
+    let selected = document.getElementById("selected").textContent;
+    if (selected !== "None") {
+        document.getElementById("modalPfp").src = "../Images/Pfps/" + convert(selected, "name-to-pfp");
+        document.getElementById("hidden_pfp_input").value = convert(selected, "name-to-pfp");
+    }
+    hidePfpModal();
+})
+
+function convert(src, direction = "pfp-to-name") {
+    const pfpToName = {
+        "pfp1.jpg": "Books",
+        "pfp2.jpg": "Superman",
+        "pfp3.jpg": "Batman",
+        "pfp4.jpg": "Wonder Woman",
+        "pfp5.jpg": "Spider-Man",
+        "pfp6.jpg": "Hulk",
+        "pfp7.jpg": "X-Men",
+        "pfp8.jpg": "Invincible",
+        "pfp9.jpg": "TMNT",
+        "pfp10.jpg": "Optimus Prime",
+        "pfp11.jpg": "Green Lantern"
+    };
+    
+    const nameToPfp = {};
+    for (const key in pfpToName) {
+        const value = pfpToName[key];
+        nameToPfp[value] = key;
+    }
+
+    if (direction === "pfp-to-name") {
+        return pfpToName[src] || "Default";
+    } else if (direction === "name-to-pfp") {
+        return nameToPfp[src] || "Default";
+    } else {
+        return "Invalid direction";
     }
 }
 
+
+//Bio form functionality
