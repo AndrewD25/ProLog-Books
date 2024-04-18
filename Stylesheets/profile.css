@@ -4,13 +4,39 @@ Share Your Shelf Settings Page CSS
 DUE DATE 
 */
 
-body {
-    text-align: center;
+html, body {
+    scroll-behavior: smooth;
 }
 
-#profileDisplay, #settings {
+body {
+    display: flex;
+    justify-content: center;
+}
+
+#leftNavbar {
     background-color: var(--darkerSecondary);
-    width: 80%;
+    width: 30%;
+    height: calc(100vh - var(--navHeight));
+    position: fixed;
+    top: var(--navHeight);
+    left: 0;
+}
+
+#leftNavbar a {
+    display: block;
+    color: var(--textColor);
+    text-decoration: none;
+}
+
+main {
+    margin-left: 30%;
+    text-align: center;
+    width: 70%;
+}
+
+section {
+    background-color: var(--darkerSecondary);
+    width: 100%;
     max-width: 1000px;
     margin-left: auto;
     margin-right: auto;
@@ -25,14 +51,9 @@ body {
     justify-content: left;
 }
 
-#pfp {
-    width: 200px;
-    height: 200px;
-    text-align: center;
-}
-
-#pfp img {
-    width: 80%;
+.pfp {
+    width: 160px;
+    height: 160px;
     border-radius: 5px;
 }
 
@@ -51,6 +72,27 @@ body {
     border-radius: 5px;
 }
 
+.username {
+    display: inline-block;
+}
+
+#editProfileBtn {
+    display: inline-block;
+    background: transparent;
+    border: none;
+    color: var(--textColor);
+}
+
+.bio {
+    resize: none;
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    color: var(--textColor);
+    font-family: "Times New Roman", Times, serif;
+    font-size: 1em;
+}
+
 #signOutButton {
     text-decoration: none;
     color: var(--textColor);
@@ -61,6 +103,7 @@ body {
 
 .modal {
     position: fixed;
+    text-align: center;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -72,7 +115,33 @@ body {
     color: var(--textColor);
 }
 
-.modal input[type=submit] {
+#editProfileModal {
+    padding: 2em;
+}
+
+#editProfileModal > *, #editProfileModal form > * {
+    display: block;
+}
+
+#pfpButton {
+    background: none;
+    border: none;
+}
+
+#modalPfp {
+    width: 100%;
+}
+
+.modal form {
+    text-align: center;
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+}
+
+.modal input[type=submit], .selector {
     background-color: var(--secondaryColor);
     color: var(--textColor);
 }

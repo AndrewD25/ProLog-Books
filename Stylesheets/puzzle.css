@@ -141,18 +141,6 @@ h3 {
     margin-block: 8px;
 }
 
-.green {
-    color: green;
-}
-
-.red {
-    color: red;
-}
-
-.yellow {
-    color: yellow;
-}
-
 #instagram {
     text-align: center;
 }
@@ -197,4 +185,54 @@ summary {
     display: block;
     width: 100%;
     text-align: center;
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80vw;
+    max-width: 500px;
+    background-color: var(--darkerSecondary);
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+    z-index: 9999999991;
+    color: var(--textColor);
+    text-align: center;
+}
+
+.heatmap {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 20px;
+    background: linear-gradient(to right, #E66A17, #F9BC4B, #ECF683, white, #69DFEF, #26F6C9, #6EEBA8);
+}
+
+#range {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    list-style-type: none;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+}
+
+.cancel {
+    margin-block: 10px;
+    background-color: var(--accentColor);
+    color: var(--textColor);
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(3px);
+    z-index: 9999999;
 }
