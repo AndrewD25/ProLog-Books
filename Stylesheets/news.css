@@ -1,37 +1,70 @@
 #pageTitle {
     text-align: center;
+    font-size: clamp(30px, 1.5vw, 3vh);
 }
 
-#blogColumns {
+/*I had to create a special second hidden class because the search and filters were overriding each other*/
+.hidden2 {
+    display: none;
+}
+
+#mainContent {
+    min-height: 50px;
+    width: 90vw;
+    margin-inline: 5vw;
+    display: flex;
+    justify-content: center;
+    gap: 4vw;
+}
+
+#articleGrid {
+    width: 80%;
     display: grid;
-    grid-template-columns: auto auto auto;
-    gap: 3.2vw;
-    padding-inline: 3.5vw;
+    grid-template-columns: auto;
+    grid-gap: 2vw;
+    justify-content: center;
+}
+
+@media only screen and (min-width: 1200px) {
+    #articleGrid {
+        grid-template-columns: repeat(2, auto); /* Two columns */
+    }
+}
+
+@media only screen and (min-width: 1850px) {
+    #articleGrid {
+        grid-template-columns: repeat(3, auto); /* Three columns */
+    }
 }
 
 article {
-    width: 28vw;
-    background-color: white;
-    color: black;
+    width: 400px;
+    height: 370px;
+    min-width: 60%;
+    background-color: var(--darkerSecondary);
+    color: var(--textColor);
+    box-sizing: border-box;
+    border: 1px solid var(--textColor);
+    border-radius: 8px; 
 }
 
 article a {
     text-decoration: none;
-    color: black;
+    color: var(--textColor);
 }
 
-.thumbnail {
-    width: 28vw;
-    height: 18vw;
+.thumbnail { /*FIX IT 😜*/
+    width: 100%;
+    min-height: 200px;
     margin-block: 0;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
+    border-radius: 8px;
+    display: block;
 }
 
 .data {
-    height: 15vw;
-    padding-inline: 5%;
-    border-top: 1px solid black;
+    padding: 5%;
+    margin-block: 0%;
+    border-top: 1px solid var(--textColor);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -40,14 +73,12 @@ article a {
 
 .title {
     margin-block: 0;
-    font-size: 3vw;
 }
 
 .subData {
     display: flex;
     justify-content: left;
     gap: 5%;
-    font-size: 2vw;
 }
 
 .author {
@@ -58,3 +89,61 @@ article a {
     margin-block: 0;
 }
 
+.preview {
+    margin-block: 0;
+    word-wrap: normal;
+}
+
+#sidebar {
+    width: 20%;
+}
+
+/*Hide sidebar under 700px until programmatically shown*/
+@media only screen and (max-width: 700px) {
+    #sidebar {
+        display: none;
+    }
+
+    #mainContent {
+        gap: 0;
+    }
+}
+
+#sidebar > div {
+    margin-block: 50px;
+    border: 1px solid var(--textColor);
+    background-color: var(--darkerSecondary);
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+#searchBox {
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+}
+
+#searchBox p {
+    margin: 0;
+}
+
+#searchBox [type=search] {
+    width: 80%;
+}
+
+/* clears the ‘X’ from Internet Explorer */
+input[type=search]::-ms-clear { display: none; width : 0; height: 0; }
+input[type=search]::-ms-reveal { display: none; width : 0; height: 0; }
+/* clears the ‘X’ from Chrome */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration { display: none; }
+
+[type=checkbox] {
+    display: inline-block;
+}
+
+#filterBox p {
+    display: inline-block;
+}

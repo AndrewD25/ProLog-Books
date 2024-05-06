@@ -4,9 +4,14 @@ Secret Shelf Home Page CSS
 DUE DATE
 */
 
+body {
+    scroll-behavior: smooth;
+}
+
 h1, .puzzleNumber {
     text-align: center;
     margin-block: 1%;
+    color: var(--textColor);
 }
 
 div#centering {
@@ -104,6 +109,8 @@ div#rightSide {
 }
 
 h3 {
+    border: 1px solid var(--textColor);
+    color: var(--textColor);
     margin-block: 1%;
 }
 
@@ -114,7 +121,7 @@ h3 {
 }
 
 .flex > * {
-    border: 1px solid white;
+    border: 1px solid var(--textColor);
     border-radius: 5px;
     padding-inline: 2%;
     margin-block: 3px;
@@ -122,35 +129,110 @@ h3 {
 
 .series { /*For the guess display*/
     width: 72%;
+    color: var(--textColor);
 }
 
 .number { /*For the guess display*/
     width: 18%;
+    color: var(--textColor);
 }
 
 .guess {
-    border: 1px solid white;
     margin-block: 8px;
 }
 
-.green {
-    color: green;
+#instagram {
+    text-align: center;
 }
 
-.red {
-    color: red;
-}
-
-.yellow {
-    color: yellow;
+#instagram a {
+    color: var(--linkColor);
+    text-decoration: none;
 }
 
 #kofi {
     display: flex;
     justify-content: center;
+    margin-block: 20px;
 }
 
 .btn-container {
     margin-left: auto;
     margin-right: auto;
+}
+
+summary {
+    width: 60%;
+    margin-inline: 20%;
+    font-size: 25px;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+#oldLinks {
+    width: 100%;
+}
+
+.oldLink {
+    box-sizing: border-box;
+    text-decoration: none;
+    color: white;
+    background-color: green;
+    border: 1px solid white;
+    border-radius: 10px;
+    padding: 2px;
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80vw;
+    max-width: 500px;
+    background-color: var(--darkerSecondary);
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+    z-index: 9999999991;
+    color: var(--textColor);
+    text-align: center;
+}
+
+.heatmap {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 20px;
+    background: linear-gradient(to right, #E66A17, #F9BC4B, #ECF683, white, #69DFEF, #26F6C9, #6EEBA8);
+}
+
+#range {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    list-style-type: none;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+}
+
+.cancel {
+    margin-block: 10px;
+    background-color: var(--accentColor);
+    color: var(--textColor);
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(3px);
+    z-index: 9999999;
 }

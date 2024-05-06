@@ -1,10 +1,3 @@
-/* #keepEmInline {
-    position: absolute;
-    top: var(--navHeight);
-    min-height: calc(99.5vh - var(--navHeight));
-    display: flex;
-} */
-
 #folderContainer {
     float: left;
     position: fixed;
@@ -15,6 +8,7 @@
     resize: horizontal;
     padding-left: 2.5vw;
     padding-right: 2.5vw;
+    overflow-y: scroll;
 }
 
 .folderLink, #addFolderLink {
@@ -25,6 +19,23 @@
 .folderLink:hover, #addFolderLink:hover {
     color: #DDD;
     cursor: pointer;
+}
+
+.deleteFolder {
+    float: right;
+}
+
+.readRoverLink {
+    display: none;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 20vw;
+    margin-inline: 2.5vw;
+}
+
+.readRoverLink img {
+    width: 100%;
 }
 
 /*Grid columns should be 6vw apart*/
@@ -39,17 +50,10 @@
     position: relative;
 }
 
-#startSignInButton {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
 .folder {
     display: grid;
     align-items: center;
-    grid-template-columns: auto;
+    grid-template-columns: 50vw;
     gap: 6vw;
     row-gap: 60px;
     margin-bottom: 60px;
@@ -63,43 +67,12 @@
     position: relative;
 }
 
-@media screen and (min-width: 600px) {
-    #collectionContainer {
-        padding-inline: 7vw;
-        padding-block: 6vw;
-    }
-
-    .folder {
-        grid-template-columns: auto auto;
-    }
-
-    .book {
-        width: 27vw;
-        height: 41vw;
-    }
-}
-
-@media screen and (min-width: 1300px) {
-    #collectionContainer {
-        padding-inline: 6vw;
-        padding-block: 4vw;
-    }
-    
-    .folder {
-        grid-template-columns: auto auto auto;
-    }
-
-    .book {
-        width: 17vw;
-        height: 26vw;
-    }
-}
-
-.bookCircle {
+.appendBook {
     background-color: var(--primaryColor);
     color: white;
-    position: absolute;
     width: 40px;
+    margin-inline: calc(50vw/2 - 20px);
+    margin-block: calc(76vw/2 - 20px);
     height: 40px;
     font-size: 15px;
     border: 1px solid white;
@@ -110,13 +83,54 @@
     align-items: center;
 }
 
-.addFirstBook {
+@media screen and (min-width: 800px) {
+    #collectionContainer {
+        padding-inline: 7vw;
+        padding-block: 6vw;
+    }
+
+    .folder {
+        grid-template-columns: 27vw 27vw;
+    }
+
+    .book {
+        width: 27vw;
+        height: 41vw;
+    }
+
+    .appendBook {
+        margin-inline: calc(27vw/2 - 20px);
+        margin-block: calc(41vw/2 - 20px);
+    }
+}
+
+@media screen and (min-width: 1300px) {
+    #collectionContainer {
+        padding-inline: 6vw;
+        padding-block: 4vw;
+    }
+    
+    .folder {
+        grid-template-columns: 17vw 17vw 17vw;
+    }
+
+    .book {
+        width: 17vw;
+        height: 26vw;
+    }
+
+    .appendBook {
+        margin-inline: calc(17vw/2 - 20px);
+        margin-block: calc(26vw/2 - 20px);
+    }
+}
+
+.bookCircle {
     background-color: var(--primaryColor);
     color: white;
+    position: absolute;
     width: 40px;
-    margin-inline: clamp(5px, 10vw, 45px);
     height: 40px;
-    margin-block: clamp(20px, 20vw, 15vh);
     font-size: 15px;
     border: 1px solid white;
     border-radius: 50%;
@@ -181,6 +195,10 @@
     to {bottom: -15px; left: -15px;}
 }
 
+.active {
+    background-color: var(--accentColor) !important;
+}
+
 .flipped .addBookButton, .flipped .editButton, .flipped .copyButton {
     display: flex !important;
 }
@@ -230,21 +248,22 @@
     background-color: rgba(0, 0, 0, 0);
     border: 1px solid white;
     border-radius: 5px;
-    resize: none;
+    overflow-y: scroll;
+    overflow-x: hidden;
     color: white;
     margin-block: 5px; /*Temp value change later*/
+    margin-inline: 5%;
 }
 
-.selectBox { 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-block: 0.5vw; /*Temp value change later*/
+.selectLabel {
+    display: inline-block;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
-.selectBox select {
-    width: 40%;
-    font-size: 80%;
+.details > div > p {
+    display: inline-block;
+    margin-block: 2.5px;
 }
 
 .divider {
@@ -268,41 +287,43 @@
     width: 25%;
 }
 
+
 /* MODAL WINDOW */  
 .modal {
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: white;
+    background-color: var(--primaryColor);
     padding: 1rem;
     border-radius: 5px;
     box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
     z-index: 9999999991;
-    color: black;
-}
-
-#addBookModal {
-    text-align: center;
-    width: 50vw;
-    height: 65vw;
-    max-height: 85vh;
+    color: white;
 }
 
 #signInModal {
     text-align: left;
 }
 
-#signInModal > * {
-    display: block;
+#addBookModal, #editBookModal {
+    text-align: center;
 }
 
-@media screen and (max-width: 1100px) {
-    #addBookModal {
-        width: 60vw;
-        height: 85vw;
-    }
-} 
+#addBookModal h1, #editBookModal h1 {
+    margin-block: clamp(1vh, 1vw, 3vh);
+    border-bottom: 1px solid var(--accentColor);
+}
+
+#addBookModal form, #editBookModal form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#signInModal > *, #addBookModal form > *, #editBookModal form > * {
+    display: block;
+}
 
 .modal h1 {
     font-size: clamp(10px, 3.5vw, 60px);
@@ -314,57 +335,68 @@
 
 .modal label, .modal input, .modal select {
     font-size: clamp(5px, 2.5vw, 4vh);
+    color: var(--textColor);
+    background: none;
+}
+
+.modal input, .modal select {
+    border: 1px solid var(--textColor);
 }
 
 .modal p, .modal select {
     margin-bottom: 1vh;
 }
 
-#modalTitle {
+.modal select {
+    background-color: var(--primaryColor);
+}
+
+#title_input, #new_title_input {
     width: 60%;
 }
 
-#modalSubtitle {
+#subtitle_input, #new_subtitle_input {
     width: 55%;
 }
 
-#modalNotes {
+#notes_input, #new_notes_input {
     resize: none;
     width: 60%;
 }
 
-#modalRead {
+#read_input, #new_read_input {
     width: 30%;
 }
 
-#modalRating {
+#rating_input, #new_rating_input {
     width: 27%;
 }
 
-.modal button {
+.modal button, .modal input[type=submit] {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: clamp(5px, 2vw, 3.5vh);
     color: white;
-    border: 1px solid black;
+    border: 1px solid var(--textColor);
     border-radius: 5px;
     margin-top: 3vh;
+    display: inline-block;
 }
 
-.modal button:first-of-type {
+.modal input[type=submit] {
     background-color: var(--secondaryColor);
-} 
+}
 
-.modal button:nth-of-type(2) {
-    background-color: red;
+.cancel {
+    background-color: var(--accentColor);
 }
 
 .smallText {
     color: #889;
-    font-size: 13px;
+    font-size: clamp(9px, 1vw, 2vh);
 }
   
 .overlay {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;

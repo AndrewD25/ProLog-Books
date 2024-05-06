@@ -16,115 +16,103 @@ DUE DATE
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     </head>
     <body>
-        <!--Page Banner with Navlinks at the top of each page-->
-        <header id="pageTop">
-            <a href="../index.php"><img id="mainLogo" src="../Images/PLBLogo.png"></a>
+        <?php
+            // Start the session
+            session_start();
 
-            <!--Navigation Links-->
-            <nav>
-                <li><a href="../index.php"><i class="fas fa-home" title="Home"></i> <span>Home</span></a></li>
-                <li><a href="collection.php"><i class="fa-solid fa-book" title="Collection"></i> <span>Collection</span></a></li>
-                <li><a href="social.php"><i class="fa-solid fa-people-arrows" title="Social"></i> <span>Social</span></a></li>
-                <li><a href="news.php"><i class="fa-solid fa-newspaper" title="News"></i> <span>News</span></a></li>
-                <li><a href="puzzle.php"><i class="fa-solid fa-puzzle-piece" title="Play Comicle"></i> <span>Play Comicle</span></a></li>
-                <li id="accountLi"><a><i class="fa-solid fa-user"></i> <span>Account</span></a>
-                    <div id="accountMenu" class="hidden dropdown">
-                        <ul>
-                            <li><a href="signUp.php">Sign Up</a></li>
-                            <li><a href="signInPage.php">Sign In</a></li>
-                            <li><a href="profile.php">Profile</a></li>
-                            <li><a>Sign Out</a></li>
-                        </ul>
-                    </div>
-                </li>
-            </nav>
-        </header>
+            //Set theme mode to dark or light
+            if (isset($_SESSION['theme'])) {
+                $darkMode = $_SESSION['theme'] == 1;
+                if(!$darkMode) {
+                    echo '<script>';
+                    echo 'document.documentElement.style.setProperty("--primaryColor", "#ffffff");'; // Change primary color variable
+                    echo 'document.documentElement.style.setProperty("--textColor", "#000000");'; // Change text color variable
+                    echo '</script>';
+                }
+            }
+
+            //Banner with NavLinks
+            include_once 'Includes/header.php'; 
+
+            //Connect to the database
+            include_once 'Includes/connect.php'; 
+        ?>
 
         <!--Rest of Page Code-->
         <div id="pageTitle">
             <h1>ProLog Books Articles</h1>
         </div>
-        <div id="blogColumns">
-            <article>
-                <a href="Articles/02-01-24.php">
-                    <img class="thumbnail" style="background-image: url(https://img.freepik.com/free-photo/sunset-time-tropical-beach-sea-with-coconut-palm-tree_74190-1075.jpg);">
-                    <div class="data">
-                        <h2 class="title">Welcome to<br>ProLog Books</h2>
-                        <div class="subData">
-                            <p class="author"><i class="fa-solid fa-pencil"></i> Andrew Deal</p>
-                            <p class="date"><i class="fa-regular fa-calendar"></i> 02/01/24 </p>
-                        </div>
+        
+        <div id="mainContent">
+            <div id="articleGrid">
+                <?php
+                    //Add articles from database
+                    $query = "SELECT * FROM Articles ORDER BY published DESC";
+                    $result = $conn->query($query);
+
+                    //Create data collection to store dates in
+                    $dates = array();
+
+                    // Loop through results
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            echo '<article>';
+                            echo '<a href="article.php?id=' . $row['article_id'] . '">';
+                            echo '<img class="thumbnail" style="background-image: url(\'../Images/Articles/' . $row['thumbnail'] . '\');">';
+                            echo '<div class="data">';
+                            echo '<h2 class="title">' . $row['header'] . '</h2>';
+                            echo '<div class="subData">';
+                            echo '<p class="author"><i class="fa-solid fa-pencil"></i> ' . $row['author'] . '</p>';
+                            echo '<p class="date"><i class="fa-regular fa-calendar"></i> ' . date('m/d/y', strtotime($row['published'])) . '</p>';
+
+                            $dates[] = $row['published'];
+
+                            echo '</div>';
+                            echo '<p class="preview">' . substr($row['content'], 0, 72) . '...</p>';
+                            echo '</div>';
+                            echo '</a>';
+                            echo '</article>';
+                        }
+                    } else {
+                        echo "No articles found.";
+                    }
+                ?>
+            </div>
+            <div id="sidebar">
+                <div id="searchBox">
+                    <p>Search:</p>
+                    <input type="search">
+                </div>
+                <div id="filterBox">
+                    <p>Filter By Month:</p>
+                    <div id="monthFilters">
+                        <?php
+                            foreach ($dates as $date) {
+                                $dateTime = new DateTime($date);
+                                $formattedDate = $dateTime->format("F Y");
+                                echo '<div><input checked type="checkbox"><p>' . $formattedDate . '</p></div>';
+                            }
+                        ?>
                     </div>
-                </a>
-                
-            </article>
-            <article>
-                <a href="Articles/02-01-24.php">
-                    <img class="thumbnail" style="background-image: url(https://img.freepik.com/free-photo/sunset-time-tropical-beach-sea-with-coconut-palm-tree_74190-1075.jpg);">
-                    <div class="data">
-                        <h2 class="title">Welcome to<br>ProLog Books</h2>
-                        <div class="subData">
-                            <p class="author"><i class="fa-solid fa-pencil"></i> Andrew Deal</p>
-                            <p class="date"><i class="fa-regular fa-calendar"></i> 02/01/24 </p>
-                        </div>
-                    </div>
-                </a>
-                
-            </article>
-            <article>
-                <a href="Articles/02-01-24.php">
-                    <img class="thumbnail" style="background-image: url(https://img.freepik.com/free-photo/sunset-time-tropical-beach-sea-with-coconut-palm-tree_74190-1075.jpg);">
-                    <div class="data">
-                        <h2 class="title">Welcome to<br>ProLog Books</h2>
-                        <div class="subData">
-                            <p class="author"><i class="fa-solid fa-pencil"></i> Andrew Deal</p>
-                            <p class="date"><i class="fa-regular fa-calendar"></i> 02/01/24 </p>
-                        </div>
-                    </div>
-                </a>
-                
-            </article>
-            <article>
-                <a href="Articles/02-01-24.php">
-                    <img class="thumbnail" style="background-image: url(https://img.freepik.com/free-photo/sunset-time-tropical-beach-sea-with-coconut-palm-tree_74190-1075.jpg);">
-                    <div class="data">
-                        <h2 class="title">Welcome to<br>ProLog Books</h2>
-                        <div class="subData">
-                            <p class="author"><i class="fa-solid fa-pencil"></i> Andrew Deal</p>
-                            <p class="date"><i class="fa-regular fa-calendar"></i> 02/01/24 </p>
-                        </div>
-                    </div>
-                </a>
-                
-            </article>
-            <article>
-                <a href="Articles/02-01-24.php">
-                    <img class="thumbnail" style="background-image: url(https://img.freepik.com/free-photo/sunset-time-tropical-beach-sea-with-coconut-palm-tree_74190-1075.jpg);">
-                    <div class="data">
-                        <h2 class="title">Welcome to<br>ProLog Books</h2>
-                        <div class="subData">
-                            <p class="author"><i class="fa-solid fa-pencil"></i> Andrew Deal</p>
-                            <p class="date"><i class="fa-regular fa-calendar"></i> 02/01/24 </p>
-                        </div>
-                    </div>
-                </a>
-                
-            </article>
-            <article>
-                <a href="Articles/02-01-24.php">
-                    <img class="thumbnail" style="background-image: url(https://img.freepik.com/free-photo/sunset-time-tropical-beach-sea-with-coconut-palm-tree_74190-1075.jpg);">
-                    <div class="data">
-                        <h2 class="title">Welcome to<br>ProLog Books</h2>
-                        <div class="subData">
-                            <p class="author"><i class="fa-solid fa-pencil"></i> Andrew Deal</p>
-                            <p class="date"><i class="fa-regular fa-calendar"></i> 02/01/24 </p>
-                        </div>
-                    </div>
-                </a>
-                
-            </article>
-            <!--End of last article-->
+                </div>
+            </div>
         </div>
+
+
+        <!-- Example article html structure:
+        <article>
+            <a href="article.php"> APPEND THE ARTICLE ID TO THE END OF THE URL
+                <img class="thumbnail" style="background-image: url("../Images/Articles/IMAGE_ID_HERE");">
+                <div class="data">
+                    <h2 class="title">Welcome to<br>ProLog Books</h2>
+                    <div class="subData">
+                        <p class="author"><i class="fa-solid fa-pencil"></i> Andrew Deal</p>
+                        <p class="date"><i class="fa-regular fa-calendar"></i> 02/01/24 </p>
+                    </div>
+                </div>
+            </a>
+        </article>
+        -->
 
 
         <script src="../Scripts/news.js?v=<?php echo time(); ?>"></script>

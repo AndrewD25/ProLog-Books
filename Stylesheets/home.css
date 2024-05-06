@@ -9,9 +9,7 @@ DUE DATE
 }
 
 body {
-    background-image: url("../Images/comicBackgroundBlurred.jpg");
-    background-size: 300% auto; /*Background for mobile version*/
-    background-repeat: repeat-y; /* Repeat vertically */
+    /*Moved insides to index.php for now*/
 }
 
 div {
@@ -19,6 +17,7 @@ div {
 }
 
 #landingBox {
+    box-sizing: border-box;
     width: 70vw;
     height: auto;
     min-height: var(--landingBoxHeight);
@@ -82,8 +81,9 @@ h1 {
 }
 
 .previewImage {
-    width: 60%;
-    height: 160%;
+    width: 30%;
+    min-width: 150px;
+    height: 80%;
     border: 1px dashed white;
 }
 
@@ -92,17 +92,37 @@ h1 {
 }
 
 /* This media query targets larger screens using the same measure as the hamburger menu query */
-@media only screen and (min-width: 1100px) {
+/* @media only screen and (min-width: 1100px) {
     body {
-        background-size: 100% auto; /*Set background for pc version*/
+        background-size: 100% auto; /*Set background for pc version MOVED THIS TO INDEX.PHP FOR NOW
     }
-}
+} */
 
 /* For phone version - refactor to make this the default later*/
 @media screen and (max-width: 600px) {
-    #landingBox {
-        width: 60vw;
+    #landingBox, .info {
+        width: 100vw !important;
+        margin-inline: 0 !important;
         padding: 8vw;
+        border-radius: 0px;
+        opacity: 0.9;
+    }
+
+    .info {
+        padding-inline: 0;
+        justify-content: center !important;
+    }
+
+    .info .previewImage  {
+        width: 40% !important;
+    }
+
+    .infoText {
+        width: 50%;
+    }
+
+    h1, p {
+        opacity: 1;
     }
 } 
 
@@ -111,4 +131,13 @@ h1 {
     .info {
         flex-direction: column;
     }
-} 
+
+    .rightBox {
+        flex-direction: column-reverse;
+    }
+
+    .infoText {
+        text-align: center;
+        width: 80%;
+    }
+}

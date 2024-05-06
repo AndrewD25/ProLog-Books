@@ -11,23 +11,71 @@ body {
     }
 }
 
-#centerScrolling {
-    display: block;
-    width: 65%;
+#scrollbox {
+    box-sizing: border-box;
+    width: 70vw;
+    max-width: 1300px;
     padding-inline: 5%;
-    padding-block: 5%;
-    margin-top: calc(var(--navHeight) / 2);
+    padding-top: 3%;
     margin-inline: auto;
     background-color: var(--darkerSecondary);
     box-shadow: 0px 0px 25px rgb(25, 25, 25);
     text-align: center;
+    display: flex;
+    gap: 5%;
+    justify-content: center;
+}
+
+article {
+    width: 70%;
+    text-align: left;
+}
+
+article h1 {
+    width: 100%;
+    font-size: clamp(10px, 3em, 6vw);
 }
 
 #Image {
-    width: 90%;
+    /* border-top: 10px solid var(--primaryColor); */
+    width: 100%;
 }
 
-#Content {
+/* #Content {
     text-align: left;
     width: 100%;
+} */
+
+#sidebar {
+    width: 30%;
+}
+
+.test-ad {
+    width: 100%;
+}
+
+#kofi-ad {
+    background-color: var(--secondaryColor);
+    border-radius: 8px;
+    text-align: center;
+    margin-block: 1vh;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px;
+}
+
+#kofi-ad p {
+    color: var(--textColor);
+    margin-block: 3px;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 4px;
+    text-align: left;
+}
+
+#kofi-ad p:first-of-type {
+    border-bottom: 1px solid var(--darkerSecondary);
+    font-size: 90%;
+    color: #AAA;
+    font-style: italic;
 }

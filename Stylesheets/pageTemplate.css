@@ -12,19 +12,22 @@ DUE DATE
     --textColor: white;
     --linkColor: rgb(0, 196, 192);
     --linkClickedColor: var(--accentColor);
-    --navHeight: clamp(60px, 10vh, 6vw);
+    /* --navHeight: clamp(60px, 10vh, 6vw); */
+    --navHeight: 120px;
 }
 
 html, body {
     padding: 0;
     margin: 0;
+    overflow-x: hidden;
 }
 
 body {
+    position: relative;
     padding-top: var(--navHeight);
     background-color: var(--primaryColor);
-    overflow-x: hidden;    
     color: white;
+    width: 100vw;
 }
 
 ::-webkit-scrollbar {
@@ -32,7 +35,7 @@ body {
 }
 
 #pageTop {
-    width: 100%;
+    width: 100vw;
     z-index: 999999; /*stay at top of screen*/
     height: var(--navHeight);
     background-color: var(--secondaryColor);
@@ -64,7 +67,7 @@ body {
 #pageTop > nav > li {
     display: inline-block;
     position: relative;
-    margin-inline: 3vw;
+    margin-inline: 2vw;
     padding-block: calc(var(--navHeight) / 3);
 }
 
@@ -74,12 +77,20 @@ body {
     text-decoration: none;
 }
 
+#accountLi {
+    cursor: default;
+}
+
 #accountMenu {
     position: absolute;
     top: 100%;
     right: -20%;
     z-index: 1999999;
     font-size: clamp(12px, 1.5vw, 28px);
+}
+
+#accountLi:hover #accountMenu {
+    display: auto !important;
 }
 
 #accountMenu * {
@@ -108,6 +119,37 @@ body {
 @media screen and (max-width: 1100px) {
     #pageTop nav li a span {
         display: none;
+    }
+
+    :root {
+        --navHeight: 80px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    :root {
+        --navHeight: 100px;
+    }
+
+    #pageTop {
+        display: block;
+        text-align: center;
+    }
+
+    #mainLogo {
+        height: 50px;
+        margin-block: 5px;
+    }
+
+    #pageTop nav {
+        width: 100%;
+        margin: 0 !important;
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    #pageTop nav li {
+        padding-block: 5px !important;
     }
 } 
 

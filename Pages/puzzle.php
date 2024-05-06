@@ -11,28 +11,20 @@
     </head>
     <body>
         <!--Page Banner with Navlinks at the top of each page-->
-        <header id="pageTop">
-            <a href="../index.php"><img id="mainLogo" src="../Images/ProLogBooksLogo.png" alt="ProLog Books Logo"></a>
-  
-            <!--Navigation Links-->
-            <nav>
-                <li><a href="../index.php"><i class="fas fa-home" title="Home"></i> <span>Home</span></a></li>
-                <li><a href="collection.php"><i class="fa-solid fa-book" title="Collection"></i> <span>Collection</span></a></li>
-                <li><a href="social.php"><i class="fa-solid fa-people-arrows" title="Social"></i> <span>Social</span></a></li>
-                <li><a href="news.php"><i class="fa-solid fa-newspaper" title="News"></i> <span>News</span></a></li>
-                <li><a href="puzzle.php"><i class="fa-solid fa-puzzle-piece" title="Play Comicle"></i> <span>Play Comicle</span></a></li>
-                <li id="accountLi"><a><i class="fa-solid fa-user"></i> <span>Account</span></a>
-                    <div id="accountMenu" class="hidden dropdown">
-                        <ul>
-                            <li><a href="signUp.php">Sign Up</a></li>
-                            <li><a href="signInPage.php">Sign In</a></li>
-                            <li><a href="profile.php">Profile</a></li>
-                            <li><a>Sign Out</a></li>
-                        </ul>
-                    </div>
-                </li>
-            </nav>
-        </header>        
+        <?php 
+            include_once 'Includes/header.php'; 
+
+            //Set theme mode to dark or light
+            if (isset($_SESSION['theme'])) {
+                $darkMode = $_SESSION['theme'] == 1;
+                if(!$darkMode) {
+                    echo '<script>';
+                    echo 'document.documentElement.style.setProperty("--primaryColor", "#ffffff");'; // Change primary color variable
+                    echo 'document.documentElement.style.setProperty("--textColor", "#000000");'; // Change text color variable
+                    echo '</script>';
+                }
+            }
+        ?>   
 
         <h1>Daily Comicle</h1>
 
@@ -42,6 +34,18 @@
             $query = "SELECT * FROM Puzzles WHERE puzzle_date = '$currentDate'";
             $result = $conn->query($query);
             $row = $result->fetch_assoc();
+            //Get today's puzzle number
+            $presentPuzzle = $row["puzzle_number"];
+        
+            //Check if user input a custom puzzle number
+            if(isset($_GET['puzzle_number'])) {
+                $setNumber = (int)$_GET['puzzle_number'];
+                if(is_int($setNumber) && $setNumber <= $presentPuzzle) {
+                    $query = "SELECT * FROM Puzzles WHERE puzzle_number = '$setNumber'";
+                    $result2 = $conn->query($query);
+                    $row = $result2->fetch_assoc();
+                }
+            }
 
             echo "<p class='puzzleNumber'>Puzzle #" . $row["puzzle_number"] . "</p>";
         ?>
@@ -59,7 +63,7 @@
                     <div class="autocomplete">
                         <input type="text" id="seriesInput" placeholder="Series">
                     </div>
-                    <input type="number" id="numberInput" placeholder="Number">
+                    <input type="number" id="numberInput" placeholder="#">
                 </div>
                 <button id="guessButton">Guess!</button>
 
@@ -69,10 +73,41 @@
                     <!-- <p class="guess">Guess</p> -->
                 </div>
             </div>
+            <div id="instagram">
+                <p>For a daily hint, check out <a href="https://www.instagram.com/prologbooks?utm_source=qr&igsh=MWdpM3V2ZGxrcnJzcg==">
+                ProLog Books</a> on Instagram</p>
+            </div>
             <div id="kofi">
                 <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
                 <script type='text/javascript'>kofiwidget2.init('Support Us on Ko-fi', '#074670', 'K3K6UOKXY');kofiwidget2.draw();</script> 
             </div>
+
+            <details>
+                <summary>View All Puzzles</summary>
+                <div id="oldLinks">
+                    <?php
+                        //Create links for all previous puzzles
+                        $query = "SELECT * FROM Puzzles WHERE puzzle_number <= $presentPuzzle";
+                        $result = $conn->query($query);
+
+                        if ($result->num_rows > 0) {
+                            while ($row3 = $result->fetch_assoc()) {
+                                $puzzleNumber = $row3['puzzle_number'];
+                                if ($row3['puzzle_number'] == $row["puzzle_number"]) { //Set the current puzzle link to gray
+                                    echo "<a class='oldLink' style='background-color: #777 !important;' href='puzzle.php?puzzle_number=$puzzleNumber'>Puzzle $puzzleNumber</a><br>";
+                                } else { //All other links show as green
+                                    echo "<a class='oldLink' href='puzzle.php?puzzle_number=$puzzleNumber'>Puzzle $puzzleNumber</a><br>";
+                                }
+                            }
+                        } else {
+                            echo "No puzzles found.";
+                        }
+
+                    ?>
+                </div>
+            </details>
+            
+            
         </div>
         
         <script src="../Scripts/templateScript.js?v=<?php echo time(); ?>"></script>
@@ -84,6 +119,7 @@
         <?php
             //Set the puzzle image
             echo "<script id='deleteMe'>setAnswer('" . $row["image_id"] . "', '" . $row["answer_series"] . "', '" . $row["answer_number"] . "')</script>";
+            
         ?>
     </body>
 </html>
