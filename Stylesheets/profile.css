@@ -4,19 +4,189 @@ Share Your Shelf Settings Page CSS
 DUE DATE 
 */
 
-body {
-    text-align: center;
+html, body {
+    scroll-behavior: smooth;
 }
 
-#profileDisplay, #settings {
+body {
+    margin-top: 0;
+    display: flex;
+    justify-content: center;
+}
+
+#leftNavbar {
+    box-sizing: border-box;
     background-color: var(--darkerSecondary);
-    width: 80%;
+    width: 30%;
+    height: calc(100vh - var(--navHeight));
+    position: fixed;
+    top: var(--navHeight);
+    left: 0;
+    padding: 3%;
+}
+
+#leftNavbar a {
+    display: block;
+    color: var(--textColor);
+    text-decoration: none;
+    font-size: clamp(12px, 1.5vw, 40px);
+    margin-bottom: calc(var(--navHeight) / 4)
+}
+
+main {
+    margin-left: 30%;
+    text-align: center;
+    width: 70%;
+    padding-inline: 12%;
+}
+
+section {
+    background-color: var(--darkerSecondary);
+    width: 100%;
+    max-width: 1000px;
     margin-left: auto;
     margin-right: auto;
     /* fix later */ height: 300px; 
     border-radius: 20px;
+    padding: 2.5%;
+}
+
+#profileDisplay {
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    gap: clamp(10px, 5%, 35px);
+}
+
+.pfp {
+    --length: clamp(100px, 10vw, 175px);
+    width: var(--length);
+    height: var(--length);
+    border-radius: 5px;
+}
+
+#pictureList {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    width: 90%;
+    margin-inline: 5%;
+    max-height: 60vh;
+    overflow: scroll;
+    gap: 10px;
+}
+
+#pictureList .pfpOption {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.username {
+    display: inline-block;
+    margin-top: 0;
+    background-color: transparent;
+    border: none;
+    color: var(--textColor);
+    font-family: "Times New Roman", Times, serif;
+    font-size: clamp(15px, 2vw, 50px);
+}
+
+#editProfileBtn {
+    display: inline-block;
+    background: transparent;
+    border: none;
+    color: var(--textColor);
+}
+
+.bio {
+    resize: none;
+    margin-block: 0;
+    padding-block: 0;
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    color: var(--textColor);
+    font-family: "Times New Roman", Times, serif;
+    font-size: clamp(12px, 1.5vw, 40px);
 }
 
 #signOutButton {
-    margin-block: 30px;
+    text-decoration: none;
+    color: var(--textColor);
+    border: 1px solid var(--textColor);
+    border-radius: 5px;
+    padding: 1px;
+}
+
+.modal {
+    position: fixed;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--primaryColor);
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+    z-index: 9999999991;
+    color: var(--textColor);
+}
+
+#editProfileModal {
+    padding: 2em;
+}
+
+#editProfileModal > *, #editProfileModal form > * {
+    display: block;
+}
+
+#pfpButton {
+    background: none;
+    border: none;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#modalPfp {
+    width: 100%;
+}
+
+.modal form {
+    text-align: center;
+}
+
+label {
+    text-align: left;
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+}
+
+.errorMsg {
+    text-align: left;
+    color: red;
+    margin-block: 1px;
+}
+
+.modal input[type=submit], .selector {
+    background-color: var(--secondaryColor);
+    color: var(--textColor);
+}
+
+.cancel {
+    background-color: var(--accentColor);
+    color: var(--textColor);
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(3px);
+    z-index: 9999999;
 }
