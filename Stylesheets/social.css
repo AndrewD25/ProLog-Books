@@ -22,18 +22,50 @@ DUE DATE
 body {
     margin-top: 40px;
     display: flex;
+    justify-content: center;
 }
 
 #leftSection {
-    width: 25%;
+    position: fixed;
+    left: 0;
+    box-sizing: border-box;
+    width: 24vw;
+    background-color: var(--secondaryColor);
+    border-radius: 0 8px 8px 0;
+    text-align: center;
+    margin-block: 1vh;
+    box-sizing: border-box;
+    padding: 10px;
+    height: calc(90vh - var(--navHeight));
 }
 
 #middleSection {
-    width: 50%;
+    width: 50vw;
 }
 
 #rightSection {
- width: 25%;
+    position: fixed;
+    width: 25%;
+    right: 0;
+}
+
+@media only screen and (max-width: 900px) {
+
+    body {
+        justify-content: right;
+    }
+
+    #leftSection {
+        width: 31vw;
+    }
+
+    #middleSection {
+        width: 66%;
+    }
+
+    #rightSection {
+        display: none;
+    }
 }
 
 .sidebar {
@@ -64,30 +96,27 @@ input[type=search] {
     padding-inline: 10px;
 }
 
-details summary::-webkit-details-marker,
-details summary::marker {
-    display: none; 
-    content: "";
-}
-
-summary {
-    cursor: pointer;
+.centerBox {
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: calc(var(--navHeight) / 2);
 }
 
-summary span {
+.centerBox span {
     display: flex;
     align-items: center;
     gap: 20px;
 }
 
-.userBox img {
+.centerBox img {
     width: 40px;
     height: 40px;
     border-radius: 8px;
+}
+
+.bio {
+    font-size: 1rem;
 }
 
 form {
@@ -152,4 +181,16 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     box-sizing: border-box;
     width: 100%;
     padding: 10px;
+}
+
+#scrollBtn {
+    bottom:  1vw;
+    right: 1vw;
+    position: fixed;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    color: var(--textColor);
+    background-color: var(--secondaryColor);
+    border: 1px solid var(--textColor);
 }
