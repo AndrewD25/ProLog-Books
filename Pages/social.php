@@ -97,7 +97,7 @@ DUE DATE
                         // Output the result
                         echo "<div class='userBox'>
                                 <div class='centerBox'>
-                                    <span><img src='../Images/Pfps/$pfp'> 
+                                    <span><img class='pfp' src='../Images/Pfps/$pfp'> 
                                     $username - $count books</span>
                                     <form action='Includes/friendRequest.php' method='post'>
                                         <input type='hidden' name='storeUserId' value='$user_id'>
@@ -132,20 +132,22 @@ DUE DATE
 
                 <?php
 
-                    $leader_query = "SELECT TOP 5 Users.user_id, Users.username, Users.bio, Users.pfp, COUNT(Books.user_id) AS book_count 
+                    $leader_query = "SELECT Users.user_id, Users.username, Users.pfp, COUNT(Books.user_id) AS book_count 
                                     FROM Users 
                                     LEFT JOIN Books ON Users.user_id = Books.user_id
                                     WHERE Users.user_id NOT IN (1, 2) 
                                     GROUP BY Users.username 
-                                    ORDER BY book_count DESC, Users.username";
+                                    ORDER BY book_count DESC, Users.username
+                                    LIMIT 5";
                     // Execute the query
-                    $leaderboard = mysqli_query($conn, $users_query);
+                    $leaderboard = mysqli_query($conn, $leader_query);
 
                     while ($row = mysqli_fetch_assoc($leaderboard)) {
                         $username = $row['username'];
                         $count = $row['book_count'];
+                        $pfp = $row['pfp'];
 
-                        echo "<p>$username : $count</p>";
+                        echo "<div class='row'><p class='row'><img class='pfp' src='../Images/Pfps/$pfp'>$username</p><p>$count</p></div>";
                     }
 
                 ?>
