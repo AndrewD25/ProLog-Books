@@ -26,7 +26,9 @@
             }
         ?>   
 
-        <h1>Daily Comicle</h1>
+        <h1>&nbsp;Daily Comicle 
+            <i class="fa-solid fa-circle-question" style="font-size: 50%;" onclick="showModal('instructions')"></i>
+        </h1>
 
         <?php
             include_once 'Includes/connect.php';
@@ -47,13 +49,19 @@
                 }
             }
 
-            echo "<p class='puzzleNumber'>Puzzle #" . $row["puzzle_number"] . "</p>";
+            echo "<p class='puzzleNumber'>Puzzle #<span id='getNum'>" . $row["puzzle_number"] . "</span></p>";
         ?>
 
         <div id="centering">
             <div id="leftSide">
                 <!--Image to be Pixelated-->
                 <canvas id="mycanvas"></canvas>
+
+                <?php
+                    if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id']) && in_array($_SESSION['user_id'], [1, 2, 3])) {
+                        echo '<button id="downloadButton">Download</button>';     
+                    }
+                ?>
 
                 <p id="roundText">Round <span id="roundNum">1</span>/6</p>
             </div>
@@ -66,6 +74,7 @@
                     <input type="number" id="numberInput" placeholder="#">
                 </div>
                 <button id="guessButton">Guess!</button>
+                <button id="skipButton">Smart Skip ✨</button>
 
                 <!--Keep track of guesses-->
                 <h3>Guesses:</h3>
@@ -76,6 +85,7 @@
             <div id="instagram">
                 <p>For a daily hint, check out <a href="https://www.instagram.com/prologbooks?utm_source=qr&igsh=MWdpM3V2ZGxrcnJzcg==">
                 ProLog Books</a> on Instagram</p>
+                <p>DM us to share puzzle ideas!</p>
             </div>
             <div id="kofi">
                 <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
@@ -83,7 +93,9 @@
             </div>
 
             <details>
-                <summary>View All Puzzles</summary>
+                <summary>
+                    View All Puzzles
+                </summary>
                 <div id="oldLinks">
                     <?php
                         //Create links for all previous puzzles
@@ -94,9 +106,9 @@
                             while ($row3 = $result->fetch_assoc()) {
                                 $puzzleNumber = $row3['puzzle_number'];
                                 if ($row3['puzzle_number'] == $row["puzzle_number"]) { //Set the current puzzle link to gray
-                                    echo "<a class='oldLink' style='background-color: #777 !important;' href='puzzle.php?puzzle_number=$puzzleNumber'>Puzzle $puzzleNumber</a><br>";
+                                    echo "<a id='link$puzzleNumber' class='oldLink' style='background-color: #777 !important;' href='puzzle.php?puzzle_number=$puzzleNumber'>Puzzle $puzzleNumber</a><br>";
                                 } else { //All other links show as green
-                                    echo "<a class='oldLink' href='puzzle.php?puzzle_number=$puzzleNumber'>Puzzle $puzzleNumber</a><br>";
+                                    echo "<a id='link$puzzleNumber' class='oldLink' href='puzzle.php?puzzle_number=$puzzleNumber'>Puzzle $puzzleNumber</a><br>";
                                 }
                             }
                         } else {
@@ -109,7 +121,42 @@
             
             
         </div>
+
+
+        <!--Instructions Modal Window-->
+        <div class="modal" id="instructions"> 
+            <h2>How To Play</h2>
+
+            <p style="text-align: left">
+                Solve the daily Comicle in 6 guesses or less by figuring out what the blurred comic cover is. Answers range from iconic classics to modern
+                releases, and even manga mixed in. Each guess, the cover will get less blurry.
+            </p>
+            <p style="text-align: left">
+                To solve the puzzle, you'll have to get both the series and the number. You will receive feedback on each guess to help narrow it down.
+                Based on how far away you are, the color and direction of the number feedback arrow <i class="fa-solid fa-arrow-up"></i>
+                will change. Check the scale below to see what each color means.
+            </p>
+            
+            <div class="heatmap">
+                <p style="float: left; margin-block: 0; margin-left: 5px;">Far</p>
+                <p style="float: right; margin-block: 0; margin-right: 5px;">Close</p>
+            </div>
+            <ul id="range">
+                <li>1</li>
+                <li>10</li>
+                <li>50</li>
+                <li>100</li>
+                <li>500</li>
+                <li>1000</li>
+            </ul>
+
+            <p style="text-align: left">Hint: If you're stuck, don't waste a guess! Try a guess to narrow down the possibilities or try the smart skip button!</p>
+
+            <button class="cancel" type="button" onclick="hideModal()">Let's Play!</button>
+        </div> 
+        <div class="overlay" id="overlay"></div>
         
+
         <script src="../Scripts/templateScript.js?v=<?php echo time(); ?>"></script>
         <script type="text/javascript" src="https://cdn.rawgit.com/rogeriopvl/8bit/master/8bit.js">
         </script><script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
