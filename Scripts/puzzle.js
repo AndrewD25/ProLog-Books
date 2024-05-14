@@ -17,6 +17,7 @@ Hide correct answer data better
 let roundText = document.getElementById("roundText");
 let roundNum = document.getElementById("roundNum");
 const guessBtn = document.getElementById("guessButton");
+const skipBtn = document.getElementById("skipButton");
 let round = 1;
 let scaleFactor = [1, 2, 3, 5, 10, 25]; // Should go from 1, 2, 3, 5, 10, 25
 let sfi = 0; //index for scale factor array
@@ -59,6 +60,24 @@ let correctAnswer = {
     series: "Error",
     number: 0
 }
+
+//Set up download button for admin
+if (document.querySelectorAll("#downloadButton").length == 1) {
+    document.getElementById('downloadButton').addEventListener('click', function() {
+        let canvas = document.getElementById('mycanvas');
+        let dataURL = canvas.toDataURL('image/png');
+        let link = document.createElement('a');
+        link.href = dataURL;
+        link.download = 'comicle_answer.png';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    });
+}
+
+                        
+
+                    
 
 // Function to encode a string using rot13
 function rot13Encode(str) {
@@ -219,7 +238,9 @@ function guess() {
     if (correct || round > 6) {
         eightBit(document.getElementById('mycanvas'), img, 100); //Make image fully visible 
         guessBtn.onclick = null;
+        skipBtn.onclick = null;
         guessBtn.style.backgroundColor = "#555";
+        skipBtn.style.backgroundColor = "#555";
     }
 
     if (correct) { //Win
@@ -231,7 +252,15 @@ function guess() {
     }
 }
 
+function skip() {
+    seriesInput.value = autoSuggest[Math.floor(Math.random() * autoSuggest.length)];
+    numberInput.value = 1;
+
+    guess();
+}
+
 
 // On Startup Functions to Run //
 guessBtn.onclick = guess;
+skipBtn.onclick = skip;
 autocomplete(document.getElementById("seriesInput"));
