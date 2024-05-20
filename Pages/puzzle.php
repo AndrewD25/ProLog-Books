@@ -157,6 +157,25 @@
         <div class="overlay" id="overlay"></div>
         
 
+        <!--Get autocomplete-->
+        <?php
+            include_once 'Includes/connect.php';
+
+            $query = "SELECT series FROM Autocomplete";
+            $result = $conn->query($query);
+
+            $seriesArray = [];
+            while ($row2 = $result->fetch_assoc()) {
+                $seriesArray[] = $row2['series'];
+            }
+
+            $seriesJson = json_encode($seriesArray);
+        ?>
+
+        <script>
+            let autoSuggest = <?php echo $seriesJson; ?>;
+        </script>
+
         <script src="../Scripts/templateScript.js?v=<?php echo time(); ?>"></script>
         <script type="text/javascript" src="https://cdn.rawgit.com/rogeriopvl/8bit/master/8bit.js">
         </script><script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
