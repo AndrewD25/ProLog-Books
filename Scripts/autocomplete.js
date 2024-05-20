@@ -1,179 +1,43 @@
-// Autocomplete Script
-let dcComics = [
-    "52",
-    "Action Comics",
-    "All-Star Comics",
-    "Aquaman",
-    "Batgirl",
-    "Batman",
-    "Batman #428 Robin Lives!",
-    "Batman: The Killing Joke",
-    "Batman: The Dark Knight Returns",
-    "Birds of Prey",
-    "Blackest Night",
-    "Blue Beetle",
-    "Booster Gold",
-    "Catwoman",
-    "Crisis on Infinite Earths",
-    "Dark Nights Metal",
-    "Dark Nights Death Metal",
-    "Detective Comics",
-    "Doom Patrol",
-    "The Flash",
-    "Green Arrow",
-    "Green Lantern",
-    "Green Lantern Corps",
-    "Green Lantern: War Journal",
-    "The Fury of Firestorm The Nuclear Man",
-    "Harley Quinn",
-    "Hot Wheels",
-    "Hawkman",
-    "Kamandi",
-    "Kingdom Come",
-    "Knight Terrors",
-    "KFC: Across the Universe",
-    "Justice League",
-    "Justice Society of America",
-    "Lobo",
-    "Legion of Super-Heroes",
-    "Nightwing",
-    "Red Hood and the Outlaws",
-    "OMAC",
-    "Sensation Comics",
-    "Showcase",
-    "Speed Force",
-    "Sinestro",
-    "Suicide Squad",
-    "Superman",
-    "Superman Annual",
-    "Supermans Pal, Jimmy Olsen",
-    "Supergirl",
-    "Supergirl: Woman of Tomorrow",
-    "Teen Titans",
-    "Titans",
-    "The Flash",
-    "Wonder Woman",
-    "Young Justice",
-    "New Fun Comics"
-];
-let marvelComics = [
-    "The Amazing Spider-Man",
-    "All-New Spider-Man",
-    "Ant-Man",
-    "The Avengers",
-    "Darth Vader",
-    "Black Panther",
-    "Blood Hunters",
-    "Captain America",
-    "Daredevil",
-    "Deadpool",
-    "Doctor Strange",
-    "Elfquest",
-    "Fantastic Four",
-    "Guardians of the Galaxy",
-    "Hawkeye",
-    "House of M",
-    "The Infinity Gauntlet",
-    "The Incredible Hulk",
-    "Inhumans",
-    "Iron Man",
-    "Iron Fist",
-    "Its Jeff!",
-    "Journey Into Mystery",
-    "Luke Cage",
-    "Marvel Comics",
-    "Moon Knight",
-    "Ms. Marvel",
-    "Nova",
-    "The Punisher",
-    "Secret Wars",
-    "Tales of Suspense",
-    "The Silver Surfer",
-    "The Spectacular Spider-Man",
-    "The Superior Spider-Man",
-    "Ultimate Spider-Man",
-    "Spider-Man",
-    "Spider-Woman",
-    "Thor",
-    "Venom",
-    "Wolverine",
-    "X-Force",
-    "X-Men",
-    "X-Men 97",
-    "The Uncanny X-Men",
-    "The Ultimates",
-    "What If?",
-];
-let otherComics = [
-    "Archie",
-    "Batman/Spawn",
-    "Hellboy",
-    "Invincible",
-    "Eight Billion Genies",
-    "Spawn",
-    "Maus",
-    "WildC.A.T.s",
-    "Watchmen",
-    "Radiant Black",
-    "G.I. Joe",
-    "Ghost Machine",
-    "Void Rivals",
-    "Transformers",
-    "Y: The Last Man",
-];
-let manga = [
-    "Akira",
-    "Assassination Classroom",
-    "Attack on Titan",
-    "Blue Lock",
-    "Jojos Bizarre Adventure",
-    "Kaguya-Sama: Love is War",
-    "Kaiju No. 8",
-    "Romantic Killer",
-    "Solo Leveling",
-    "Spy x Family",
-    "Dragon Ball",
-    "Dragon Ball Z",
-];
-let otherBooks = [
-    //No other books right now, this is comicle for now
+//Autocomplete script
 
-    // "Harry Potter",
-    // "The Lord of the Rings",
-    // "Game of Thrones",
-    // "The Chronicles of Narnia",
-    // "The Hunger Games",
-    // "Divergent",
-    // "Percy Jackson & the Olympians",
-    // "The Maze Runner",
-    // "Twilight",
-    // "The Dark Tower"
-];
-let autoSuggest = [...dcComics, ...marvelComics, ...otherComics, ...otherBooks, ...manga];
+"use strict";
 
-function autocomplete(inp, arr = autoSuggest) { //arr is optional param
+function autocomplete(inp, arr) {
     var currentFocus;
     var maxResults = 5; // Maximum number of results to display
     
     inp.addEventListener("input", function(e) {
-        var a, b, i, val = this.value;
+        var a, b, i, val = this.value.toLowerCase();
         closeAllLists();
-        if (!val) { return false; }
+        if (val.length < 2) { return false; } // Only start showing suggestions when input is 2 characters or longer
         currentFocus = -1;
+
         a = document.createElement("DIV");
         a.setAttribute("id", this.id + "autocomplete-list");
         a.setAttribute("class", "autocomplete-items");
         this.parentNode.appendChild(a);
 
         for (i = 0; i < arr.length; i++) {
-            if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+            var item = arr[i].toLowerCase();
+            var normalizedVal = (val !== "the " && val.startsWith("the ")) ? val.substring(4) : val;
+            var normalizedItem = item.startsWith("the ") ? item.substring(4) : item;
+
+            if (item.startsWith(val) || item.includes(normalizedVal) || normalizedItem.includes(val)) {
                 if (a.childElementCount >= maxResults) {
                     break; // Exit loop if maximum results reached
                 }
 
                 b = document.createElement("DIV");
-                b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
-                b.innerHTML += arr[i].substr(val.length);
+                var startIndex = arr[i].toLowerCase().indexOf(normalizedVal);
+                var matchLength = normalizedVal.length;
+
+                if (startIndex >= 0) {
+                    b.innerHTML = arr[i].substring(0, startIndex) + "<strong>" + arr[i].substring(startIndex, startIndex + matchLength) + "</strong>" + arr[i].substring(startIndex + matchLength);
+                } else {
+                    b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+                    b.innerHTML += arr[i].substr(val.length);
+                }
+
                 b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
                 
                 b.addEventListener("click", function(e) {
