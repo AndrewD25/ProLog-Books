@@ -263,4 +263,4 @@ function skip() {
 // On Startup Functions to Run //
 guessBtn.onclick = guess;
 skipBtn.onclick = skip;
-autocomplete(document.getElementById("seriesInput"));
+autocomplete(document.getElementById("seriesInput"), autoSuggest);
