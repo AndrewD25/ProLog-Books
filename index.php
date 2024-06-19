@@ -37,6 +37,10 @@ DUE DATE
         <!--Page Banner with Navlinks at the top of each page-->
         <?php 
             include_once 'Pages/Includes/header.php'; 
+
+            session_start(); // Start the session if not already started
+            // Store the current page's URL in a session variable
+            $_SESSION['previous_page'] = $_SERVER['REQUEST_URI'];
         ?>
 
         <!--Rest of Page Code-->
