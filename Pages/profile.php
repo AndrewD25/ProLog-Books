@@ -20,6 +20,9 @@ DUE DATE
             // Start the session
             session_start();
 
+            // Store the current page's URL in a session variable
+            $_SESSION['previous_page'] = $_SERVER['REQUEST_URI'];
+
             // Check if the username session variable exists and has a value
             if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
                 // Redirect the user to the sign-in page
@@ -64,7 +67,6 @@ DUE DATE
         <!--Rest of Page Code-->
         <nav id="leftNavbar">
             <a href="#profileSection">Your Profile</a>
-            <a href="#friendsSection">Friend Requests</a>
             <a href="#accountSection">Account Settings</a>
         </nav>
 
@@ -117,12 +119,6 @@ DUE DATE
                 </form>
                 
             </div>
-
-            <h1 id="friendsSection">Pending Friend Requests</h1>
-            <section id="friendRequests">
-                
-            </section>
-
             
             <h1 id="accountSection">Account Settings</h1>
             <section id="settings">

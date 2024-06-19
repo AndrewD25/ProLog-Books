@@ -20,6 +20,10 @@ DUE DATE
             // Start the session
             session_start();
 
+            session_start(); // Start the session if not already started
+            // Store the current page's URL in a session variable
+            $_SESSION['previous_page'] = $_SERVER['REQUEST_URI'];
+
             //Set theme mode to dark or light
             if (isset($_SESSION['theme'])) {
                 $darkMode = $_SESSION['theme'] == 1;
@@ -56,19 +60,21 @@ DUE DATE
                     // Loop through results
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
-                            echo '<article>';
+                            echo '<article class="post">';
                             echo '<a href="article.php?id=' . $row['article_id'] . '">';
-                            echo '<img class="thumbnail" style="background-image: url(\'../Images/Articles/' . $row['thumbnail'] . '\');">';
+                            echo '<img class="thumbnail" src="../Images/Articles/' . $row['thumbnail'] . '">';
                             echo '<div class="data">';
                             echo '<h2 class="title">' . $row['header'] . '</h2>';
                             echo '<div class="subData">';
                             echo '<p class="author"><i class="fa-solid fa-pencil"></i> ' . $row['author'] . '</p>';
                             echo '<p class="date"><i class="fa-regular fa-calendar"></i> ' . date('m/d/y', strtotime($row['published'])) . '</p>';
 
-                            $dates[] = $row['published'];
+                            $dateTime = new DateTime($row['published']);
+                            $formattedDate = $dateTime->format("F Y");
+                            $dates[] = $formattedDate;
 
                             echo '</div>';
-                            echo '<p class="preview">' . substr($row['content'], 0, 72) . '...</p>';
+                            echo '<p class="preview">' . str_replace("\n", " ", substr($row['content'], 0, 40)) . '...</p>';
                             echo '</div>';
                             echo '</a>';
                             echo '</article>';
@@ -81,16 +87,14 @@ DUE DATE
             <div id="sidebar">
                 <div id="searchBox">
                     <p>Search:</p>
-                    <input type="search">
+                    <input type="search" id="search">
                 </div>
                 <div id="filterBox">
                     <p>Filter By Month:</p>
                     <div id="monthFilters">
                         <?php
-                            foreach ($dates as $date) {
-                                $dateTime = new DateTime($date);
-                                $formattedDate = $dateTime->format("F Y");
-                                echo '<div><input checked type="checkbox"><p>' . $formattedDate . '</p></div>';
+                            foreach (array_unique($dates) as $date) {
+                                echo '<div><input checked type="checkbox"><p>' . $date . '</p></div>';
                             }
                         ?>
                     </div>

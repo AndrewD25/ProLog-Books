@@ -20,6 +20,9 @@ DUE DATE
             // Start the session
             session_start();
 
+            // Store the current page's URL in a session variable
+            $_SESSION['previous_page'] = $_SERVER['REQUEST_URI'];
+
             // Redirect the user to sign in if they are logged out
             if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
                 // Redirect the user to the sign-in page

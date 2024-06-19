@@ -14,6 +14,10 @@
         <?php 
             include_once 'Includes/header.php'; 
 
+            session_start(); // Start the session if not already started
+            // Store the current page's URL in a session variable
+            $_SESSION['previous_page'] = $_SERVER['REQUEST_URI'];
+
             //Set theme mode to dark or light
             if (isset($_SESSION['theme'])) {
                 $darkMode = $_SESSION['theme'] == 1;

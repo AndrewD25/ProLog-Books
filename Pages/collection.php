@@ -2,6 +2,7 @@
 Andrew Deal
 ProLog Books Collection Page HTML
 DUE DATE
+
 -->
 
 <!DOCTYPE html>
@@ -20,20 +21,32 @@ DUE DATE
             // Start the session
             session_start();
 
+            // Store the current page's URL in a session variable
+            $_SESSION['previous_page'] = $_SERVER['REQUEST_URI'];
+
+            //My google books api key : key=AIzaSyBnGRxwvJL-zDN5YgE0Z6ZhWPMg_BCG_rE
+
             // Redirect the user to sign in if they are logged out
-            if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
+            if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
                 // Redirect the user to the sign-in page
                 header("Location: /Pages/signInPage.php");
                 exit(); // Make sure to exit after redirection
+            } else {
+                include_once 'Includes/connect.php';
+                $user_id = mysqli_real_escape_string($conn, $_SESSION['user_id']);
+                $query = "SELECT username FROM Users WHERE user_id = '$user_id'";
+                $results = mysqli_query($conn, $query);
+
+                if (mysqli_num_rows($results) > 0) {
+                    $row = mysqli_fetch_assoc($results);
+                    $username = $row['username'];
+                }
             }
         ?>
 
        <!--Page Banner with Navlinks at the top of each page-->
        <?php 
             include_once 'Includes/header.php'; 
-
-            //Connect to db
-            include_once 'Includes/connect.php';
         ?>
 
         <!--Rest of Page Code-->
@@ -42,8 +55,8 @@ DUE DATE
 
             <!--Add Folders With PHP-->
             <?php
-                $stmt = $conn->prepare("SELECT * FROM Folders WHERE username = ?");
-                $stmt->bind_param("s", $_SESSION['username']);
+                $stmt = $conn->prepare("SELECT * FROM Folders WHERE user_id = ? ORDER BY folder_name");
+                $stmt->bind_param("s", $user_id);
                 $stmt->execute();
                 $folders = $stmt->get_result();
 
@@ -54,8 +67,8 @@ DUE DATE
                         $collection[$folder['folder_name']] = []; //Here
 
                         //Store books into the folder array
-                        $stmt_books = $conn->prepare("SELECT * FROM Books WHERE username = ? AND folder_name = ? ORDER BY position_id ASC");
-                        $stmt_books->bind_param("ss", $_SESSION['username'], $folder['folder_name']);
+                        $stmt_books = $conn->prepare("SELECT * FROM Books WHERE user_id = ? AND folder_name = ? ORDER BY position_id ASC");
+                        $stmt_books->bind_param("ss", $user_id, $folder['folder_name']);
                         $stmt_books->execute();
                         $books_result = $stmt_books->get_result();
                         if ($books_result->num_rows >= 1) {
@@ -88,7 +101,7 @@ DUE DATE
                         foreach ($books as $book) {
                             // Echo the book with its details
                             echo '<div class="book" id="' . $book["book_id"] . '">
-                                <img class="cover" src="' . $book["image_url"] . '" alt="test cover">
+                                <img class="cover" src="' . $book["image_url"] . '" alt="$book["title"]" onerror="this.src=`../Images/altImg.jpg`;">
                                 <div class="details">
                                     <p class="book_id" style="display: none;">' . $book["book_id"] . '</p>
                                     <h3 class="title">' . $book["title"] . '</h3>
@@ -170,7 +183,7 @@ DUE DATE
             <h1>Add New Folder</h1>
             <form action="Includes/addFolder.php" method="post">
                 <input type="text" id="folder_name" name="folder_name" maxlength="30" required placeholder="Enter Folder Name">
-                <input type="hidden" id="storeUsername" name="storeUsername" value="<?php echo $_SESSION['username'] ?>">
+                <input type="hidden" id="storeUserId" name="storeUserId" value="<?php echo $user_id ?>">
                 <div style="min-width: 45%; display: flex; justify-content: space-between;">
                     <button type="button" class="cancel" onclick="hideModal()">Cancel</button>
                     <input type="submit" value="Add Folder">
@@ -184,7 +197,7 @@ DUE DATE
             <h2>⚠️ Deleting this folder will delete all books inside it from your collection.</h2>
             <form action="Includes/deleteFolder.php" method="post">
                 <input type="hidden" id="folder_to_delete" name="folder_to_delete" required>
-                <input type="hidden" id="storeUsername2" name="storeUsername" value="<?php echo $_SESSION['username'] ?>">
+                <input type="hidden" id="storeUserId2" name="storeUserId" value="<?php echo $user_id ?>">
                 <div style="min-width: 45%; display: flex; justify-content: space-between;">
                     <button type="button" class="cancel" onclick="hideModal()">Cancel</button>
                     <input type="submit" value="Delete Folder">
@@ -202,13 +215,13 @@ DUE DATE
 
                 <div>
                     <label for="title_input">Title: </label>
-                    <input type="text" placeholder="Example Vol 1: Title" name="title_input" id="title_input">
+                    <input type="text" placeholder="Example Vol 1: Title" name="title_input" id="title_input" maxlength="100">
                 </div>
                 <p class="smallText">A title may include a series, number, and/or name</p>
 
                 <div>
                     <label for="subtitle_input">Subtitle: </label>
-                    <input type="text" placeholder="Published By X" name="subtitle_input" id="subtitle_input">
+                    <input type="text" placeholder="Published By X" name="subtitle_input" id="subtitle_input" maxlength="50">
                 </div>
                 <p class="smallText">A subtitle may include publisher or continuity</p>
 
@@ -220,7 +233,7 @@ DUE DATE
 
                 <div>
                     <label for="notes_input">Notes: </label>
-                    <input type="text" placeholder="This book is..." name="notes_input" id="notes_input">
+                    <input type="text" placeholder="This book is..." name="notes_input" id="notes_input" maxlength="255">
                 </div>
                 <p class="smallText">Information about the book - or leave a review!</p>
 
@@ -261,7 +274,7 @@ DUE DATE
                     </select>
                 </div>
                 
-                <input type="hidden" id="storeUsername3" name="storeUsername" value="<?php echo $_SESSION['username'] ?>">
+                <input type="hidden" id="storeUserId3" name="storeUserId" value="<?php echo $user_id ?>">
                 <div style="min-width: 45%; display: flex; justify-content: space-between;">
                     <button type="button" class="cancel" onclick="hideModal()">Cancel</button>
                     <input type="submit" value="Add Book">
@@ -277,7 +290,7 @@ DUE DATE
                 <input type="hidden" name="folder_location" id="folder_location2" value="">
                 <input type="hidden" name="position" id="position2" value=""> 
                 <input type="hidden" id="book_to_delete" name="book_to_delete" required>
-                <input type="hidden" id="storeUsername4" name="storeUsername" value="<?php echo $_SESSION['username'] ?>">
+                <input type="hidden" id="storeUserId4" name="storeUserId" value="<?php echo $user_id ?>">
                 <div style="min-width: 45%; display: flex; justify-content: space-between;">
                     <button type="button" class="cancel" onclick="hideModal()">Cancel</button>
                     <input type="submit" value="Delete Book">
@@ -294,13 +307,13 @@ DUE DATE
 
                 <div>
                     <label for="new_title_input">Title: </label>
-                    <input type="text" placeholder="Example Vol 1: Title" name="title_input" id="new_title_input">
+                    <input type="text" placeholder="Example Vol 1: Title" name="title_input" id="new_title_input" maxlength="100">
                 </div>
                 <p class="smallText">A title may include a series, number, and/or name</p>
 
                 <div>
                     <label for="new_subtitle_input">Subtitle: </label>
-                    <input type="text" placeholder="Published By X" name="subtitle_input" id="new_subtitle_input">
+                    <input type="text" placeholder="Published By X" name="subtitle_input" id="new_subtitle_input" maxlength="50">
                 </div>
                 <p class="smallText">A subtitle may include publisher or continuity</p>
 
@@ -312,7 +325,7 @@ DUE DATE
 
                 <div>
                     <label for="new_notes_input">Notes: </label>
-                    <input type="text" placeholder="This book is..." name="notes_input" id="new_notes_input">
+                    <input type="text" placeholder="This book is..." name="notes_input" id="new_notes_input" maxlength="255">
                 </div>
                 <p class="smallText">Information about the book - or leave a review!</p>
 
@@ -353,7 +366,7 @@ DUE DATE
                     </select>
                 </div>
                 
-                <input type="hidden" id="storeUsername5" name="storeUsername" value="<?php echo $_SESSION['username'] ?>">
+                <input type="hidden" id="storeUserId5" name="storeUserId" value="<?php echo $user_id ?>">
 
                 <div style="min-width: 50%; display: flex; justify-content: space-between;">
                     <button type="button" class="cancel" onclick="hideModal()">Cancel</button>
