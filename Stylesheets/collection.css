@@ -74,7 +74,7 @@
     margin-inline: calc(50vw/2 - 20px);
     margin-block: calc(76vw/2 - 20px);
     height: 40px;
-    font-size: 15px;
+    font-size: 27px;
     border: 1px solid white;
     border-radius: 50%;
     display: flex;
@@ -218,7 +218,11 @@
 }
 
 .flipped .cover {
-    display: none !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    /* display: none !important; */
 } .flipped .details {
     overflow: hidden;
 
@@ -226,7 +230,7 @@
     width: 100%;
     padding-inline: 5%;
     height: 100%;
-    background-color: var(--darkerSecondary);
+    background-color: rgba(0, 0, 0, 0.5); /*var(--darkerSecondary)*/
     display: block !important;
 }
 
@@ -364,14 +368,6 @@
     width: 60%;
 }
 
-#read_input, #new_read_input {
-    width: 30%;
-}
-
-#rating_input, #new_rating_input {
-    width: 27%;
-}
-
 .modal button, .modal input[type=submit] {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: clamp(5px, 2vw, 3.5vh);
@@ -405,5 +401,3 @@
     backdrop-filter: blur(3px);
     z-index: 9999999;
 }
-
-
